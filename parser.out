@@ -1,0 +1,4653 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    ignore
+    LIST
+
+Grammar
+
+Rule 0     S' -> programa
+Rule 1     empty -> <empty>
+Rule 2     programa -> PROGRAM pn_1 ID SEMICOLON programaAuxiliar funcs programaAuxiliar1
+Rule 3     pn_1 -> empty
+Rule 4     programaAuxiliar -> vars
+Rule 5     programaAuxiliar -> empty
+Rule 6     programaAuxiliar1 -> programaAuxiliar2 bloque main_end
+Rule 7     programaAuxiliar2 -> MAIN pn_2
+Rule 8     main_end -> <empty>
+Rule 9     pn_2 -> empty
+Rule 10    funcs -> FUN COLON funcs1
+Rule 11    funcs -> empty
+Rule 12    funcs1 -> tipo funcsAux1 funcs1
+Rule 13    funcs1 -> tipoVoid funcsAux1 funcs1
+Rule 14    funcs1 -> empty
+Rule 15    tipoVoid -> VOID
+Rule 16    funcsAux1 -> funcsAux5 OPENPARENTHESIS funcsAux2 CLOSEPARENTHESIS bloque func_end
+Rule 17    func_end -> <empty>
+Rule 18    funcsAux2 -> funcsAux3
+Rule 19    funcsAux2 -> empty
+Rule 20    funcsAux3 -> tipo ID funcsAux4
+Rule 21    funcsAux4 -> COMMA funcsAux3
+Rule 22    funcsAux4 -> empty
+Rule 23    funcsAux5 -> ID
+Rule 24    vars -> VAR COLON varsAuxiliar2 varsAuxiliar1
+Rule 25    varsAuxiliar1 -> varsAuxiliar2 varsAuxiliar1
+Rule 26    varsAuxiliar1 -> empty
+Rule 27    varsAuxiliar2 -> tipo ID varsAuxiliar3 SEMICOLON
+Rule 28    varsAuxiliar3 -> COMMA ID varsAuxiliar3
+Rule 29    varsAuxiliar3 -> empty
+Rule 30    tipo -> INT
+Rule 31    tipo -> FLOAT
+Rule 32    tipo -> arreglo
+Rule 33    tipo -> BOOL
+Rule 34    tipo -> STRING
+Rule 35    bloque -> OPENBRACKET bloqueAuxiliar1 bloqueAuxiliar CLOSEBRACKET
+Rule 36    bloqueAuxiliar -> estatuto bloqueAuxiliar
+Rule 37    bloqueAuxiliar -> empty
+Rule 38    bloqueAuxiliar1 -> vars
+Rule 39    bloqueAuxiliar1 -> empty
+Rule 40    estatuto -> asignacion SEMICOLON
+Rule 41    estatuto -> condicion
+Rule 42    estatuto -> escritura
+Rule 43    estatuto -> lectura
+Rule 44    estatuto -> ciclo
+Rule 45    estatuto -> llamada SEMICOLON
+Rule 46    estatuto -> incremento SEMICOLON
+Rule 47    estatuto -> retorno
+Rule 48    retorno -> RETURN retornoAux SEMICOLON
+Rule 49    retornoAux -> var_cte
+Rule 50    retornoAux -> spcte
+Rule 51    retornoAux -> expression
+Rule 52    llamada -> ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2
+Rule 53    pn_llamada -> empty
+Rule 54    pn_llamada2 -> <empty>
+Rule 55    llamadaAux -> llamadaAux1
+Rule 56    llamadaAux -> empty
+Rule 57    llamadaAux1 -> expression end_par pn_llamada_param llamadaAux2
+Rule 58    pn_llamada_param -> <empty>
+Rule 59    llamadaAux2 -> COMMA false_bottom llamadaAux1
+Rule 60    llamadaAux2 -> empty
+Rule 61    ciclo -> FOR pn_8 OPENPARENTHESIS expression CLOSEPARENTHESIS pn_6 bloque pn_7
+Rule 62    pn_8 -> empty
+Rule 63    pn_6 -> empty
+Rule 64    pn_7 -> empty
+Rule 65    incremento -> ID incremnetoAux1 expression
+Rule 66    incremnetoAux1 -> MOREEQUALS
+Rule 67    incremnetoAux1 -> LESSEQUALS
+Rule 68    asignacion -> ID pupid EQUAL asignacionAux
+Rule 69    asignacion -> arregloVar EQUAL asignacionAux
+Rule 70    pupid -> <empty>
+Rule 71    asignacionAux -> spcte
+Rule 72    asignacionAux -> expression
+Rule 73    arreglo -> tipo SQUAREBOPEN CTEINT SQUAREBCLOSE
+Rule 74    arregloVar -> ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1
+Rule 75    setVerData -> <empty>
+Rule 76    getLimits -> <empty>
+Rule 77    setVerData1 -> <empty>
+Rule 78    listaccess1 -> SQUAREBOPEN false_bottom expression setVerData1 SQUAREBCLOSE end_par
+Rule 79    listaccess1 -> empty
+Rule 80    lectura -> READ OPENPARENTHESIS ID CLOSEPARENTHESIS SEMICOLON
+Rule 81    escritura -> PRINT OPENPARENTHESIS escrituraAuxiliar1 CLOSEPARENTHESIS SEMICOLON
+Rule 82    escrituraAuxiliar1 -> expression
+Rule 83    escrituraAuxiliar1 -> spcte
+Rule 84    condicion -> IF OPENPARENTHESIS expression CLOSEPARENTHESIS pn_3 bloque condicionAuxiliar SEMICOLON
+Rule 85    condicion -> IF OPENPARENTHESIS expression CLOSEPARENTHESIS pn_3 bloque condicionAuxiliar
+Rule 86    pn_3 -> empty
+Rule 87    pn_4 -> empty
+Rule 88    condicionAuxiliar -> pn_9 ELSE bloque pn_5
+Rule 89    condicionAuxiliar -> pn_4 empty
+Rule 90    pn_9 -> empty
+Rule 91    pn_5 -> empty
+Rule 92    expression -> exploc logicexp
+Rule 93    logicexp -> OR andor exploc top_andor
+Rule 94    logicexp -> AND andor exploc top_andor
+Rule 95    logicexp -> empty
+Rule 96    exploc -> exp expression1
+Rule 97    expression1 -> LESSER relop exp top_relop
+Rule 98    expression1 -> GREATER relop exp top_relop
+Rule 99    expression1 -> EQUALEQUAL relop exp top_relop
+Rule 100   expression1 -> NOTEQUAL relop exp top_relop
+Rule 101   expression1 -> GREATEROREQUAL relop exp top_relop
+Rule 102   expression1 -> LESSEROREQUAL relop exp top_relop
+Rule 103   expression1 -> empty
+Rule 104   exp -> term top_exp exp1
+Rule 105   exp1 -> MINUS push_sign exp
+Rule 106   exp1 -> PLUS push_sign exp
+Rule 107   exp1 -> empty
+Rule 108   top_exp -> empty
+Rule 109   term -> factor top_factor term1
+Rule 110   term1 -> DIVIDE push_sign term
+Rule 111   term1 -> TIMES push_sign term
+Rule 112   term1 -> empty
+Rule 113   factor -> OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par
+Rule 114   factor -> var_cte
+Rule 115   factor -> ID push_id
+Rule 116   top_factor -> <empty>
+Rule 117   var_cte -> arregloVar
+Rule 118   var_cte -> CTEINT getvalue_i
+Rule 119   var_cte -> CTEFLOAT getvalue_f
+Rule 120   var_cte -> ID getidvalue
+Rule 121   var_cte -> llamada getidllamada
+Rule 122   var_cte -> spcte
+Rule 123   getidllamada -> empty
+Rule 124   getarrayvalue -> <empty>
+Rule 125   getidvalue -> <empty>
+Rule 126   getvalue_i -> <empty>
+Rule 127   getvalue_f -> <empty>
+Rule 128   getvalue_b -> <empty>
+Rule 129   relop -> <empty>
+Rule 130   andor -> <empty>
+Rule 131   top_andor -> <empty>
+Rule 132   top_relop -> <empty>
+Rule 133   push_sign -> <empty>
+Rule 134   false_bottom -> empty
+Rule 135   end_par -> <empty>
+Rule 136   push_id -> <empty>
+Rule 137   ctebool -> TRUE
+Rule 138   ctebool -> FALSE
+Rule 139   spcte -> CTESTRING
+Rule 140   spcte -> ctebool
+
+Terminals, with rules where they appear
+
+AND                  : 94
+BOOL                 : 33
+CLOSEBRACKET         : 35
+CLOSEPARENTHESIS     : 16 52 61 80 81 84 85 113
+COLON                : 10 24
+COMMA                : 21 28 59
+CTEFLOAT             : 119
+CTEINT               : 73 118
+CTESTRING            : 139
+DIVIDE               : 110
+ELSE                 : 88
+EQUAL                : 68 69
+EQUALEQUAL           : 99
+FALSE                : 138
+FLOAT                : 31
+FOR                  : 61
+FUN                  : 10
+GREATER              : 98
+GREATEROREQUAL       : 101
+ID                   : 2 20 23 27 28 52 65 68 74 80 115 120
+IF                   : 84 85
+INT                  : 30
+LESSEQUALS           : 67
+LESSER               : 97
+LESSEROREQUAL        : 102
+LIST                 : 
+MAIN                 : 7
+MINUS                : 105
+MOREEQUALS           : 66
+NOTEQUAL             : 100
+OPENBRACKET          : 35
+OPENPARENTHESIS      : 16 52 61 80 81 84 85 113
+OR                   : 93
+PLUS                 : 106
+PRINT                : 81
+PROGRAM              : 2
+READ                 : 80
+RETURN               : 48
+SEMICOLON            : 2 27 40 45 46 48 80 81 84
+SQUAREBCLOSE         : 73 74 78
+SQUAREBOPEN          : 73 74 78
+STRING               : 34
+TIMES                : 111
+TRUE                 : 137
+VAR                  : 24
+VOID                 : 15
+error                : 
+ignore               : 
+
+Nonterminals, with rules where they appear
+
+andor                : 93 94
+arreglo              : 32
+arregloVar           : 69 117
+asignacion           : 40
+asignacionAux        : 68 69
+bloque               : 6 16 61 84 85 88
+bloqueAuxiliar       : 35 36
+bloqueAuxiliar1      : 35
+ciclo                : 44
+condicion            : 41
+condicionAuxiliar    : 84 85
+ctebool              : 140
+empty                : 3 5 9 11 14 19 22 26 29 37 39 53 56 60 62 63 64 79 86 87 89 90 91 95 103 107 108 112 123 134
+end_par              : 57 74 78 113
+escritura            : 42
+escrituraAuxiliar1   : 81
+estatuto             : 36
+exp                  : 96 97 98 99 100 101 102 105 106
+exp1                 : 104
+exploc               : 92 93 94
+expression           : 51 57 61 65 72 74 78 82 84 85 113
+expression1          : 96
+factor               : 109
+false_bottom         : 52 59 74 78 113
+func_end             : 16
+funcs                : 2
+funcs1               : 10 12 13
+funcsAux1            : 12 13
+funcsAux2            : 16
+funcsAux3            : 18 21
+funcsAux4            : 20
+funcsAux5            : 16
+getLimits            : 74
+getarrayvalue        : 
+getidllamada         : 121
+getidvalue           : 120
+getvalue_b           : 
+getvalue_f           : 119
+getvalue_i           : 118
+incremento           : 46
+incremnetoAux1       : 65
+lectura              : 43
+listaccess1          : 74
+llamada              : 45 121
+llamadaAux           : 52
+llamadaAux1          : 55 59
+llamadaAux2          : 57
+logicexp             : 92
+main_end             : 6
+pn_1                 : 2
+pn_2                 : 7
+pn_3                 : 84 85
+pn_4                 : 89
+pn_5                 : 88
+pn_6                 : 61
+pn_7                 : 61
+pn_8                 : 61
+pn_9                 : 88
+pn_llamada           : 52
+pn_llamada2          : 52
+pn_llamada_param     : 57
+programa             : 0
+programaAuxiliar     : 2
+programaAuxiliar1    : 2
+programaAuxiliar2    : 6
+pupid                : 68
+push_id              : 115
+push_sign            : 105 106 110 111
+relop                : 97 98 99 100 101 102
+retorno              : 47
+retornoAux           : 48
+setVerData           : 74
+setVerData1          : 78
+spcte                : 50 71 83 122
+term                 : 104 110 111
+term1                : 109
+tipo                 : 12 20 27 73
+tipoVoid             : 13
+top_andor            : 93 94
+top_exp              : 104
+top_factor           : 109
+top_relop            : 97 98 99 100 101 102
+var_cte              : 49 114
+vars                 : 4 38
+varsAuxiliar1        : 24 25
+varsAuxiliar2        : 24 25
+varsAuxiliar3        : 27 28
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . programa
+    (2) programa -> . PROGRAM pn_1 ID SEMICOLON programaAuxiliar funcs programaAuxiliar1
+
+    PROGRAM         shift and go to state 1
+
+    programa                       shift and go to state 2
+
+state 1
+
+    (2) programa -> PROGRAM . pn_1 ID SEMICOLON programaAuxiliar funcs programaAuxiliar1
+    (3) pn_1 -> . empty
+    (1) empty -> .
+
+    ID              reduce using rule 1 (empty -> .)
+
+    pn_1                           shift and go to state 3
+    empty                          shift and go to state 4
+
+state 2
+
+    (0) S' -> programa .
+
+
+
+state 3
+
+    (2) programa -> PROGRAM pn_1 . ID SEMICOLON programaAuxiliar funcs programaAuxiliar1
+
+    ID              shift and go to state 5
+
+
+state 4
+
+    (3) pn_1 -> empty .
+
+    ID              reduce using rule 3 (pn_1 -> empty .)
+
+
+state 5
+
+    (2) programa -> PROGRAM pn_1 ID . SEMICOLON programaAuxiliar funcs programaAuxiliar1
+
+    SEMICOLON       shift and go to state 6
+
+
+state 6
+
+    (2) programa -> PROGRAM pn_1 ID SEMICOLON . programaAuxiliar funcs programaAuxiliar1
+    (4) programaAuxiliar -> . vars
+    (5) programaAuxiliar -> . empty
+    (24) vars -> . VAR COLON varsAuxiliar2 varsAuxiliar1
+    (1) empty -> .
+
+    VAR             shift and go to state 9
+    FUN             reduce using rule 1 (empty -> .)
+    MAIN            reduce using rule 1 (empty -> .)
+
+    programaAuxiliar               shift and go to state 7
+    vars                           shift and go to state 8
+    empty                          shift and go to state 10
+
+state 7
+
+    (2) programa -> PROGRAM pn_1 ID SEMICOLON programaAuxiliar . funcs programaAuxiliar1
+    (10) funcs -> . FUN COLON funcs1
+    (11) funcs -> . empty
+    (1) empty -> .
+
+    FUN             shift and go to state 12
+    MAIN            reduce using rule 1 (empty -> .)
+
+    funcs                          shift and go to state 11
+    empty                          shift and go to state 13
+
+state 8
+
+    (4) programaAuxiliar -> vars .
+
+    FUN             reduce using rule 4 (programaAuxiliar -> vars .)
+    MAIN            reduce using rule 4 (programaAuxiliar -> vars .)
+
+
+state 9
+
+    (24) vars -> VAR . COLON varsAuxiliar2 varsAuxiliar1
+
+    COLON           shift and go to state 14
+
+
+state 10
+
+    (5) programaAuxiliar -> empty .
+
+    FUN             reduce using rule 5 (programaAuxiliar -> empty .)
+    MAIN            reduce using rule 5 (programaAuxiliar -> empty .)
+
+
+state 11
+
+    (2) programa -> PROGRAM pn_1 ID SEMICOLON programaAuxiliar funcs . programaAuxiliar1
+    (6) programaAuxiliar1 -> . programaAuxiliar2 bloque main_end
+    (7) programaAuxiliar2 -> . MAIN pn_2
+
+    MAIN            shift and go to state 17
+
+    programaAuxiliar2              shift and go to state 15
+    programaAuxiliar1              shift and go to state 16
+
+state 12
+
+    (10) funcs -> FUN . COLON funcs1
+
+    COLON           shift and go to state 18
+
+
+state 13
+
+    (11) funcs -> empty .
+
+    MAIN            reduce using rule 11 (funcs -> empty .)
+
+
+state 14
+
+    (24) vars -> VAR COLON . varsAuxiliar2 varsAuxiliar1
+    (27) varsAuxiliar2 -> . tipo ID varsAuxiliar3 SEMICOLON
+    (30) tipo -> . INT
+    (31) tipo -> . FLOAT
+    (32) tipo -> . arreglo
+    (33) tipo -> . BOOL
+    (34) tipo -> . STRING
+    (73) arreglo -> . tipo SQUAREBOPEN CTEINT SQUAREBCLOSE
+
+    INT             shift and go to state 21
+    FLOAT           shift and go to state 22
+    BOOL            shift and go to state 24
+    STRING          shift and go to state 25
+
+    varsAuxiliar2                  shift and go to state 19
+    tipo                           shift and go to state 20
+    arreglo                        shift and go to state 23
+
+state 15
+
+    (6) programaAuxiliar1 -> programaAuxiliar2 . bloque main_end
+    (35) bloque -> . OPENBRACKET bloqueAuxiliar1 bloqueAuxiliar CLOSEBRACKET
+
+    OPENBRACKET     shift and go to state 26
+
+    bloque                         shift and go to state 27
+
+state 16
+
+    (2) programa -> PROGRAM pn_1 ID SEMICOLON programaAuxiliar funcs programaAuxiliar1 .
+
+    $end            reduce using rule 2 (programa -> PROGRAM pn_1 ID SEMICOLON programaAuxiliar funcs programaAuxiliar1 .)
+
+
+state 17
+
+    (7) programaAuxiliar2 -> MAIN . pn_2
+    (9) pn_2 -> . empty
+    (1) empty -> .
+
+    OPENBRACKET     reduce using rule 1 (empty -> .)
+
+    pn_2                           shift and go to state 28
+    empty                          shift and go to state 29
+
+state 18
+
+    (10) funcs -> FUN COLON . funcs1
+    (12) funcs1 -> . tipo funcsAux1 funcs1
+    (13) funcs1 -> . tipoVoid funcsAux1 funcs1
+    (14) funcs1 -> . empty
+    (30) tipo -> . INT
+    (31) tipo -> . FLOAT
+    (32) tipo -> . arreglo
+    (33) tipo -> . BOOL
+    (34) tipo -> . STRING
+    (15) tipoVoid -> . VOID
+    (1) empty -> .
+    (73) arreglo -> . tipo SQUAREBOPEN CTEINT SQUAREBCLOSE
+
+    INT             shift and go to state 21
+    FLOAT           shift and go to state 22
+    BOOL            shift and go to state 24
+    STRING          shift and go to state 25
+    VOID            shift and go to state 31
+    MAIN            reduce using rule 1 (empty -> .)
+
+    tipo                           shift and go to state 30
+    tipoVoid                       shift and go to state 32
+    arreglo                        shift and go to state 23
+    funcs1                         shift and go to state 33
+    empty                          shift and go to state 34
+
+state 19
+
+    (24) vars -> VAR COLON varsAuxiliar2 . varsAuxiliar1
+    (25) varsAuxiliar1 -> . varsAuxiliar2 varsAuxiliar1
+    (26) varsAuxiliar1 -> . empty
+    (27) varsAuxiliar2 -> . tipo ID varsAuxiliar3 SEMICOLON
+    (1) empty -> .
+    (30) tipo -> . INT
+    (31) tipo -> . FLOAT
+    (32) tipo -> . arreglo
+    (33) tipo -> . BOOL
+    (34) tipo -> . STRING
+    (73) arreglo -> . tipo SQUAREBOPEN CTEINT SQUAREBCLOSE
+
+    FUN             reduce using rule 1 (empty -> .)
+    MAIN            reduce using rule 1 (empty -> .)
+    ID              reduce using rule 1 (empty -> .)
+    IF              reduce using rule 1 (empty -> .)
+    PRINT           reduce using rule 1 (empty -> .)
+    READ            reduce using rule 1 (empty -> .)
+    FOR             reduce using rule 1 (empty -> .)
+    RETURN          reduce using rule 1 (empty -> .)
+    CLOSEBRACKET    reduce using rule 1 (empty -> .)
+    INT             shift and go to state 21
+    FLOAT           shift and go to state 22
+    BOOL            shift and go to state 24
+    STRING          shift and go to state 25
+
+    varsAuxiliar2                  shift and go to state 35
+    varsAuxiliar1                  shift and go to state 36
+    tipo                           shift and go to state 20
+    arreglo                        shift and go to state 23
+    empty                          shift and go to state 37
+
+state 20
+
+    (27) varsAuxiliar2 -> tipo . ID varsAuxiliar3 SEMICOLON
+    (73) arreglo -> tipo . SQUAREBOPEN CTEINT SQUAREBCLOSE
+
+    ID              shift and go to state 39
+    SQUAREBOPEN     shift and go to state 38
+
+
+state 21
+
+    (30) tipo -> INT .
+
+    ID              reduce using rule 30 (tipo -> INT .)
+    SQUAREBOPEN     reduce using rule 30 (tipo -> INT .)
+
+
+state 22
+
+    (31) tipo -> FLOAT .
+
+    ID              reduce using rule 31 (tipo -> FLOAT .)
+    SQUAREBOPEN     reduce using rule 31 (tipo -> FLOAT .)
+
+
+state 23
+
+    (32) tipo -> arreglo .
+
+    ID              reduce using rule 32 (tipo -> arreglo .)
+    SQUAREBOPEN     reduce using rule 32 (tipo -> arreglo .)
+
+
+state 24
+
+    (33) tipo -> BOOL .
+
+    ID              reduce using rule 33 (tipo -> BOOL .)
+    SQUAREBOPEN     reduce using rule 33 (tipo -> BOOL .)
+
+
+state 25
+
+    (34) tipo -> STRING .
+
+    ID              reduce using rule 34 (tipo -> STRING .)
+    SQUAREBOPEN     reduce using rule 34 (tipo -> STRING .)
+
+
+state 26
+
+    (35) bloque -> OPENBRACKET . bloqueAuxiliar1 bloqueAuxiliar CLOSEBRACKET
+    (38) bloqueAuxiliar1 -> . vars
+    (39) bloqueAuxiliar1 -> . empty
+    (24) vars -> . VAR COLON varsAuxiliar2 varsAuxiliar1
+    (1) empty -> .
+
+    VAR             shift and go to state 9
+    ID              reduce using rule 1 (empty -> .)
+    IF              reduce using rule 1 (empty -> .)
+    PRINT           reduce using rule 1 (empty -> .)
+    READ            reduce using rule 1 (empty -> .)
+    FOR             reduce using rule 1 (empty -> .)
+    RETURN          reduce using rule 1 (empty -> .)
+    CLOSEBRACKET    reduce using rule 1 (empty -> .)
+
+    vars                           shift and go to state 40
+    bloqueAuxiliar1                shift and go to state 41
+    empty                          shift and go to state 42
+
+state 27
+
+    (6) programaAuxiliar1 -> programaAuxiliar2 bloque . main_end
+    (8) main_end -> .
+
+    $end            reduce using rule 8 (main_end -> .)
+
+    main_end                       shift and go to state 43
+
+state 28
+
+    (7) programaAuxiliar2 -> MAIN pn_2 .
+
+    OPENBRACKET     reduce using rule 7 (programaAuxiliar2 -> MAIN pn_2 .)
+
+
+state 29
+
+    (9) pn_2 -> empty .
+
+    OPENBRACKET     reduce using rule 9 (pn_2 -> empty .)
+
+
+state 30
+
+    (12) funcs1 -> tipo . funcsAux1 funcs1
+    (73) arreglo -> tipo . SQUAREBOPEN CTEINT SQUAREBCLOSE
+    (16) funcsAux1 -> . funcsAux5 OPENPARENTHESIS funcsAux2 CLOSEPARENTHESIS bloque func_end
+    (23) funcsAux5 -> . ID
+
+    SQUAREBOPEN     shift and go to state 38
+    ID              shift and go to state 46
+
+    funcsAux5                      shift and go to state 45
+    funcsAux1                      shift and go to state 44
+
+state 31
+
+    (15) tipoVoid -> VOID .
+
+    ID              reduce using rule 15 (tipoVoid -> VOID .)
+
+
+state 32
+
+    (13) funcs1 -> tipoVoid . funcsAux1 funcs1
+    (16) funcsAux1 -> . funcsAux5 OPENPARENTHESIS funcsAux2 CLOSEPARENTHESIS bloque func_end
+    (23) funcsAux5 -> . ID
+
+    ID              shift and go to state 46
+
+    funcsAux5                      shift and go to state 45
+    funcsAux1                      shift and go to state 47
+
+state 33
+
+    (10) funcs -> FUN COLON funcs1 .
+
+    MAIN            reduce using rule 10 (funcs -> FUN COLON funcs1 .)
+
+
+state 34
+
+    (14) funcs1 -> empty .
+
+    MAIN            reduce using rule 14 (funcs1 -> empty .)
+
+
+state 35
+
+    (25) varsAuxiliar1 -> varsAuxiliar2 . varsAuxiliar1
+    (25) varsAuxiliar1 -> . varsAuxiliar2 varsAuxiliar1
+    (26) varsAuxiliar1 -> . empty
+    (27) varsAuxiliar2 -> . tipo ID varsAuxiliar3 SEMICOLON
+    (1) empty -> .
+    (30) tipo -> . INT
+    (31) tipo -> . FLOAT
+    (32) tipo -> . arreglo
+    (33) tipo -> . BOOL
+    (34) tipo -> . STRING
+    (73) arreglo -> . tipo SQUAREBOPEN CTEINT SQUAREBCLOSE
+
+    FUN             reduce using rule 1 (empty -> .)
+    MAIN            reduce using rule 1 (empty -> .)
+    ID              reduce using rule 1 (empty -> .)
+    IF              reduce using rule 1 (empty -> .)
+    PRINT           reduce using rule 1 (empty -> .)
+    READ            reduce using rule 1 (empty -> .)
+    FOR             reduce using rule 1 (empty -> .)
+    RETURN          reduce using rule 1 (empty -> .)
+    CLOSEBRACKET    reduce using rule 1 (empty -> .)
+    INT             shift and go to state 21
+    FLOAT           shift and go to state 22
+    BOOL            shift and go to state 24
+    STRING          shift and go to state 25
+
+    varsAuxiliar2                  shift and go to state 35
+    varsAuxiliar1                  shift and go to state 48
+    tipo                           shift and go to state 20
+    arreglo                        shift and go to state 23
+    empty                          shift and go to state 37
+
+state 36
+
+    (24) vars -> VAR COLON varsAuxiliar2 varsAuxiliar1 .
+
+    ID              reduce using rule 24 (vars -> VAR COLON varsAuxiliar2 varsAuxiliar1 .)
+    IF              reduce using rule 24 (vars -> VAR COLON varsAuxiliar2 varsAuxiliar1 .)
+    PRINT           reduce using rule 24 (vars -> VAR COLON varsAuxiliar2 varsAuxiliar1 .)
+    READ            reduce using rule 24 (vars -> VAR COLON varsAuxiliar2 varsAuxiliar1 .)
+    FOR             reduce using rule 24 (vars -> VAR COLON varsAuxiliar2 varsAuxiliar1 .)
+    RETURN          reduce using rule 24 (vars -> VAR COLON varsAuxiliar2 varsAuxiliar1 .)
+    CLOSEBRACKET    reduce using rule 24 (vars -> VAR COLON varsAuxiliar2 varsAuxiliar1 .)
+    FUN             reduce using rule 24 (vars -> VAR COLON varsAuxiliar2 varsAuxiliar1 .)
+    MAIN            reduce using rule 24 (vars -> VAR COLON varsAuxiliar2 varsAuxiliar1 .)
+
+
+state 37
+
+    (26) varsAuxiliar1 -> empty .
+
+    FUN             reduce using rule 26 (varsAuxiliar1 -> empty .)
+    MAIN            reduce using rule 26 (varsAuxiliar1 -> empty .)
+    ID              reduce using rule 26 (varsAuxiliar1 -> empty .)
+    IF              reduce using rule 26 (varsAuxiliar1 -> empty .)
+    PRINT           reduce using rule 26 (varsAuxiliar1 -> empty .)
+    READ            reduce using rule 26 (varsAuxiliar1 -> empty .)
+    FOR             reduce using rule 26 (varsAuxiliar1 -> empty .)
+    RETURN          reduce using rule 26 (varsAuxiliar1 -> empty .)
+    CLOSEBRACKET    reduce using rule 26 (varsAuxiliar1 -> empty .)
+
+
+state 38
+
+    (73) arreglo -> tipo SQUAREBOPEN . CTEINT SQUAREBCLOSE
+
+    CTEINT          shift and go to state 49
+
+
+state 39
+
+    (27) varsAuxiliar2 -> tipo ID . varsAuxiliar3 SEMICOLON
+    (28) varsAuxiliar3 -> . COMMA ID varsAuxiliar3
+    (29) varsAuxiliar3 -> . empty
+    (1) empty -> .
+
+    COMMA           shift and go to state 51
+    SEMICOLON       reduce using rule 1 (empty -> .)
+
+    varsAuxiliar3                  shift and go to state 50
+    empty                          shift and go to state 52
+
+state 40
+
+    (38) bloqueAuxiliar1 -> vars .
+
+    ID              reduce using rule 38 (bloqueAuxiliar1 -> vars .)
+    IF              reduce using rule 38 (bloqueAuxiliar1 -> vars .)
+    PRINT           reduce using rule 38 (bloqueAuxiliar1 -> vars .)
+    READ            reduce using rule 38 (bloqueAuxiliar1 -> vars .)
+    FOR             reduce using rule 38 (bloqueAuxiliar1 -> vars .)
+    RETURN          reduce using rule 38 (bloqueAuxiliar1 -> vars .)
+    CLOSEBRACKET    reduce using rule 38 (bloqueAuxiliar1 -> vars .)
+
+
+state 41
+
+    (35) bloque -> OPENBRACKET bloqueAuxiliar1 . bloqueAuxiliar CLOSEBRACKET
+    (36) bloqueAuxiliar -> . estatuto bloqueAuxiliar
+    (37) bloqueAuxiliar -> . empty
+    (40) estatuto -> . asignacion SEMICOLON
+    (41) estatuto -> . condicion
+    (42) estatuto -> . escritura
+    (43) estatuto -> . lectura
+    (44) estatuto -> . ciclo
+    (45) estatuto -> . llamada SEMICOLON
+    (46) estatuto -> . incremento SEMICOLON
+    (47) estatuto -> . retorno
+    (1) empty -> .
+    (68) asignacion -> . ID pupid EQUAL asignacionAux
+    (69) asignacion -> . arregloVar EQUAL asignacionAux
+    (84) condicion -> . IF OPENPARENTHESIS expression CLOSEPARENTHESIS pn_3 bloque condicionAuxiliar SEMICOLON
+    (85) condicion -> . IF OPENPARENTHESIS expression CLOSEPARENTHESIS pn_3 bloque condicionAuxiliar
+    (81) escritura -> . PRINT OPENPARENTHESIS escrituraAuxiliar1 CLOSEPARENTHESIS SEMICOLON
+    (80) lectura -> . READ OPENPARENTHESIS ID CLOSEPARENTHESIS SEMICOLON
+    (61) ciclo -> . FOR pn_8 OPENPARENTHESIS expression CLOSEPARENTHESIS pn_6 bloque pn_7
+    (52) llamada -> . ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2
+    (65) incremento -> . ID incremnetoAux1 expression
+    (48) retorno -> . RETURN retornoAux SEMICOLON
+    (74) arregloVar -> . ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1
+
+    CLOSEBRACKET    reduce using rule 1 (empty -> .)
+    ID              shift and go to state 66
+    IF              shift and go to state 67
+    PRINT           shift and go to state 54
+    READ            shift and go to state 61
+    FOR             shift and go to state 64
+    RETURN          shift and go to state 53
+
+    bloqueAuxiliar                 shift and go to state 65
+    ciclo                          shift and go to state 55
+    estatuto                       shift and go to state 56
+    arregloVar                     shift and go to state 57
+    llamada                        shift and go to state 58
+    condicion                      shift and go to state 59
+    retorno                        shift and go to state 60
+    lectura                        shift and go to state 62
+    empty                          shift and go to state 63
+    asignacion                     shift and go to state 68
+    incremento                     shift and go to state 69
+    escritura                      shift and go to state 70
+
+state 42
+
+    (39) bloqueAuxiliar1 -> empty .
+
+    ID              reduce using rule 39 (bloqueAuxiliar1 -> empty .)
+    IF              reduce using rule 39 (bloqueAuxiliar1 -> empty .)
+    PRINT           reduce using rule 39 (bloqueAuxiliar1 -> empty .)
+    READ            reduce using rule 39 (bloqueAuxiliar1 -> empty .)
+    FOR             reduce using rule 39 (bloqueAuxiliar1 -> empty .)
+    RETURN          reduce using rule 39 (bloqueAuxiliar1 -> empty .)
+    CLOSEBRACKET    reduce using rule 39 (bloqueAuxiliar1 -> empty .)
+
+
+state 43
+
+    (6) programaAuxiliar1 -> programaAuxiliar2 bloque main_end .
+
+    $end            reduce using rule 6 (programaAuxiliar1 -> programaAuxiliar2 bloque main_end .)
+
+
+state 44
+
+    (12) funcs1 -> tipo funcsAux1 . funcs1
+    (12) funcs1 -> . tipo funcsAux1 funcs1
+    (13) funcs1 -> . tipoVoid funcsAux1 funcs1
+    (14) funcs1 -> . empty
+    (30) tipo -> . INT
+    (31) tipo -> . FLOAT
+    (32) tipo -> . arreglo
+    (33) tipo -> . BOOL
+    (34) tipo -> . STRING
+    (15) tipoVoid -> . VOID
+    (1) empty -> .
+    (73) arreglo -> . tipo SQUAREBOPEN CTEINT SQUAREBCLOSE
+
+    INT             shift and go to state 21
+    FLOAT           shift and go to state 22
+    BOOL            shift and go to state 24
+    STRING          shift and go to state 25
+    VOID            shift and go to state 31
+    MAIN            reduce using rule 1 (empty -> .)
+
+    tipo                           shift and go to state 30
+    tipoVoid                       shift and go to state 32
+    arreglo                        shift and go to state 23
+    funcs1                         shift and go to state 71
+    empty                          shift and go to state 34
+
+state 45
+
+    (16) funcsAux1 -> funcsAux5 . OPENPARENTHESIS funcsAux2 CLOSEPARENTHESIS bloque func_end
+
+    OPENPARENTHESIS shift and go to state 72
+
+
+state 46
+
+    (23) funcsAux5 -> ID .
+
+    OPENPARENTHESIS reduce using rule 23 (funcsAux5 -> ID .)
+
+
+state 47
+
+    (13) funcs1 -> tipoVoid funcsAux1 . funcs1
+    (12) funcs1 -> . tipo funcsAux1 funcs1
+    (13) funcs1 -> . tipoVoid funcsAux1 funcs1
+    (14) funcs1 -> . empty
+    (30) tipo -> . INT
+    (31) tipo -> . FLOAT
+    (32) tipo -> . arreglo
+    (33) tipo -> . BOOL
+    (34) tipo -> . STRING
+    (15) tipoVoid -> . VOID
+    (1) empty -> .
+    (73) arreglo -> . tipo SQUAREBOPEN CTEINT SQUAREBCLOSE
+
+    INT             shift and go to state 21
+    FLOAT           shift and go to state 22
+    BOOL            shift and go to state 24
+    STRING          shift and go to state 25
+    VOID            shift and go to state 31
+    MAIN            reduce using rule 1 (empty -> .)
+
+    tipo                           shift and go to state 30
+    tipoVoid                       shift and go to state 32
+    arreglo                        shift and go to state 23
+    funcs1                         shift and go to state 73
+    empty                          shift and go to state 34
+
+state 48
+
+    (25) varsAuxiliar1 -> varsAuxiliar2 varsAuxiliar1 .
+
+    FUN             reduce using rule 25 (varsAuxiliar1 -> varsAuxiliar2 varsAuxiliar1 .)
+    MAIN            reduce using rule 25 (varsAuxiliar1 -> varsAuxiliar2 varsAuxiliar1 .)
+    ID              reduce using rule 25 (varsAuxiliar1 -> varsAuxiliar2 varsAuxiliar1 .)
+    IF              reduce using rule 25 (varsAuxiliar1 -> varsAuxiliar2 varsAuxiliar1 .)
+    PRINT           reduce using rule 25 (varsAuxiliar1 -> varsAuxiliar2 varsAuxiliar1 .)
+    READ            reduce using rule 25 (varsAuxiliar1 -> varsAuxiliar2 varsAuxiliar1 .)
+    FOR             reduce using rule 25 (varsAuxiliar1 -> varsAuxiliar2 varsAuxiliar1 .)
+    RETURN          reduce using rule 25 (varsAuxiliar1 -> varsAuxiliar2 varsAuxiliar1 .)
+    CLOSEBRACKET    reduce using rule 25 (varsAuxiliar1 -> varsAuxiliar2 varsAuxiliar1 .)
+
+
+state 49
+
+    (73) arreglo -> tipo SQUAREBOPEN CTEINT . SQUAREBCLOSE
+
+    SQUAREBCLOSE    shift and go to state 74
+
+
+state 50
+
+    (27) varsAuxiliar2 -> tipo ID varsAuxiliar3 . SEMICOLON
+
+    SEMICOLON       shift and go to state 75
+
+
+state 51
+
+    (28) varsAuxiliar3 -> COMMA . ID varsAuxiliar3
+
+    ID              shift and go to state 76
+
+
+state 52
+
+    (29) varsAuxiliar3 -> empty .
+
+    SEMICOLON       reduce using rule 29 (varsAuxiliar3 -> empty .)
+
+
+state 53
+
+    (48) retorno -> RETURN . retornoAux SEMICOLON
+    (49) retornoAux -> . var_cte
+    (50) retornoAux -> . spcte
+    (51) retornoAux -> . expression
+    (117) var_cte -> . arregloVar
+    (118) var_cte -> . CTEINT getvalue_i
+    (119) var_cte -> . CTEFLOAT getvalue_f
+    (120) var_cte -> . ID getidvalue
+    (121) var_cte -> . llamada getidllamada
+    (122) var_cte -> . spcte
+    (139) spcte -> . CTESTRING
+    (140) spcte -> . ctebool
+    (92) expression -> . exploc logicexp
+    (74) arregloVar -> . ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1
+    (52) llamada -> . ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2
+    (137) ctebool -> . TRUE
+    (138) ctebool -> . FALSE
+    (96) exploc -> . exp expression1
+    (104) exp -> . term top_exp exp1
+    (109) term -> . factor top_factor term1
+    (113) factor -> . OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par
+    (114) factor -> . var_cte
+    (115) factor -> . ID push_id
+
+    CTEINT          shift and go to state 86
+    CTEFLOAT        shift and go to state 83
+    ID              shift and go to state 89
+    CTESTRING       shift and go to state 80
+    TRUE            shift and go to state 82
+    FALSE           shift and go to state 90
+    OPENPARENTHESIS shift and go to state 93
+
+    exploc                         shift and go to state 77
+    ctebool                        shift and go to state 78
+    var_cte                        shift and go to state 79
+    arregloVar                     shift and go to state 81
+    llamada                        shift and go to state 84
+    factor                         shift and go to state 85
+    term                           shift and go to state 87
+    spcte                          shift and go to state 88
+    retornoAux                     shift and go to state 91
+    exp                            shift and go to state 92
+    expression                     shift and go to state 94
+
+state 54
+
+    (81) escritura -> PRINT . OPENPARENTHESIS escrituraAuxiliar1 CLOSEPARENTHESIS SEMICOLON
+
+    OPENPARENTHESIS shift and go to state 95
+
+
+state 55
+
+    (44) estatuto -> ciclo .
+
+    ID              reduce using rule 44 (estatuto -> ciclo .)
+    IF              reduce using rule 44 (estatuto -> ciclo .)
+    PRINT           reduce using rule 44 (estatuto -> ciclo .)
+    READ            reduce using rule 44 (estatuto -> ciclo .)
+    FOR             reduce using rule 44 (estatuto -> ciclo .)
+    RETURN          reduce using rule 44 (estatuto -> ciclo .)
+    CLOSEBRACKET    reduce using rule 44 (estatuto -> ciclo .)
+
+
+state 56
+
+    (36) bloqueAuxiliar -> estatuto . bloqueAuxiliar
+    (36) bloqueAuxiliar -> . estatuto bloqueAuxiliar
+    (37) bloqueAuxiliar -> . empty
+    (40) estatuto -> . asignacion SEMICOLON
+    (41) estatuto -> . condicion
+    (42) estatuto -> . escritura
+    (43) estatuto -> . lectura
+    (44) estatuto -> . ciclo
+    (45) estatuto -> . llamada SEMICOLON
+    (46) estatuto -> . incremento SEMICOLON
+    (47) estatuto -> . retorno
+    (1) empty -> .
+    (68) asignacion -> . ID pupid EQUAL asignacionAux
+    (69) asignacion -> . arregloVar EQUAL asignacionAux
+    (84) condicion -> . IF OPENPARENTHESIS expression CLOSEPARENTHESIS pn_3 bloque condicionAuxiliar SEMICOLON
+    (85) condicion -> . IF OPENPARENTHESIS expression CLOSEPARENTHESIS pn_3 bloque condicionAuxiliar
+    (81) escritura -> . PRINT OPENPARENTHESIS escrituraAuxiliar1 CLOSEPARENTHESIS SEMICOLON
+    (80) lectura -> . READ OPENPARENTHESIS ID CLOSEPARENTHESIS SEMICOLON
+    (61) ciclo -> . FOR pn_8 OPENPARENTHESIS expression CLOSEPARENTHESIS pn_6 bloque pn_7
+    (52) llamada -> . ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2
+    (65) incremento -> . ID incremnetoAux1 expression
+    (48) retorno -> . RETURN retornoAux SEMICOLON
+    (74) arregloVar -> . ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1
+
+    CLOSEBRACKET    reduce using rule 1 (empty -> .)
+    ID              shift and go to state 66
+    IF              shift and go to state 67
+    PRINT           shift and go to state 54
+    READ            shift and go to state 61
+    FOR             shift and go to state 64
+    RETURN          shift and go to state 53
+
+    bloqueAuxiliar                 shift and go to state 96
+    ciclo                          shift and go to state 55
+    estatuto                       shift and go to state 56
+    arregloVar                     shift and go to state 57
+    llamada                        shift and go to state 58
+    condicion                      shift and go to state 59
+    retorno                        shift and go to state 60
+    lectura                        shift and go to state 62
+    empty                          shift and go to state 63
+    asignacion                     shift and go to state 68
+    incremento                     shift and go to state 69
+    escritura                      shift and go to state 70
+
+state 57
+
+    (69) asignacion -> arregloVar . EQUAL asignacionAux
+
+    EQUAL           shift and go to state 97
+
+
+state 58
+
+    (45) estatuto -> llamada . SEMICOLON
+
+    SEMICOLON       shift and go to state 98
+
+
+state 59
+
+    (41) estatuto -> condicion .
+
+    ID              reduce using rule 41 (estatuto -> condicion .)
+    IF              reduce using rule 41 (estatuto -> condicion .)
+    PRINT           reduce using rule 41 (estatuto -> condicion .)
+    READ            reduce using rule 41 (estatuto -> condicion .)
+    FOR             reduce using rule 41 (estatuto -> condicion .)
+    RETURN          reduce using rule 41 (estatuto -> condicion .)
+    CLOSEBRACKET    reduce using rule 41 (estatuto -> condicion .)
+
+
+state 60
+
+    (47) estatuto -> retorno .
+
+    ID              reduce using rule 47 (estatuto -> retorno .)
+    IF              reduce using rule 47 (estatuto -> retorno .)
+    PRINT           reduce using rule 47 (estatuto -> retorno .)
+    READ            reduce using rule 47 (estatuto -> retorno .)
+    FOR             reduce using rule 47 (estatuto -> retorno .)
+    RETURN          reduce using rule 47 (estatuto -> retorno .)
+    CLOSEBRACKET    reduce using rule 47 (estatuto -> retorno .)
+
+
+state 61
+
+    (80) lectura -> READ . OPENPARENTHESIS ID CLOSEPARENTHESIS SEMICOLON
+
+    OPENPARENTHESIS shift and go to state 99
+
+
+state 62
+
+    (43) estatuto -> lectura .
+
+    ID              reduce using rule 43 (estatuto -> lectura .)
+    IF              reduce using rule 43 (estatuto -> lectura .)
+    PRINT           reduce using rule 43 (estatuto -> lectura .)
+    READ            reduce using rule 43 (estatuto -> lectura .)
+    FOR             reduce using rule 43 (estatuto -> lectura .)
+    RETURN          reduce using rule 43 (estatuto -> lectura .)
+    CLOSEBRACKET    reduce using rule 43 (estatuto -> lectura .)
+
+
+state 63
+
+    (37) bloqueAuxiliar -> empty .
+
+    CLOSEBRACKET    reduce using rule 37 (bloqueAuxiliar -> empty .)
+
+
+state 64
+
+    (61) ciclo -> FOR . pn_8 OPENPARENTHESIS expression CLOSEPARENTHESIS pn_6 bloque pn_7
+    (62) pn_8 -> . empty
+    (1) empty -> .
+
+    OPENPARENTHESIS reduce using rule 1 (empty -> .)
+
+    pn_8                           shift and go to state 100
+    empty                          shift and go to state 101
+
+state 65
+
+    (35) bloque -> OPENBRACKET bloqueAuxiliar1 bloqueAuxiliar . CLOSEBRACKET
+
+    CLOSEBRACKET    shift and go to state 102
+
+
+state 66
+
+    (68) asignacion -> ID . pupid EQUAL asignacionAux
+    (52) llamada -> ID . pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2
+    (65) incremento -> ID . incremnetoAux1 expression
+    (74) arregloVar -> ID . getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1
+    (70) pupid -> .
+    (53) pn_llamada -> . empty
+    (66) incremnetoAux1 -> . MOREEQUALS
+    (67) incremnetoAux1 -> . LESSEQUALS
+    (76) getLimits -> .
+    (1) empty -> .
+
+    EQUAL           reduce using rule 70 (pupid -> .)
+    MOREEQUALS      shift and go to state 108
+    LESSEQUALS      shift and go to state 105
+    SQUAREBOPEN     reduce using rule 76 (getLimits -> .)
+    OPENPARENTHESIS reduce using rule 1 (empty -> .)
+
+    pn_llamada                     shift and go to state 103
+    getLimits                      shift and go to state 104
+    incremnetoAux1                 shift and go to state 106
+    pupid                          shift and go to state 107
+    empty                          shift and go to state 109
+
+state 67
+
+    (84) condicion -> IF . OPENPARENTHESIS expression CLOSEPARENTHESIS pn_3 bloque condicionAuxiliar SEMICOLON
+    (85) condicion -> IF . OPENPARENTHESIS expression CLOSEPARENTHESIS pn_3 bloque condicionAuxiliar
+
+    OPENPARENTHESIS shift and go to state 110
+
+
+state 68
+
+    (40) estatuto -> asignacion . SEMICOLON
+
+    SEMICOLON       shift and go to state 111
+
+
+state 69
+
+    (46) estatuto -> incremento . SEMICOLON
+
+    SEMICOLON       shift and go to state 112
+
+
+state 70
+
+    (42) estatuto -> escritura .
+
+    ID              reduce using rule 42 (estatuto -> escritura .)
+    IF              reduce using rule 42 (estatuto -> escritura .)
+    PRINT           reduce using rule 42 (estatuto -> escritura .)
+    READ            reduce using rule 42 (estatuto -> escritura .)
+    FOR             reduce using rule 42 (estatuto -> escritura .)
+    RETURN          reduce using rule 42 (estatuto -> escritura .)
+    CLOSEBRACKET    reduce using rule 42 (estatuto -> escritura .)
+
+
+state 71
+
+    (12) funcs1 -> tipo funcsAux1 funcs1 .
+
+    MAIN            reduce using rule 12 (funcs1 -> tipo funcsAux1 funcs1 .)
+
+
+state 72
+
+    (16) funcsAux1 -> funcsAux5 OPENPARENTHESIS . funcsAux2 CLOSEPARENTHESIS bloque func_end
+    (18) funcsAux2 -> . funcsAux3
+    (19) funcsAux2 -> . empty
+    (20) funcsAux3 -> . tipo ID funcsAux4
+    (1) empty -> .
+    (30) tipo -> . INT
+    (31) tipo -> . FLOAT
+    (32) tipo -> . arreglo
+    (33) tipo -> . BOOL
+    (34) tipo -> . STRING
+    (73) arreglo -> . tipo SQUAREBOPEN CTEINT SQUAREBCLOSE
+
+    CLOSEPARENTHESIS reduce using rule 1 (empty -> .)
+    INT             shift and go to state 21
+    FLOAT           shift and go to state 22
+    BOOL            shift and go to state 24
+    STRING          shift and go to state 25
+
+    tipo                           shift and go to state 113
+    arreglo                        shift and go to state 23
+    funcsAux2                      shift and go to state 114
+    funcsAux3                      shift and go to state 115
+    empty                          shift and go to state 116
+
+state 73
+
+    (13) funcs1 -> tipoVoid funcsAux1 funcs1 .
+
+    MAIN            reduce using rule 13 (funcs1 -> tipoVoid funcsAux1 funcs1 .)
+
+
+state 74
+
+    (73) arreglo -> tipo SQUAREBOPEN CTEINT SQUAREBCLOSE .
+
+    ID              reduce using rule 73 (arreglo -> tipo SQUAREBOPEN CTEINT SQUAREBCLOSE .)
+    SQUAREBOPEN     reduce using rule 73 (arreglo -> tipo SQUAREBOPEN CTEINT SQUAREBCLOSE .)
+
+
+state 75
+
+    (27) varsAuxiliar2 -> tipo ID varsAuxiliar3 SEMICOLON .
+
+    INT             reduce using rule 27 (varsAuxiliar2 -> tipo ID varsAuxiliar3 SEMICOLON .)
+    FLOAT           reduce using rule 27 (varsAuxiliar2 -> tipo ID varsAuxiliar3 SEMICOLON .)
+    BOOL            reduce using rule 27 (varsAuxiliar2 -> tipo ID varsAuxiliar3 SEMICOLON .)
+    STRING          reduce using rule 27 (varsAuxiliar2 -> tipo ID varsAuxiliar3 SEMICOLON .)
+    FUN             reduce using rule 27 (varsAuxiliar2 -> tipo ID varsAuxiliar3 SEMICOLON .)
+    MAIN            reduce using rule 27 (varsAuxiliar2 -> tipo ID varsAuxiliar3 SEMICOLON .)
+    ID              reduce using rule 27 (varsAuxiliar2 -> tipo ID varsAuxiliar3 SEMICOLON .)
+    IF              reduce using rule 27 (varsAuxiliar2 -> tipo ID varsAuxiliar3 SEMICOLON .)
+    PRINT           reduce using rule 27 (varsAuxiliar2 -> tipo ID varsAuxiliar3 SEMICOLON .)
+    READ            reduce using rule 27 (varsAuxiliar2 -> tipo ID varsAuxiliar3 SEMICOLON .)
+    FOR             reduce using rule 27 (varsAuxiliar2 -> tipo ID varsAuxiliar3 SEMICOLON .)
+    RETURN          reduce using rule 27 (varsAuxiliar2 -> tipo ID varsAuxiliar3 SEMICOLON .)
+    CLOSEBRACKET    reduce using rule 27 (varsAuxiliar2 -> tipo ID varsAuxiliar3 SEMICOLON .)
+
+
+state 76
+
+    (28) varsAuxiliar3 -> COMMA ID . varsAuxiliar3
+    (28) varsAuxiliar3 -> . COMMA ID varsAuxiliar3
+    (29) varsAuxiliar3 -> . empty
+    (1) empty -> .
+
+    COMMA           shift and go to state 51
+    SEMICOLON       reduce using rule 1 (empty -> .)
+
+    varsAuxiliar3                  shift and go to state 117
+    empty                          shift and go to state 52
+
+state 77
+
+    (92) expression -> exploc . logicexp
+    (93) logicexp -> . OR andor exploc top_andor
+    (94) logicexp -> . AND andor exploc top_andor
+    (95) logicexp -> . empty
+    (1) empty -> .
+
+    OR              shift and go to state 120
+    AND             shift and go to state 118
+    SEMICOLON       reduce using rule 1 (empty -> .)
+    CLOSEPARENTHESIS reduce using rule 1 (empty -> .)
+    COMMA           reduce using rule 1 (empty -> .)
+    SQUAREBCLOSE    reduce using rule 1 (empty -> .)
+
+    logicexp                       shift and go to state 119
+    empty                          shift and go to state 121
+
+state 78
+
+    (140) spcte -> ctebool .
+
+    DIVIDE          reduce using rule 140 (spcte -> ctebool .)
+    TIMES           reduce using rule 140 (spcte -> ctebool .)
+    MINUS           reduce using rule 140 (spcte -> ctebool .)
+    PLUS            reduce using rule 140 (spcte -> ctebool .)
+    LESSER          reduce using rule 140 (spcte -> ctebool .)
+    GREATER         reduce using rule 140 (spcte -> ctebool .)
+    EQUALEQUAL      reduce using rule 140 (spcte -> ctebool .)
+    NOTEQUAL        reduce using rule 140 (spcte -> ctebool .)
+    GREATEROREQUAL  reduce using rule 140 (spcte -> ctebool .)
+    LESSEROREQUAL   reduce using rule 140 (spcte -> ctebool .)
+    OR              reduce using rule 140 (spcte -> ctebool .)
+    AND             reduce using rule 140 (spcte -> ctebool .)
+    SEMICOLON       reduce using rule 140 (spcte -> ctebool .)
+    CLOSEPARENTHESIS reduce using rule 140 (spcte -> ctebool .)
+    COMMA           reduce using rule 140 (spcte -> ctebool .)
+    SQUAREBCLOSE    reduce using rule 140 (spcte -> ctebool .)
+
+
+state 79
+
+    (49) retornoAux -> var_cte .
+    (114) factor -> var_cte .
+
+  ! reduce/reduce conflict for SEMICOLON resolved using rule 49 (retornoAux -> var_cte .)
+    SEMICOLON       reduce using rule 49 (retornoAux -> var_cte .)
+    DIVIDE          reduce using rule 114 (factor -> var_cte .)
+    TIMES           reduce using rule 114 (factor -> var_cte .)
+    MINUS           reduce using rule 114 (factor -> var_cte .)
+    PLUS            reduce using rule 114 (factor -> var_cte .)
+    LESSER          reduce using rule 114 (factor -> var_cte .)
+    GREATER         reduce using rule 114 (factor -> var_cte .)
+    EQUALEQUAL      reduce using rule 114 (factor -> var_cte .)
+    NOTEQUAL        reduce using rule 114 (factor -> var_cte .)
+    GREATEROREQUAL  reduce using rule 114 (factor -> var_cte .)
+    LESSEROREQUAL   reduce using rule 114 (factor -> var_cte .)
+    OR              reduce using rule 114 (factor -> var_cte .)
+    AND             reduce using rule 114 (factor -> var_cte .)
+
+  ! SEMICOLON       [ reduce using rule 114 (factor -> var_cte .) ]
+
+
+state 80
+
+    (139) spcte -> CTESTRING .
+
+    DIVIDE          reduce using rule 139 (spcte -> CTESTRING .)
+    TIMES           reduce using rule 139 (spcte -> CTESTRING .)
+    MINUS           reduce using rule 139 (spcte -> CTESTRING .)
+    PLUS            reduce using rule 139 (spcte -> CTESTRING .)
+    LESSER          reduce using rule 139 (spcte -> CTESTRING .)
+    GREATER         reduce using rule 139 (spcte -> CTESTRING .)
+    EQUALEQUAL      reduce using rule 139 (spcte -> CTESTRING .)
+    NOTEQUAL        reduce using rule 139 (spcte -> CTESTRING .)
+    GREATEROREQUAL  reduce using rule 139 (spcte -> CTESTRING .)
+    LESSEROREQUAL   reduce using rule 139 (spcte -> CTESTRING .)
+    OR              reduce using rule 139 (spcte -> CTESTRING .)
+    AND             reduce using rule 139 (spcte -> CTESTRING .)
+    SEMICOLON       reduce using rule 139 (spcte -> CTESTRING .)
+    CLOSEPARENTHESIS reduce using rule 139 (spcte -> CTESTRING .)
+    COMMA           reduce using rule 139 (spcte -> CTESTRING .)
+    SQUAREBCLOSE    reduce using rule 139 (spcte -> CTESTRING .)
+
+
+state 81
+
+    (117) var_cte -> arregloVar .
+
+    DIVIDE          reduce using rule 117 (var_cte -> arregloVar .)
+    TIMES           reduce using rule 117 (var_cte -> arregloVar .)
+    MINUS           reduce using rule 117 (var_cte -> arregloVar .)
+    PLUS            reduce using rule 117 (var_cte -> arregloVar .)
+    LESSER          reduce using rule 117 (var_cte -> arregloVar .)
+    GREATER         reduce using rule 117 (var_cte -> arregloVar .)
+    EQUALEQUAL      reduce using rule 117 (var_cte -> arregloVar .)
+    NOTEQUAL        reduce using rule 117 (var_cte -> arregloVar .)
+    GREATEROREQUAL  reduce using rule 117 (var_cte -> arregloVar .)
+    LESSEROREQUAL   reduce using rule 117 (var_cte -> arregloVar .)
+    OR              reduce using rule 117 (var_cte -> arregloVar .)
+    AND             reduce using rule 117 (var_cte -> arregloVar .)
+    SQUAREBCLOSE    reduce using rule 117 (var_cte -> arregloVar .)
+    SEMICOLON       reduce using rule 117 (var_cte -> arregloVar .)
+    CLOSEPARENTHESIS reduce using rule 117 (var_cte -> arregloVar .)
+    COMMA           reduce using rule 117 (var_cte -> arregloVar .)
+
+
+state 82
+
+    (137) ctebool -> TRUE .
+
+    DIVIDE          reduce using rule 137 (ctebool -> TRUE .)
+    TIMES           reduce using rule 137 (ctebool -> TRUE .)
+    MINUS           reduce using rule 137 (ctebool -> TRUE .)
+    PLUS            reduce using rule 137 (ctebool -> TRUE .)
+    OR              reduce using rule 137 (ctebool -> TRUE .)
+    AND             reduce using rule 137 (ctebool -> TRUE .)
+    SEMICOLON       reduce using rule 137 (ctebool -> TRUE .)
+    CLOSEPARENTHESIS reduce using rule 137 (ctebool -> TRUE .)
+    COMMA           reduce using rule 137 (ctebool -> TRUE .)
+    SQUAREBCLOSE    reduce using rule 137 (ctebool -> TRUE .)
+    LESSER          reduce using rule 137 (ctebool -> TRUE .)
+    GREATER         reduce using rule 137 (ctebool -> TRUE .)
+    EQUALEQUAL      reduce using rule 137 (ctebool -> TRUE .)
+    NOTEQUAL        reduce using rule 137 (ctebool -> TRUE .)
+    GREATEROREQUAL  reduce using rule 137 (ctebool -> TRUE .)
+    LESSEROREQUAL   reduce using rule 137 (ctebool -> TRUE .)
+
+
+state 83
+
+    (119) var_cte -> CTEFLOAT . getvalue_f
+    (127) getvalue_f -> .
+
+    SEMICOLON       reduce using rule 127 (getvalue_f -> .)
+    DIVIDE          reduce using rule 127 (getvalue_f -> .)
+    TIMES           reduce using rule 127 (getvalue_f -> .)
+    MINUS           reduce using rule 127 (getvalue_f -> .)
+    PLUS            reduce using rule 127 (getvalue_f -> .)
+    LESSER          reduce using rule 127 (getvalue_f -> .)
+    GREATER         reduce using rule 127 (getvalue_f -> .)
+    EQUALEQUAL      reduce using rule 127 (getvalue_f -> .)
+    NOTEQUAL        reduce using rule 127 (getvalue_f -> .)
+    GREATEROREQUAL  reduce using rule 127 (getvalue_f -> .)
+    LESSEROREQUAL   reduce using rule 127 (getvalue_f -> .)
+    OR              reduce using rule 127 (getvalue_f -> .)
+    AND             reduce using rule 127 (getvalue_f -> .)
+    CLOSEPARENTHESIS reduce using rule 127 (getvalue_f -> .)
+    COMMA           reduce using rule 127 (getvalue_f -> .)
+    SQUAREBCLOSE    reduce using rule 127 (getvalue_f -> .)
+
+    getvalue_f                     shift and go to state 122
+
+state 84
+
+    (121) var_cte -> llamada . getidllamada
+    (123) getidllamada -> . empty
+    (1) empty -> .
+
+    SEMICOLON       reduce using rule 1 (empty -> .)
+    DIVIDE          reduce using rule 1 (empty -> .)
+    TIMES           reduce using rule 1 (empty -> .)
+    MINUS           reduce using rule 1 (empty -> .)
+    PLUS            reduce using rule 1 (empty -> .)
+    LESSER          reduce using rule 1 (empty -> .)
+    GREATER         reduce using rule 1 (empty -> .)
+    EQUALEQUAL      reduce using rule 1 (empty -> .)
+    NOTEQUAL        reduce using rule 1 (empty -> .)
+    GREATEROREQUAL  reduce using rule 1 (empty -> .)
+    LESSEROREQUAL   reduce using rule 1 (empty -> .)
+    OR              reduce using rule 1 (empty -> .)
+    AND             reduce using rule 1 (empty -> .)
+    CLOSEPARENTHESIS reduce using rule 1 (empty -> .)
+    COMMA           reduce using rule 1 (empty -> .)
+    SQUAREBCLOSE    reduce using rule 1 (empty -> .)
+
+    empty                          shift and go to state 123
+    getidllamada                   shift and go to state 124
+
+state 85
+
+    (109) term -> factor . top_factor term1
+    (116) top_factor -> .
+
+    DIVIDE          reduce using rule 116 (top_factor -> .)
+    TIMES           reduce using rule 116 (top_factor -> .)
+    MINUS           reduce using rule 116 (top_factor -> .)
+    PLUS            reduce using rule 116 (top_factor -> .)
+    LESSER          reduce using rule 116 (top_factor -> .)
+    GREATER         reduce using rule 116 (top_factor -> .)
+    EQUALEQUAL      reduce using rule 116 (top_factor -> .)
+    NOTEQUAL        reduce using rule 116 (top_factor -> .)
+    GREATEROREQUAL  reduce using rule 116 (top_factor -> .)
+    LESSEROREQUAL   reduce using rule 116 (top_factor -> .)
+    OR              reduce using rule 116 (top_factor -> .)
+    AND             reduce using rule 116 (top_factor -> .)
+    SEMICOLON       reduce using rule 116 (top_factor -> .)
+    CLOSEPARENTHESIS reduce using rule 116 (top_factor -> .)
+    COMMA           reduce using rule 116 (top_factor -> .)
+    SQUAREBCLOSE    reduce using rule 116 (top_factor -> .)
+
+    top_factor                     shift and go to state 125
+
+state 86
+
+    (118) var_cte -> CTEINT . getvalue_i
+    (126) getvalue_i -> .
+
+    SEMICOLON       reduce using rule 126 (getvalue_i -> .)
+    DIVIDE          reduce using rule 126 (getvalue_i -> .)
+    TIMES           reduce using rule 126 (getvalue_i -> .)
+    MINUS           reduce using rule 126 (getvalue_i -> .)
+    PLUS            reduce using rule 126 (getvalue_i -> .)
+    LESSER          reduce using rule 126 (getvalue_i -> .)
+    GREATER         reduce using rule 126 (getvalue_i -> .)
+    EQUALEQUAL      reduce using rule 126 (getvalue_i -> .)
+    NOTEQUAL        reduce using rule 126 (getvalue_i -> .)
+    GREATEROREQUAL  reduce using rule 126 (getvalue_i -> .)
+    LESSEROREQUAL   reduce using rule 126 (getvalue_i -> .)
+    OR              reduce using rule 126 (getvalue_i -> .)
+    AND             reduce using rule 126 (getvalue_i -> .)
+    CLOSEPARENTHESIS reduce using rule 126 (getvalue_i -> .)
+    COMMA           reduce using rule 126 (getvalue_i -> .)
+    SQUAREBCLOSE    reduce using rule 126 (getvalue_i -> .)
+
+    getvalue_i                     shift and go to state 126
+
+state 87
+
+    (104) exp -> term . top_exp exp1
+    (108) top_exp -> . empty
+    (1) empty -> .
+
+    MINUS           reduce using rule 1 (empty -> .)
+    PLUS            reduce using rule 1 (empty -> .)
+    LESSER          reduce using rule 1 (empty -> .)
+    GREATER         reduce using rule 1 (empty -> .)
+    EQUALEQUAL      reduce using rule 1 (empty -> .)
+    NOTEQUAL        reduce using rule 1 (empty -> .)
+    GREATEROREQUAL  reduce using rule 1 (empty -> .)
+    LESSEROREQUAL   reduce using rule 1 (empty -> .)
+    OR              reduce using rule 1 (empty -> .)
+    AND             reduce using rule 1 (empty -> .)
+    SEMICOLON       reduce using rule 1 (empty -> .)
+    CLOSEPARENTHESIS reduce using rule 1 (empty -> .)
+    COMMA           reduce using rule 1 (empty -> .)
+    SQUAREBCLOSE    reduce using rule 1 (empty -> .)
+
+    empty                          shift and go to state 127
+    top_exp                        shift and go to state 128
+
+state 88
+
+    (50) retornoAux -> spcte .
+    (122) var_cte -> spcte .
+
+  ! reduce/reduce conflict for SEMICOLON resolved using rule 50 (retornoAux -> spcte .)
+    SEMICOLON       reduce using rule 50 (retornoAux -> spcte .)
+    DIVIDE          reduce using rule 122 (var_cte -> spcte .)
+    TIMES           reduce using rule 122 (var_cte -> spcte .)
+    MINUS           reduce using rule 122 (var_cte -> spcte .)
+    PLUS            reduce using rule 122 (var_cte -> spcte .)
+    LESSER          reduce using rule 122 (var_cte -> spcte .)
+    GREATER         reduce using rule 122 (var_cte -> spcte .)
+    EQUALEQUAL      reduce using rule 122 (var_cte -> spcte .)
+    NOTEQUAL        reduce using rule 122 (var_cte -> spcte .)
+    GREATEROREQUAL  reduce using rule 122 (var_cte -> spcte .)
+    LESSEROREQUAL   reduce using rule 122 (var_cte -> spcte .)
+    OR              reduce using rule 122 (var_cte -> spcte .)
+    AND             reduce using rule 122 (var_cte -> spcte .)
+
+  ! SEMICOLON       [ reduce using rule 122 (var_cte -> spcte .) ]
+
+
+state 89
+
+    (120) var_cte -> ID . getidvalue
+    (74) arregloVar -> ID . getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1
+    (52) llamada -> ID . pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2
+    (115) factor -> ID . push_id
+    (125) getidvalue -> .
+    (76) getLimits -> .
+    (53) pn_llamada -> . empty
+    (136) push_id -> .
+    (1) empty -> .
+
+  ! reduce/reduce conflict for DIVIDE resolved using rule 125 (getidvalue -> .)
+  ! reduce/reduce conflict for TIMES resolved using rule 125 (getidvalue -> .)
+  ! reduce/reduce conflict for MINUS resolved using rule 125 (getidvalue -> .)
+  ! reduce/reduce conflict for PLUS resolved using rule 125 (getidvalue -> .)
+  ! reduce/reduce conflict for LESSER resolved using rule 125 (getidvalue -> .)
+  ! reduce/reduce conflict for GREATER resolved using rule 125 (getidvalue -> .)
+  ! reduce/reduce conflict for EQUALEQUAL resolved using rule 125 (getidvalue -> .)
+  ! reduce/reduce conflict for NOTEQUAL resolved using rule 125 (getidvalue -> .)
+  ! reduce/reduce conflict for GREATEROREQUAL resolved using rule 125 (getidvalue -> .)
+  ! reduce/reduce conflict for LESSEROREQUAL resolved using rule 125 (getidvalue -> .)
+  ! reduce/reduce conflict for OR resolved using rule 125 (getidvalue -> .)
+  ! reduce/reduce conflict for AND resolved using rule 125 (getidvalue -> .)
+  ! reduce/reduce conflict for SEMICOLON resolved using rule 125 (getidvalue -> .)
+    SEMICOLON       reduce using rule 125 (getidvalue -> .)
+    DIVIDE          reduce using rule 125 (getidvalue -> .)
+    TIMES           reduce using rule 125 (getidvalue -> .)
+    MINUS           reduce using rule 125 (getidvalue -> .)
+    PLUS            reduce using rule 125 (getidvalue -> .)
+    LESSER          reduce using rule 125 (getidvalue -> .)
+    GREATER         reduce using rule 125 (getidvalue -> .)
+    EQUALEQUAL      reduce using rule 125 (getidvalue -> .)
+    NOTEQUAL        reduce using rule 125 (getidvalue -> .)
+    GREATEROREQUAL  reduce using rule 125 (getidvalue -> .)
+    LESSEROREQUAL   reduce using rule 125 (getidvalue -> .)
+    OR              reduce using rule 125 (getidvalue -> .)
+    AND             reduce using rule 125 (getidvalue -> .)
+    SQUAREBOPEN     reduce using rule 76 (getLimits -> .)
+    OPENPARENTHESIS reduce using rule 1 (empty -> .)
+
+  ! DIVIDE          [ reduce using rule 136 (push_id -> .) ]
+  ! TIMES           [ reduce using rule 136 (push_id -> .) ]
+  ! MINUS           [ reduce using rule 136 (push_id -> .) ]
+  ! PLUS            [ reduce using rule 136 (push_id -> .) ]
+  ! LESSER          [ reduce using rule 136 (push_id -> .) ]
+  ! GREATER         [ reduce using rule 136 (push_id -> .) ]
+  ! EQUALEQUAL      [ reduce using rule 136 (push_id -> .) ]
+  ! NOTEQUAL        [ reduce using rule 136 (push_id -> .) ]
+  ! GREATEROREQUAL  [ reduce using rule 136 (push_id -> .) ]
+  ! LESSEROREQUAL   [ reduce using rule 136 (push_id -> .) ]
+  ! OR              [ reduce using rule 136 (push_id -> .) ]
+  ! AND             [ reduce using rule 136 (push_id -> .) ]
+  ! SEMICOLON       [ reduce using rule 136 (push_id -> .) ]
+
+    pn_llamada                     shift and go to state 103
+    getLimits                      shift and go to state 104
+    getidvalue                     shift and go to state 130
+    push_id                        shift and go to state 129
+    empty                          shift and go to state 109
+
+state 90
+
+    (138) ctebool -> FALSE .
+
+    DIVIDE          reduce using rule 138 (ctebool -> FALSE .)
+    TIMES           reduce using rule 138 (ctebool -> FALSE .)
+    MINUS           reduce using rule 138 (ctebool -> FALSE .)
+    PLUS            reduce using rule 138 (ctebool -> FALSE .)
+    OR              reduce using rule 138 (ctebool -> FALSE .)
+    AND             reduce using rule 138 (ctebool -> FALSE .)
+    SEMICOLON       reduce using rule 138 (ctebool -> FALSE .)
+    CLOSEPARENTHESIS reduce using rule 138 (ctebool -> FALSE .)
+    COMMA           reduce using rule 138 (ctebool -> FALSE .)
+    SQUAREBCLOSE    reduce using rule 138 (ctebool -> FALSE .)
+    LESSER          reduce using rule 138 (ctebool -> FALSE .)
+    GREATER         reduce using rule 138 (ctebool -> FALSE .)
+    EQUALEQUAL      reduce using rule 138 (ctebool -> FALSE .)
+    NOTEQUAL        reduce using rule 138 (ctebool -> FALSE .)
+    GREATEROREQUAL  reduce using rule 138 (ctebool -> FALSE .)
+    LESSEROREQUAL   reduce using rule 138 (ctebool -> FALSE .)
+
+
+state 91
+
+    (48) retorno -> RETURN retornoAux . SEMICOLON
+
+    SEMICOLON       shift and go to state 131
+
+
+state 92
+
+    (96) exploc -> exp . expression1
+    (97) expression1 -> . LESSER relop exp top_relop
+    (98) expression1 -> . GREATER relop exp top_relop
+    (99) expression1 -> . EQUALEQUAL relop exp top_relop
+    (100) expression1 -> . NOTEQUAL relop exp top_relop
+    (101) expression1 -> . GREATEROREQUAL relop exp top_relop
+    (102) expression1 -> . LESSEROREQUAL relop exp top_relop
+    (103) expression1 -> . empty
+    (1) empty -> .
+
+    LESSER          shift and go to state 135
+    GREATER         shift and go to state 133
+    EQUALEQUAL      shift and go to state 138
+    NOTEQUAL        shift and go to state 132
+    GREATEROREQUAL  shift and go to state 136
+    LESSEROREQUAL   shift and go to state 134
+    OR              reduce using rule 1 (empty -> .)
+    AND             reduce using rule 1 (empty -> .)
+    SEMICOLON       reduce using rule 1 (empty -> .)
+    CLOSEPARENTHESIS reduce using rule 1 (empty -> .)
+    COMMA           reduce using rule 1 (empty -> .)
+    SQUAREBCLOSE    reduce using rule 1 (empty -> .)
+
+    expression1                    shift and go to state 137
+    empty                          shift and go to state 139
+
+state 93
+
+    (113) factor -> OPENPARENTHESIS . false_bottom expression CLOSEPARENTHESIS end_par
+    (134) false_bottom -> . empty
+    (1) empty -> .
+
+    OPENPARENTHESIS reduce using rule 1 (empty -> .)
+    ID              reduce using rule 1 (empty -> .)
+    CTEINT          reduce using rule 1 (empty -> .)
+    CTEFLOAT        reduce using rule 1 (empty -> .)
+    CTESTRING       reduce using rule 1 (empty -> .)
+    TRUE            reduce using rule 1 (empty -> .)
+    FALSE           reduce using rule 1 (empty -> .)
+
+    false_bottom                   shift and go to state 140
+    empty                          shift and go to state 141
+
+state 94
+
+    (51) retornoAux -> expression .
+
+    SEMICOLON       reduce using rule 51 (retornoAux -> expression .)
+
+
+state 95
+
+    (81) escritura -> PRINT OPENPARENTHESIS . escrituraAuxiliar1 CLOSEPARENTHESIS SEMICOLON
+    (82) escrituraAuxiliar1 -> . expression
+    (83) escrituraAuxiliar1 -> . spcte
+    (92) expression -> . exploc logicexp
+    (139) spcte -> . CTESTRING
+    (140) spcte -> . ctebool
+    (96) exploc -> . exp expression1
+    (137) ctebool -> . TRUE
+    (138) ctebool -> . FALSE
+    (104) exp -> . term top_exp exp1
+    (109) term -> . factor top_factor term1
+    (113) factor -> . OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par
+    (114) factor -> . var_cte
+    (115) factor -> . ID push_id
+    (117) var_cte -> . arregloVar
+    (118) var_cte -> . CTEINT getvalue_i
+    (119) var_cte -> . CTEFLOAT getvalue_f
+    (120) var_cte -> . ID getidvalue
+    (121) var_cte -> . llamada getidllamada
+    (122) var_cte -> . spcte
+    (74) arregloVar -> . ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1
+    (52) llamada -> . ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2
+
+    CTESTRING       shift and go to state 80
+    TRUE            shift and go to state 82
+    FALSE           shift and go to state 90
+    OPENPARENTHESIS shift and go to state 93
+    ID              shift and go to state 145
+    CTEINT          shift and go to state 86
+    CTEFLOAT        shift and go to state 83
+
+    exploc                         shift and go to state 77
+    escrituraAuxiliar1             shift and go to state 142
+    ctebool                        shift and go to state 78
+    var_cte                        shift and go to state 143
+    arregloVar                     shift and go to state 81
+    llamada                        shift and go to state 84
+    factor                         shift and go to state 85
+    spcte                          shift and go to state 144
+    term                           shift and go to state 87
+    exp                            shift and go to state 92
+    expression                     shift and go to state 146
+
+state 96
+
+    (36) bloqueAuxiliar -> estatuto bloqueAuxiliar .
+
+    CLOSEBRACKET    reduce using rule 36 (bloqueAuxiliar -> estatuto bloqueAuxiliar .)
+
+
+state 97
+
+    (69) asignacion -> arregloVar EQUAL . asignacionAux
+    (71) asignacionAux -> . spcte
+    (72) asignacionAux -> . expression
+    (139) spcte -> . CTESTRING
+    (140) spcte -> . ctebool
+    (92) expression -> . exploc logicexp
+    (137) ctebool -> . TRUE
+    (138) ctebool -> . FALSE
+    (96) exploc -> . exp expression1
+    (104) exp -> . term top_exp exp1
+    (109) term -> . factor top_factor term1
+    (113) factor -> . OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par
+    (114) factor -> . var_cte
+    (115) factor -> . ID push_id
+    (117) var_cte -> . arregloVar
+    (118) var_cte -> . CTEINT getvalue_i
+    (119) var_cte -> . CTEFLOAT getvalue_f
+    (120) var_cte -> . ID getidvalue
+    (121) var_cte -> . llamada getidllamada
+    (122) var_cte -> . spcte
+    (74) arregloVar -> . ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1
+    (52) llamada -> . ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2
+
+    CTESTRING       shift and go to state 80
+    TRUE            shift and go to state 82
+    FALSE           shift and go to state 90
+    OPENPARENTHESIS shift and go to state 93
+    ID              shift and go to state 145
+    CTEINT          shift and go to state 86
+    CTEFLOAT        shift and go to state 83
+
+    exploc                         shift and go to state 77
+    ctebool                        shift and go to state 78
+    var_cte                        shift and go to state 143
+    asignacionAux                  shift and go to state 147
+    arregloVar                     shift and go to state 81
+    llamada                        shift and go to state 84
+    factor                         shift and go to state 85
+    spcte                          shift and go to state 148
+    term                           shift and go to state 87
+    exp                            shift and go to state 92
+    expression                     shift and go to state 149
+
+state 98
+
+    (45) estatuto -> llamada SEMICOLON .
+
+    ID              reduce using rule 45 (estatuto -> llamada SEMICOLON .)
+    IF              reduce using rule 45 (estatuto -> llamada SEMICOLON .)
+    PRINT           reduce using rule 45 (estatuto -> llamada SEMICOLON .)
+    READ            reduce using rule 45 (estatuto -> llamada SEMICOLON .)
+    FOR             reduce using rule 45 (estatuto -> llamada SEMICOLON .)
+    RETURN          reduce using rule 45 (estatuto -> llamada SEMICOLON .)
+    CLOSEBRACKET    reduce using rule 45 (estatuto -> llamada SEMICOLON .)
+
+
+state 99
+
+    (80) lectura -> READ OPENPARENTHESIS . ID CLOSEPARENTHESIS SEMICOLON
+
+    ID              shift and go to state 150
+
+
+state 100
+
+    (61) ciclo -> FOR pn_8 . OPENPARENTHESIS expression CLOSEPARENTHESIS pn_6 bloque pn_7
+
+    OPENPARENTHESIS shift and go to state 151
+
+
+state 101
+
+    (62) pn_8 -> empty .
+
+    OPENPARENTHESIS reduce using rule 62 (pn_8 -> empty .)
+
+
+state 102
+
+    (35) bloque -> OPENBRACKET bloqueAuxiliar1 bloqueAuxiliar CLOSEBRACKET .
+
+    ID              reduce using rule 35 (bloque -> OPENBRACKET bloqueAuxiliar1 bloqueAuxiliar CLOSEBRACKET .)
+    IF              reduce using rule 35 (bloque -> OPENBRACKET bloqueAuxiliar1 bloqueAuxiliar CLOSEBRACKET .)
+    PRINT           reduce using rule 35 (bloque -> OPENBRACKET bloqueAuxiliar1 bloqueAuxiliar CLOSEBRACKET .)
+    READ            reduce using rule 35 (bloque -> OPENBRACKET bloqueAuxiliar1 bloqueAuxiliar CLOSEBRACKET .)
+    FOR             reduce using rule 35 (bloque -> OPENBRACKET bloqueAuxiliar1 bloqueAuxiliar CLOSEBRACKET .)
+    RETURN          reduce using rule 35 (bloque -> OPENBRACKET bloqueAuxiliar1 bloqueAuxiliar CLOSEBRACKET .)
+    CLOSEBRACKET    reduce using rule 35 (bloque -> OPENBRACKET bloqueAuxiliar1 bloqueAuxiliar CLOSEBRACKET .)
+    SEMICOLON       reduce using rule 35 (bloque -> OPENBRACKET bloqueAuxiliar1 bloqueAuxiliar CLOSEBRACKET .)
+    ELSE            reduce using rule 35 (bloque -> OPENBRACKET bloqueAuxiliar1 bloqueAuxiliar CLOSEBRACKET .)
+    $end            reduce using rule 35 (bloque -> OPENBRACKET bloqueAuxiliar1 bloqueAuxiliar CLOSEBRACKET .)
+    INT             reduce using rule 35 (bloque -> OPENBRACKET bloqueAuxiliar1 bloqueAuxiliar CLOSEBRACKET .)
+    FLOAT           reduce using rule 35 (bloque -> OPENBRACKET bloqueAuxiliar1 bloqueAuxiliar CLOSEBRACKET .)
+    BOOL            reduce using rule 35 (bloque -> OPENBRACKET bloqueAuxiliar1 bloqueAuxiliar CLOSEBRACKET .)
+    STRING          reduce using rule 35 (bloque -> OPENBRACKET bloqueAuxiliar1 bloqueAuxiliar CLOSEBRACKET .)
+    VOID            reduce using rule 35 (bloque -> OPENBRACKET bloqueAuxiliar1 bloqueAuxiliar CLOSEBRACKET .)
+    MAIN            reduce using rule 35 (bloque -> OPENBRACKET bloqueAuxiliar1 bloqueAuxiliar CLOSEBRACKET .)
+
+
+state 103
+
+    (52) llamada -> ID pn_llamada . OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2
+
+    OPENPARENTHESIS shift and go to state 152
+
+
+state 104
+
+    (74) arregloVar -> ID getLimits . false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1
+    (134) false_bottom -> . empty
+    (1) empty -> .
+
+    SQUAREBOPEN     reduce using rule 1 (empty -> .)
+
+    false_bottom                   shift and go to state 153
+    empty                          shift and go to state 141
+
+state 105
+
+    (67) incremnetoAux1 -> LESSEQUALS .
+
+    OPENPARENTHESIS reduce using rule 67 (incremnetoAux1 -> LESSEQUALS .)
+    ID              reduce using rule 67 (incremnetoAux1 -> LESSEQUALS .)
+    CTEINT          reduce using rule 67 (incremnetoAux1 -> LESSEQUALS .)
+    CTEFLOAT        reduce using rule 67 (incremnetoAux1 -> LESSEQUALS .)
+    CTESTRING       reduce using rule 67 (incremnetoAux1 -> LESSEQUALS .)
+    TRUE            reduce using rule 67 (incremnetoAux1 -> LESSEQUALS .)
+    FALSE           reduce using rule 67 (incremnetoAux1 -> LESSEQUALS .)
+
+
+state 106
+
+    (65) incremento -> ID incremnetoAux1 . expression
+    (92) expression -> . exploc logicexp
+    (96) exploc -> . exp expression1
+    (104) exp -> . term top_exp exp1
+    (109) term -> . factor top_factor term1
+    (113) factor -> . OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par
+    (114) factor -> . var_cte
+    (115) factor -> . ID push_id
+    (117) var_cte -> . arregloVar
+    (118) var_cte -> . CTEINT getvalue_i
+    (119) var_cte -> . CTEFLOAT getvalue_f
+    (120) var_cte -> . ID getidvalue
+    (121) var_cte -> . llamada getidllamada
+    (122) var_cte -> . spcte
+    (74) arregloVar -> . ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1
+    (52) llamada -> . ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2
+    (139) spcte -> . CTESTRING
+    (140) spcte -> . ctebool
+    (137) ctebool -> . TRUE
+    (138) ctebool -> . FALSE
+
+    OPENPARENTHESIS shift and go to state 93
+    ID              shift and go to state 145
+    CTEINT          shift and go to state 86
+    CTEFLOAT        shift and go to state 83
+    CTESTRING       shift and go to state 80
+    TRUE            shift and go to state 82
+    FALSE           shift and go to state 90
+
+    exploc                         shift and go to state 77
+    ctebool                        shift and go to state 78
+    var_cte                        shift and go to state 143
+    arregloVar                     shift and go to state 81
+    llamada                        shift and go to state 84
+    factor                         shift and go to state 85
+    spcte                          shift and go to state 154
+    term                           shift and go to state 87
+    exp                            shift and go to state 92
+    expression                     shift and go to state 155
+
+state 107
+
+    (68) asignacion -> ID pupid . EQUAL asignacionAux
+
+    EQUAL           shift and go to state 156
+
+
+state 108
+
+    (66) incremnetoAux1 -> MOREEQUALS .
+
+    OPENPARENTHESIS reduce using rule 66 (incremnetoAux1 -> MOREEQUALS .)
+    ID              reduce using rule 66 (incremnetoAux1 -> MOREEQUALS .)
+    CTEINT          reduce using rule 66 (incremnetoAux1 -> MOREEQUALS .)
+    CTEFLOAT        reduce using rule 66 (incremnetoAux1 -> MOREEQUALS .)
+    CTESTRING       reduce using rule 66 (incremnetoAux1 -> MOREEQUALS .)
+    TRUE            reduce using rule 66 (incremnetoAux1 -> MOREEQUALS .)
+    FALSE           reduce using rule 66 (incremnetoAux1 -> MOREEQUALS .)
+
+
+state 109
+
+    (53) pn_llamada -> empty .
+
+    OPENPARENTHESIS reduce using rule 53 (pn_llamada -> empty .)
+
+
+state 110
+
+    (84) condicion -> IF OPENPARENTHESIS . expression CLOSEPARENTHESIS pn_3 bloque condicionAuxiliar SEMICOLON
+    (85) condicion -> IF OPENPARENTHESIS . expression CLOSEPARENTHESIS pn_3 bloque condicionAuxiliar
+    (92) expression -> . exploc logicexp
+    (96) exploc -> . exp expression1
+    (104) exp -> . term top_exp exp1
+    (109) term -> . factor top_factor term1
+    (113) factor -> . OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par
+    (114) factor -> . var_cte
+    (115) factor -> . ID push_id
+    (117) var_cte -> . arregloVar
+    (118) var_cte -> . CTEINT getvalue_i
+    (119) var_cte -> . CTEFLOAT getvalue_f
+    (120) var_cte -> . ID getidvalue
+    (121) var_cte -> . llamada getidllamada
+    (122) var_cte -> . spcte
+    (74) arregloVar -> . ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1
+    (52) llamada -> . ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2
+    (139) spcte -> . CTESTRING
+    (140) spcte -> . ctebool
+    (137) ctebool -> . TRUE
+    (138) ctebool -> . FALSE
+
+    OPENPARENTHESIS shift and go to state 93
+    ID              shift and go to state 145
+    CTEINT          shift and go to state 86
+    CTEFLOAT        shift and go to state 83
+    CTESTRING       shift and go to state 80
+    TRUE            shift and go to state 82
+    FALSE           shift and go to state 90
+
+    exploc                         shift and go to state 77
+    ctebool                        shift and go to state 78
+    var_cte                        shift and go to state 143
+    arregloVar                     shift and go to state 81
+    llamada                        shift and go to state 84
+    factor                         shift and go to state 85
+    spcte                          shift and go to state 154
+    term                           shift and go to state 87
+    exp                            shift and go to state 92
+    expression                     shift and go to state 157
+
+state 111
+
+    (40) estatuto -> asignacion SEMICOLON .
+
+    ID              reduce using rule 40 (estatuto -> asignacion SEMICOLON .)
+    IF              reduce using rule 40 (estatuto -> asignacion SEMICOLON .)
+    PRINT           reduce using rule 40 (estatuto -> asignacion SEMICOLON .)
+    READ            reduce using rule 40 (estatuto -> asignacion SEMICOLON .)
+    FOR             reduce using rule 40 (estatuto -> asignacion SEMICOLON .)
+    RETURN          reduce using rule 40 (estatuto -> asignacion SEMICOLON .)
+    CLOSEBRACKET    reduce using rule 40 (estatuto -> asignacion SEMICOLON .)
+
+
+state 112
+
+    (46) estatuto -> incremento SEMICOLON .
+
+    ID              reduce using rule 46 (estatuto -> incremento SEMICOLON .)
+    IF              reduce using rule 46 (estatuto -> incremento SEMICOLON .)
+    PRINT           reduce using rule 46 (estatuto -> incremento SEMICOLON .)
+    READ            reduce using rule 46 (estatuto -> incremento SEMICOLON .)
+    FOR             reduce using rule 46 (estatuto -> incremento SEMICOLON .)
+    RETURN          reduce using rule 46 (estatuto -> incremento SEMICOLON .)
+    CLOSEBRACKET    reduce using rule 46 (estatuto -> incremento SEMICOLON .)
+
+
+state 113
+
+    (20) funcsAux3 -> tipo . ID funcsAux4
+    (73) arreglo -> tipo . SQUAREBOPEN CTEINT SQUAREBCLOSE
+
+    ID              shift and go to state 158
+    SQUAREBOPEN     shift and go to state 38
+
+
+state 114
+
+    (16) funcsAux1 -> funcsAux5 OPENPARENTHESIS funcsAux2 . CLOSEPARENTHESIS bloque func_end
+
+    CLOSEPARENTHESIS shift and go to state 159
+
+
+state 115
+
+    (18) funcsAux2 -> funcsAux3 .
+
+    CLOSEPARENTHESIS reduce using rule 18 (funcsAux2 -> funcsAux3 .)
+
+
+state 116
+
+    (19) funcsAux2 -> empty .
+
+    CLOSEPARENTHESIS reduce using rule 19 (funcsAux2 -> empty .)
+
+
+state 117
+
+    (28) varsAuxiliar3 -> COMMA ID varsAuxiliar3 .
+
+    SEMICOLON       reduce using rule 28 (varsAuxiliar3 -> COMMA ID varsAuxiliar3 .)
+
+
+state 118
+
+    (94) logicexp -> AND . andor exploc top_andor
+    (130) andor -> .
+
+    OPENPARENTHESIS reduce using rule 130 (andor -> .)
+    ID              reduce using rule 130 (andor -> .)
+    CTEINT          reduce using rule 130 (andor -> .)
+    CTEFLOAT        reduce using rule 130 (andor -> .)
+    CTESTRING       reduce using rule 130 (andor -> .)
+    TRUE            reduce using rule 130 (andor -> .)
+    FALSE           reduce using rule 130 (andor -> .)
+
+    andor                          shift and go to state 160
+
+state 119
+
+    (92) expression -> exploc logicexp .
+
+    CLOSEPARENTHESIS reduce using rule 92 (expression -> exploc logicexp .)
+    SEMICOLON       reduce using rule 92 (expression -> exploc logicexp .)
+    COMMA           reduce using rule 92 (expression -> exploc logicexp .)
+    SQUAREBCLOSE    reduce using rule 92 (expression -> exploc logicexp .)
+
+
+state 120
+
+    (93) logicexp -> OR . andor exploc top_andor
+    (130) andor -> .
+
+    OPENPARENTHESIS reduce using rule 130 (andor -> .)
+    ID              reduce using rule 130 (andor -> .)
+    CTEINT          reduce using rule 130 (andor -> .)
+    CTEFLOAT        reduce using rule 130 (andor -> .)
+    CTESTRING       reduce using rule 130 (andor -> .)
+    TRUE            reduce using rule 130 (andor -> .)
+    FALSE           reduce using rule 130 (andor -> .)
+
+    andor                          shift and go to state 161
+
+state 121
+
+    (95) logicexp -> empty .
+
+    SEMICOLON       reduce using rule 95 (logicexp -> empty .)
+    CLOSEPARENTHESIS reduce using rule 95 (logicexp -> empty .)
+    COMMA           reduce using rule 95 (logicexp -> empty .)
+    SQUAREBCLOSE    reduce using rule 95 (logicexp -> empty .)
+
+
+state 122
+
+    (119) var_cte -> CTEFLOAT getvalue_f .
+
+    DIVIDE          reduce using rule 119 (var_cte -> CTEFLOAT getvalue_f .)
+    TIMES           reduce using rule 119 (var_cte -> CTEFLOAT getvalue_f .)
+    MINUS           reduce using rule 119 (var_cte -> CTEFLOAT getvalue_f .)
+    PLUS            reduce using rule 119 (var_cte -> CTEFLOAT getvalue_f .)
+    LESSER          reduce using rule 119 (var_cte -> CTEFLOAT getvalue_f .)
+    GREATER         reduce using rule 119 (var_cte -> CTEFLOAT getvalue_f .)
+    EQUALEQUAL      reduce using rule 119 (var_cte -> CTEFLOAT getvalue_f .)
+    NOTEQUAL        reduce using rule 119 (var_cte -> CTEFLOAT getvalue_f .)
+    GREATEROREQUAL  reduce using rule 119 (var_cte -> CTEFLOAT getvalue_f .)
+    LESSEROREQUAL   reduce using rule 119 (var_cte -> CTEFLOAT getvalue_f .)
+    OR              reduce using rule 119 (var_cte -> CTEFLOAT getvalue_f .)
+    AND             reduce using rule 119 (var_cte -> CTEFLOAT getvalue_f .)
+    SQUAREBCLOSE    reduce using rule 119 (var_cte -> CTEFLOAT getvalue_f .)
+    SEMICOLON       reduce using rule 119 (var_cte -> CTEFLOAT getvalue_f .)
+    CLOSEPARENTHESIS reduce using rule 119 (var_cte -> CTEFLOAT getvalue_f .)
+    COMMA           reduce using rule 119 (var_cte -> CTEFLOAT getvalue_f .)
+
+
+state 123
+
+    (123) getidllamada -> empty .
+
+    SEMICOLON       reduce using rule 123 (getidllamada -> empty .)
+    DIVIDE          reduce using rule 123 (getidllamada -> empty .)
+    TIMES           reduce using rule 123 (getidllamada -> empty .)
+    MINUS           reduce using rule 123 (getidllamada -> empty .)
+    PLUS            reduce using rule 123 (getidllamada -> empty .)
+    LESSER          reduce using rule 123 (getidllamada -> empty .)
+    GREATER         reduce using rule 123 (getidllamada -> empty .)
+    EQUALEQUAL      reduce using rule 123 (getidllamada -> empty .)
+    NOTEQUAL        reduce using rule 123 (getidllamada -> empty .)
+    GREATEROREQUAL  reduce using rule 123 (getidllamada -> empty .)
+    LESSEROREQUAL   reduce using rule 123 (getidllamada -> empty .)
+    OR              reduce using rule 123 (getidllamada -> empty .)
+    AND             reduce using rule 123 (getidllamada -> empty .)
+    CLOSEPARENTHESIS reduce using rule 123 (getidllamada -> empty .)
+    COMMA           reduce using rule 123 (getidllamada -> empty .)
+    SQUAREBCLOSE    reduce using rule 123 (getidllamada -> empty .)
+
+
+state 124
+
+    (121) var_cte -> llamada getidllamada .
+
+    DIVIDE          reduce using rule 121 (var_cte -> llamada getidllamada .)
+    TIMES           reduce using rule 121 (var_cte -> llamada getidllamada .)
+    MINUS           reduce using rule 121 (var_cte -> llamada getidllamada .)
+    PLUS            reduce using rule 121 (var_cte -> llamada getidllamada .)
+    LESSER          reduce using rule 121 (var_cte -> llamada getidllamada .)
+    GREATER         reduce using rule 121 (var_cte -> llamada getidllamada .)
+    EQUALEQUAL      reduce using rule 121 (var_cte -> llamada getidllamada .)
+    NOTEQUAL        reduce using rule 121 (var_cte -> llamada getidllamada .)
+    GREATEROREQUAL  reduce using rule 121 (var_cte -> llamada getidllamada .)
+    LESSEROREQUAL   reduce using rule 121 (var_cte -> llamada getidllamada .)
+    OR              reduce using rule 121 (var_cte -> llamada getidllamada .)
+    AND             reduce using rule 121 (var_cte -> llamada getidllamada .)
+    SQUAREBCLOSE    reduce using rule 121 (var_cte -> llamada getidllamada .)
+    SEMICOLON       reduce using rule 121 (var_cte -> llamada getidllamada .)
+    CLOSEPARENTHESIS reduce using rule 121 (var_cte -> llamada getidllamada .)
+    COMMA           reduce using rule 121 (var_cte -> llamada getidllamada .)
+
+
+state 125
+
+    (109) term -> factor top_factor . term1
+    (110) term1 -> . DIVIDE push_sign term
+    (111) term1 -> . TIMES push_sign term
+    (112) term1 -> . empty
+    (1) empty -> .
+
+    DIVIDE          shift and go to state 162
+    TIMES           shift and go to state 164
+    MINUS           reduce using rule 1 (empty -> .)
+    PLUS            reduce using rule 1 (empty -> .)
+    LESSER          reduce using rule 1 (empty -> .)
+    GREATER         reduce using rule 1 (empty -> .)
+    EQUALEQUAL      reduce using rule 1 (empty -> .)
+    NOTEQUAL        reduce using rule 1 (empty -> .)
+    GREATEROREQUAL  reduce using rule 1 (empty -> .)
+    LESSEROREQUAL   reduce using rule 1 (empty -> .)
+    OR              reduce using rule 1 (empty -> .)
+    AND             reduce using rule 1 (empty -> .)
+    SEMICOLON       reduce using rule 1 (empty -> .)
+    CLOSEPARENTHESIS reduce using rule 1 (empty -> .)
+    COMMA           reduce using rule 1 (empty -> .)
+    SQUAREBCLOSE    reduce using rule 1 (empty -> .)
+
+    term1                          shift and go to state 163
+    empty                          shift and go to state 165
+
+state 126
+
+    (118) var_cte -> CTEINT getvalue_i .
+
+    DIVIDE          reduce using rule 118 (var_cte -> CTEINT getvalue_i .)
+    TIMES           reduce using rule 118 (var_cte -> CTEINT getvalue_i .)
+    MINUS           reduce using rule 118 (var_cte -> CTEINT getvalue_i .)
+    PLUS            reduce using rule 118 (var_cte -> CTEINT getvalue_i .)
+    LESSER          reduce using rule 118 (var_cte -> CTEINT getvalue_i .)
+    GREATER         reduce using rule 118 (var_cte -> CTEINT getvalue_i .)
+    EQUALEQUAL      reduce using rule 118 (var_cte -> CTEINT getvalue_i .)
+    NOTEQUAL        reduce using rule 118 (var_cte -> CTEINT getvalue_i .)
+    GREATEROREQUAL  reduce using rule 118 (var_cte -> CTEINT getvalue_i .)
+    LESSEROREQUAL   reduce using rule 118 (var_cte -> CTEINT getvalue_i .)
+    OR              reduce using rule 118 (var_cte -> CTEINT getvalue_i .)
+    AND             reduce using rule 118 (var_cte -> CTEINT getvalue_i .)
+    SQUAREBCLOSE    reduce using rule 118 (var_cte -> CTEINT getvalue_i .)
+    SEMICOLON       reduce using rule 118 (var_cte -> CTEINT getvalue_i .)
+    CLOSEPARENTHESIS reduce using rule 118 (var_cte -> CTEINT getvalue_i .)
+    COMMA           reduce using rule 118 (var_cte -> CTEINT getvalue_i .)
+
+
+state 127
+
+    (108) top_exp -> empty .
+
+    MINUS           reduce using rule 108 (top_exp -> empty .)
+    PLUS            reduce using rule 108 (top_exp -> empty .)
+    LESSER          reduce using rule 108 (top_exp -> empty .)
+    GREATER         reduce using rule 108 (top_exp -> empty .)
+    EQUALEQUAL      reduce using rule 108 (top_exp -> empty .)
+    NOTEQUAL        reduce using rule 108 (top_exp -> empty .)
+    GREATEROREQUAL  reduce using rule 108 (top_exp -> empty .)
+    LESSEROREQUAL   reduce using rule 108 (top_exp -> empty .)
+    OR              reduce using rule 108 (top_exp -> empty .)
+    AND             reduce using rule 108 (top_exp -> empty .)
+    SEMICOLON       reduce using rule 108 (top_exp -> empty .)
+    CLOSEPARENTHESIS reduce using rule 108 (top_exp -> empty .)
+    COMMA           reduce using rule 108 (top_exp -> empty .)
+    SQUAREBCLOSE    reduce using rule 108 (top_exp -> empty .)
+
+
+state 128
+
+    (104) exp -> term top_exp . exp1
+    (105) exp1 -> . MINUS push_sign exp
+    (106) exp1 -> . PLUS push_sign exp
+    (107) exp1 -> . empty
+    (1) empty -> .
+
+    MINUS           shift and go to state 169
+    PLUS            shift and go to state 167
+    LESSER          reduce using rule 1 (empty -> .)
+    GREATER         reduce using rule 1 (empty -> .)
+    EQUALEQUAL      reduce using rule 1 (empty -> .)
+    NOTEQUAL        reduce using rule 1 (empty -> .)
+    GREATEROREQUAL  reduce using rule 1 (empty -> .)
+    LESSEROREQUAL   reduce using rule 1 (empty -> .)
+    OR              reduce using rule 1 (empty -> .)
+    AND             reduce using rule 1 (empty -> .)
+    SEMICOLON       reduce using rule 1 (empty -> .)
+    CLOSEPARENTHESIS reduce using rule 1 (empty -> .)
+    COMMA           reduce using rule 1 (empty -> .)
+    SQUAREBCLOSE    reduce using rule 1 (empty -> .)
+
+    exp1                           shift and go to state 166
+    empty                          shift and go to state 168
+
+state 129
+
+    (115) factor -> ID push_id .
+
+    DIVIDE          reduce using rule 115 (factor -> ID push_id .)
+    TIMES           reduce using rule 115 (factor -> ID push_id .)
+    MINUS           reduce using rule 115 (factor -> ID push_id .)
+    PLUS            reduce using rule 115 (factor -> ID push_id .)
+    LESSER          reduce using rule 115 (factor -> ID push_id .)
+    GREATER         reduce using rule 115 (factor -> ID push_id .)
+    EQUALEQUAL      reduce using rule 115 (factor -> ID push_id .)
+    NOTEQUAL        reduce using rule 115 (factor -> ID push_id .)
+    GREATEROREQUAL  reduce using rule 115 (factor -> ID push_id .)
+    LESSEROREQUAL   reduce using rule 115 (factor -> ID push_id .)
+    OR              reduce using rule 115 (factor -> ID push_id .)
+    AND             reduce using rule 115 (factor -> ID push_id .)
+    CLOSEPARENTHESIS reduce using rule 115 (factor -> ID push_id .)
+    SEMICOLON       reduce using rule 115 (factor -> ID push_id .)
+    COMMA           reduce using rule 115 (factor -> ID push_id .)
+    SQUAREBCLOSE    reduce using rule 115 (factor -> ID push_id .)
+
+
+state 130
+
+    (120) var_cte -> ID getidvalue .
+
+    DIVIDE          reduce using rule 120 (var_cte -> ID getidvalue .)
+    TIMES           reduce using rule 120 (var_cte -> ID getidvalue .)
+    MINUS           reduce using rule 120 (var_cte -> ID getidvalue .)
+    PLUS            reduce using rule 120 (var_cte -> ID getidvalue .)
+    LESSER          reduce using rule 120 (var_cte -> ID getidvalue .)
+    GREATER         reduce using rule 120 (var_cte -> ID getidvalue .)
+    EQUALEQUAL      reduce using rule 120 (var_cte -> ID getidvalue .)
+    NOTEQUAL        reduce using rule 120 (var_cte -> ID getidvalue .)
+    GREATEROREQUAL  reduce using rule 120 (var_cte -> ID getidvalue .)
+    LESSEROREQUAL   reduce using rule 120 (var_cte -> ID getidvalue .)
+    OR              reduce using rule 120 (var_cte -> ID getidvalue .)
+    AND             reduce using rule 120 (var_cte -> ID getidvalue .)
+    SQUAREBCLOSE    reduce using rule 120 (var_cte -> ID getidvalue .)
+    SEMICOLON       reduce using rule 120 (var_cte -> ID getidvalue .)
+    CLOSEPARENTHESIS reduce using rule 120 (var_cte -> ID getidvalue .)
+    COMMA           reduce using rule 120 (var_cte -> ID getidvalue .)
+
+
+state 131
+
+    (48) retorno -> RETURN retornoAux SEMICOLON .
+
+    ID              reduce using rule 48 (retorno -> RETURN retornoAux SEMICOLON .)
+    IF              reduce using rule 48 (retorno -> RETURN retornoAux SEMICOLON .)
+    PRINT           reduce using rule 48 (retorno -> RETURN retornoAux SEMICOLON .)
+    READ            reduce using rule 48 (retorno -> RETURN retornoAux SEMICOLON .)
+    FOR             reduce using rule 48 (retorno -> RETURN retornoAux SEMICOLON .)
+    RETURN          reduce using rule 48 (retorno -> RETURN retornoAux SEMICOLON .)
+    CLOSEBRACKET    reduce using rule 48 (retorno -> RETURN retornoAux SEMICOLON .)
+
+
+state 132
+
+    (100) expression1 -> NOTEQUAL . relop exp top_relop
+    (129) relop -> .
+
+    OPENPARENTHESIS reduce using rule 129 (relop -> .)
+    ID              reduce using rule 129 (relop -> .)
+    CTEINT          reduce using rule 129 (relop -> .)
+    CTEFLOAT        reduce using rule 129 (relop -> .)
+    CTESTRING       reduce using rule 129 (relop -> .)
+    TRUE            reduce using rule 129 (relop -> .)
+    FALSE           reduce using rule 129 (relop -> .)
+
+    relop                          shift and go to state 170
+
+state 133
+
+    (98) expression1 -> GREATER . relop exp top_relop
+    (129) relop -> .
+
+    OPENPARENTHESIS reduce using rule 129 (relop -> .)
+    ID              reduce using rule 129 (relop -> .)
+    CTEINT          reduce using rule 129 (relop -> .)
+    CTEFLOAT        reduce using rule 129 (relop -> .)
+    CTESTRING       reduce using rule 129 (relop -> .)
+    TRUE            reduce using rule 129 (relop -> .)
+    FALSE           reduce using rule 129 (relop -> .)
+
+    relop                          shift and go to state 171
+
+state 134
+
+    (102) expression1 -> LESSEROREQUAL . relop exp top_relop
+    (129) relop -> .
+
+    OPENPARENTHESIS reduce using rule 129 (relop -> .)
+    ID              reduce using rule 129 (relop -> .)
+    CTEINT          reduce using rule 129 (relop -> .)
+    CTEFLOAT        reduce using rule 129 (relop -> .)
+    CTESTRING       reduce using rule 129 (relop -> .)
+    TRUE            reduce using rule 129 (relop -> .)
+    FALSE           reduce using rule 129 (relop -> .)
+
+    relop                          shift and go to state 172
+
+state 135
+
+    (97) expression1 -> LESSER . relop exp top_relop
+    (129) relop -> .
+
+    OPENPARENTHESIS reduce using rule 129 (relop -> .)
+    ID              reduce using rule 129 (relop -> .)
+    CTEINT          reduce using rule 129 (relop -> .)
+    CTEFLOAT        reduce using rule 129 (relop -> .)
+    CTESTRING       reduce using rule 129 (relop -> .)
+    TRUE            reduce using rule 129 (relop -> .)
+    FALSE           reduce using rule 129 (relop -> .)
+
+    relop                          shift and go to state 173
+
+state 136
+
+    (101) expression1 -> GREATEROREQUAL . relop exp top_relop
+    (129) relop -> .
+
+    OPENPARENTHESIS reduce using rule 129 (relop -> .)
+    ID              reduce using rule 129 (relop -> .)
+    CTEINT          reduce using rule 129 (relop -> .)
+    CTEFLOAT        reduce using rule 129 (relop -> .)
+    CTESTRING       reduce using rule 129 (relop -> .)
+    TRUE            reduce using rule 129 (relop -> .)
+    FALSE           reduce using rule 129 (relop -> .)
+
+    relop                          shift and go to state 174
+
+state 137
+
+    (96) exploc -> exp expression1 .
+
+    OR              reduce using rule 96 (exploc -> exp expression1 .)
+    AND             reduce using rule 96 (exploc -> exp expression1 .)
+    SQUAREBCLOSE    reduce using rule 96 (exploc -> exp expression1 .)
+    CLOSEPARENTHESIS reduce using rule 96 (exploc -> exp expression1 .)
+    COMMA           reduce using rule 96 (exploc -> exp expression1 .)
+    SEMICOLON       reduce using rule 96 (exploc -> exp expression1 .)
+
+
+state 138
+
+    (99) expression1 -> EQUALEQUAL . relop exp top_relop
+    (129) relop -> .
+
+    OPENPARENTHESIS reduce using rule 129 (relop -> .)
+    ID              reduce using rule 129 (relop -> .)
+    CTEINT          reduce using rule 129 (relop -> .)
+    CTEFLOAT        reduce using rule 129 (relop -> .)
+    CTESTRING       reduce using rule 129 (relop -> .)
+    TRUE            reduce using rule 129 (relop -> .)
+    FALSE           reduce using rule 129 (relop -> .)
+
+    relop                          shift and go to state 175
+
+state 139
+
+    (103) expression1 -> empty .
+
+    OR              reduce using rule 103 (expression1 -> empty .)
+    AND             reduce using rule 103 (expression1 -> empty .)
+    SEMICOLON       reduce using rule 103 (expression1 -> empty .)
+    CLOSEPARENTHESIS reduce using rule 103 (expression1 -> empty .)
+    COMMA           reduce using rule 103 (expression1 -> empty .)
+    SQUAREBCLOSE    reduce using rule 103 (expression1 -> empty .)
+
+
+state 140
+
+    (113) factor -> OPENPARENTHESIS false_bottom . expression CLOSEPARENTHESIS end_par
+    (92) expression -> . exploc logicexp
+    (96) exploc -> . exp expression1
+    (104) exp -> . term top_exp exp1
+    (109) term -> . factor top_factor term1
+    (113) factor -> . OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par
+    (114) factor -> . var_cte
+    (115) factor -> . ID push_id
+    (117) var_cte -> . arregloVar
+    (118) var_cte -> . CTEINT getvalue_i
+    (119) var_cte -> . CTEFLOAT getvalue_f
+    (120) var_cte -> . ID getidvalue
+    (121) var_cte -> . llamada getidllamada
+    (122) var_cte -> . spcte
+    (74) arregloVar -> . ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1
+    (52) llamada -> . ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2
+    (139) spcte -> . CTESTRING
+    (140) spcte -> . ctebool
+    (137) ctebool -> . TRUE
+    (138) ctebool -> . FALSE
+
+    OPENPARENTHESIS shift and go to state 93
+    ID              shift and go to state 145
+    CTEINT          shift and go to state 86
+    CTEFLOAT        shift and go to state 83
+    CTESTRING       shift and go to state 80
+    TRUE            shift and go to state 82
+    FALSE           shift and go to state 90
+
+    exploc                         shift and go to state 77
+    ctebool                        shift and go to state 78
+    var_cte                        shift and go to state 143
+    arregloVar                     shift and go to state 81
+    llamada                        shift and go to state 84
+    factor                         shift and go to state 85
+    spcte                          shift and go to state 154
+    term                           shift and go to state 87
+    exp                            shift and go to state 92
+    expression                     shift and go to state 176
+
+state 141
+
+    (134) false_bottom -> empty .
+
+    OPENPARENTHESIS reduce using rule 134 (false_bottom -> empty .)
+    ID              reduce using rule 134 (false_bottom -> empty .)
+    CTEINT          reduce using rule 134 (false_bottom -> empty .)
+    CTEFLOAT        reduce using rule 134 (false_bottom -> empty .)
+    CTESTRING       reduce using rule 134 (false_bottom -> empty .)
+    TRUE            reduce using rule 134 (false_bottom -> empty .)
+    FALSE           reduce using rule 134 (false_bottom -> empty .)
+    SQUAREBOPEN     reduce using rule 134 (false_bottom -> empty .)
+    CLOSEPARENTHESIS reduce using rule 134 (false_bottom -> empty .)
+
+
+state 142
+
+    (81) escritura -> PRINT OPENPARENTHESIS escrituraAuxiliar1 . CLOSEPARENTHESIS SEMICOLON
+
+    CLOSEPARENTHESIS shift and go to state 177
+
+
+state 143
+
+    (114) factor -> var_cte .
+
+    DIVIDE          reduce using rule 114 (factor -> var_cte .)
+    TIMES           reduce using rule 114 (factor -> var_cte .)
+    MINUS           reduce using rule 114 (factor -> var_cte .)
+    PLUS            reduce using rule 114 (factor -> var_cte .)
+    LESSER          reduce using rule 114 (factor -> var_cte .)
+    GREATER         reduce using rule 114 (factor -> var_cte .)
+    EQUALEQUAL      reduce using rule 114 (factor -> var_cte .)
+    NOTEQUAL        reduce using rule 114 (factor -> var_cte .)
+    GREATEROREQUAL  reduce using rule 114 (factor -> var_cte .)
+    LESSEROREQUAL   reduce using rule 114 (factor -> var_cte .)
+    OR              reduce using rule 114 (factor -> var_cte .)
+    AND             reduce using rule 114 (factor -> var_cte .)
+    CLOSEPARENTHESIS reduce using rule 114 (factor -> var_cte .)
+    SEMICOLON       reduce using rule 114 (factor -> var_cte .)
+    COMMA           reduce using rule 114 (factor -> var_cte .)
+    SQUAREBCLOSE    reduce using rule 114 (factor -> var_cte .)
+
+
+state 144
+
+    (83) escrituraAuxiliar1 -> spcte .
+    (122) var_cte -> spcte .
+
+  ! reduce/reduce conflict for CLOSEPARENTHESIS resolved using rule 83 (escrituraAuxiliar1 -> spcte .)
+    CLOSEPARENTHESIS reduce using rule 83 (escrituraAuxiliar1 -> spcte .)
+    DIVIDE          reduce using rule 122 (var_cte -> spcte .)
+    TIMES           reduce using rule 122 (var_cte -> spcte .)
+    MINUS           reduce using rule 122 (var_cte -> spcte .)
+    PLUS            reduce using rule 122 (var_cte -> spcte .)
+    LESSER          reduce using rule 122 (var_cte -> spcte .)
+    GREATER         reduce using rule 122 (var_cte -> spcte .)
+    EQUALEQUAL      reduce using rule 122 (var_cte -> spcte .)
+    NOTEQUAL        reduce using rule 122 (var_cte -> spcte .)
+    GREATEROREQUAL  reduce using rule 122 (var_cte -> spcte .)
+    LESSEROREQUAL   reduce using rule 122 (var_cte -> spcte .)
+    OR              reduce using rule 122 (var_cte -> spcte .)
+    AND             reduce using rule 122 (var_cte -> spcte .)
+
+  ! CLOSEPARENTHESIS [ reduce using rule 122 (var_cte -> spcte .) ]
+
+
+state 145
+
+    (115) factor -> ID . push_id
+    (120) var_cte -> ID . getidvalue
+    (74) arregloVar -> ID . getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1
+    (52) llamada -> ID . pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2
+    (136) push_id -> .
+    (125) getidvalue -> .
+    (76) getLimits -> .
+    (53) pn_llamada -> . empty
+    (1) empty -> .
+
+  ! reduce/reduce conflict for DIVIDE resolved using rule 125 (getidvalue -> .)
+  ! reduce/reduce conflict for TIMES resolved using rule 125 (getidvalue -> .)
+  ! reduce/reduce conflict for MINUS resolved using rule 125 (getidvalue -> .)
+  ! reduce/reduce conflict for PLUS resolved using rule 125 (getidvalue -> .)
+  ! reduce/reduce conflict for LESSER resolved using rule 125 (getidvalue -> .)
+  ! reduce/reduce conflict for GREATER resolved using rule 125 (getidvalue -> .)
+  ! reduce/reduce conflict for EQUALEQUAL resolved using rule 125 (getidvalue -> .)
+  ! reduce/reduce conflict for NOTEQUAL resolved using rule 125 (getidvalue -> .)
+  ! reduce/reduce conflict for GREATEROREQUAL resolved using rule 125 (getidvalue -> .)
+  ! reduce/reduce conflict for LESSEROREQUAL resolved using rule 125 (getidvalue -> .)
+  ! reduce/reduce conflict for OR resolved using rule 125 (getidvalue -> .)
+  ! reduce/reduce conflict for AND resolved using rule 125 (getidvalue -> .)
+  ! reduce/reduce conflict for CLOSEPARENTHESIS resolved using rule 125 (getidvalue -> .)
+  ! reduce/reduce conflict for SEMICOLON resolved using rule 125 (getidvalue -> .)
+  ! reduce/reduce conflict for COMMA resolved using rule 125 (getidvalue -> .)
+  ! reduce/reduce conflict for SQUAREBCLOSE resolved using rule 125 (getidvalue -> .)
+    DIVIDE          reduce using rule 125 (getidvalue -> .)
+    TIMES           reduce using rule 125 (getidvalue -> .)
+    MINUS           reduce using rule 125 (getidvalue -> .)
+    PLUS            reduce using rule 125 (getidvalue -> .)
+    LESSER          reduce using rule 125 (getidvalue -> .)
+    GREATER         reduce using rule 125 (getidvalue -> .)
+    EQUALEQUAL      reduce using rule 125 (getidvalue -> .)
+    NOTEQUAL        reduce using rule 125 (getidvalue -> .)
+    GREATEROREQUAL  reduce using rule 125 (getidvalue -> .)
+    LESSEROREQUAL   reduce using rule 125 (getidvalue -> .)
+    OR              reduce using rule 125 (getidvalue -> .)
+    AND             reduce using rule 125 (getidvalue -> .)
+    CLOSEPARENTHESIS reduce using rule 125 (getidvalue -> .)
+    SEMICOLON       reduce using rule 125 (getidvalue -> .)
+    COMMA           reduce using rule 125 (getidvalue -> .)
+    SQUAREBCLOSE    reduce using rule 125 (getidvalue -> .)
+    SQUAREBOPEN     reduce using rule 76 (getLimits -> .)
+    OPENPARENTHESIS reduce using rule 1 (empty -> .)
+
+  ! DIVIDE          [ reduce using rule 136 (push_id -> .) ]
+  ! TIMES           [ reduce using rule 136 (push_id -> .) ]
+  ! MINUS           [ reduce using rule 136 (push_id -> .) ]
+  ! PLUS            [ reduce using rule 136 (push_id -> .) ]
+  ! LESSER          [ reduce using rule 136 (push_id -> .) ]
+  ! GREATER         [ reduce using rule 136 (push_id -> .) ]
+  ! EQUALEQUAL      [ reduce using rule 136 (push_id -> .) ]
+  ! NOTEQUAL        [ reduce using rule 136 (push_id -> .) ]
+  ! GREATEROREQUAL  [ reduce using rule 136 (push_id -> .) ]
+  ! LESSEROREQUAL   [ reduce using rule 136 (push_id -> .) ]
+  ! OR              [ reduce using rule 136 (push_id -> .) ]
+  ! AND             [ reduce using rule 136 (push_id -> .) ]
+  ! CLOSEPARENTHESIS [ reduce using rule 136 (push_id -> .) ]
+  ! SEMICOLON       [ reduce using rule 136 (push_id -> .) ]
+  ! COMMA           [ reduce using rule 136 (push_id -> .) ]
+  ! SQUAREBCLOSE    [ reduce using rule 136 (push_id -> .) ]
+
+    pn_llamada                     shift and go to state 103
+    getLimits                      shift and go to state 104
+    getidvalue                     shift and go to state 130
+    push_id                        shift and go to state 129
+    empty                          shift and go to state 109
+
+state 146
+
+    (82) escrituraAuxiliar1 -> expression .
+
+    CLOSEPARENTHESIS reduce using rule 82 (escrituraAuxiliar1 -> expression .)
+
+
+state 147
+
+    (69) asignacion -> arregloVar EQUAL asignacionAux .
+
+    SEMICOLON       reduce using rule 69 (asignacion -> arregloVar EQUAL asignacionAux .)
+
+
+state 148
+
+    (71) asignacionAux -> spcte .
+    (122) var_cte -> spcte .
+
+  ! reduce/reduce conflict for SEMICOLON resolved using rule 71 (asignacionAux -> spcte .)
+    SEMICOLON       reduce using rule 71 (asignacionAux -> spcte .)
+    DIVIDE          reduce using rule 122 (var_cte -> spcte .)
+    TIMES           reduce using rule 122 (var_cte -> spcte .)
+    MINUS           reduce using rule 122 (var_cte -> spcte .)
+    PLUS            reduce using rule 122 (var_cte -> spcte .)
+    LESSER          reduce using rule 122 (var_cte -> spcte .)
+    GREATER         reduce using rule 122 (var_cte -> spcte .)
+    EQUALEQUAL      reduce using rule 122 (var_cte -> spcte .)
+    NOTEQUAL        reduce using rule 122 (var_cte -> spcte .)
+    GREATEROREQUAL  reduce using rule 122 (var_cte -> spcte .)
+    LESSEROREQUAL   reduce using rule 122 (var_cte -> spcte .)
+    OR              reduce using rule 122 (var_cte -> spcte .)
+    AND             reduce using rule 122 (var_cte -> spcte .)
+
+  ! SEMICOLON       [ reduce using rule 122 (var_cte -> spcte .) ]
+
+
+state 149
+
+    (72) asignacionAux -> expression .
+
+    SEMICOLON       reduce using rule 72 (asignacionAux -> expression .)
+
+
+state 150
+
+    (80) lectura -> READ OPENPARENTHESIS ID . CLOSEPARENTHESIS SEMICOLON
+
+    CLOSEPARENTHESIS shift and go to state 178
+
+
+state 151
+
+    (61) ciclo -> FOR pn_8 OPENPARENTHESIS . expression CLOSEPARENTHESIS pn_6 bloque pn_7
+    (92) expression -> . exploc logicexp
+    (96) exploc -> . exp expression1
+    (104) exp -> . term top_exp exp1
+    (109) term -> . factor top_factor term1
+    (113) factor -> . OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par
+    (114) factor -> . var_cte
+    (115) factor -> . ID push_id
+    (117) var_cte -> . arregloVar
+    (118) var_cte -> . CTEINT getvalue_i
+    (119) var_cte -> . CTEFLOAT getvalue_f
+    (120) var_cte -> . ID getidvalue
+    (121) var_cte -> . llamada getidllamada
+    (122) var_cte -> . spcte
+    (74) arregloVar -> . ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1
+    (52) llamada -> . ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2
+    (139) spcte -> . CTESTRING
+    (140) spcte -> . ctebool
+    (137) ctebool -> . TRUE
+    (138) ctebool -> . FALSE
+
+    OPENPARENTHESIS shift and go to state 93
+    ID              shift and go to state 145
+    CTEINT          shift and go to state 86
+    CTEFLOAT        shift and go to state 83
+    CTESTRING       shift and go to state 80
+    TRUE            shift and go to state 82
+    FALSE           shift and go to state 90
+
+    exploc                         shift and go to state 77
+    ctebool                        shift and go to state 78
+    var_cte                        shift and go to state 143
+    arregloVar                     shift and go to state 81
+    llamada                        shift and go to state 84
+    factor                         shift and go to state 85
+    spcte                          shift and go to state 154
+    term                           shift and go to state 87
+    exp                            shift and go to state 92
+    expression                     shift and go to state 179
+
+state 152
+
+    (52) llamada -> ID pn_llamada OPENPARENTHESIS . false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2
+    (134) false_bottom -> . empty
+    (1) empty -> .
+
+    OPENPARENTHESIS reduce using rule 1 (empty -> .)
+    ID              reduce using rule 1 (empty -> .)
+    CTEINT          reduce using rule 1 (empty -> .)
+    CTEFLOAT        reduce using rule 1 (empty -> .)
+    CTESTRING       reduce using rule 1 (empty -> .)
+    TRUE            reduce using rule 1 (empty -> .)
+    FALSE           reduce using rule 1 (empty -> .)
+    CLOSEPARENTHESIS reduce using rule 1 (empty -> .)
+
+    false_bottom                   shift and go to state 180
+    empty                          shift and go to state 141
+
+state 153
+
+    (74) arregloVar -> ID getLimits false_bottom . SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1
+
+    SQUAREBOPEN     shift and go to state 181
+
+
+state 154
+
+    (122) var_cte -> spcte .
+
+    DIVIDE          reduce using rule 122 (var_cte -> spcte .)
+    TIMES           reduce using rule 122 (var_cte -> spcte .)
+    MINUS           reduce using rule 122 (var_cte -> spcte .)
+    PLUS            reduce using rule 122 (var_cte -> spcte .)
+    LESSER          reduce using rule 122 (var_cte -> spcte .)
+    GREATER         reduce using rule 122 (var_cte -> spcte .)
+    EQUALEQUAL      reduce using rule 122 (var_cte -> spcte .)
+    NOTEQUAL        reduce using rule 122 (var_cte -> spcte .)
+    GREATEROREQUAL  reduce using rule 122 (var_cte -> spcte .)
+    LESSEROREQUAL   reduce using rule 122 (var_cte -> spcte .)
+    OR              reduce using rule 122 (var_cte -> spcte .)
+    AND             reduce using rule 122 (var_cte -> spcte .)
+    SQUAREBCLOSE    reduce using rule 122 (var_cte -> spcte .)
+    SEMICOLON       reduce using rule 122 (var_cte -> spcte .)
+    CLOSEPARENTHESIS reduce using rule 122 (var_cte -> spcte .)
+    COMMA           reduce using rule 122 (var_cte -> spcte .)
+
+
+state 155
+
+    (65) incremento -> ID incremnetoAux1 expression .
+
+    SEMICOLON       reduce using rule 65 (incremento -> ID incremnetoAux1 expression .)
+
+
+state 156
+
+    (68) asignacion -> ID pupid EQUAL . asignacionAux
+    (71) asignacionAux -> . spcte
+    (72) asignacionAux -> . expression
+    (139) spcte -> . CTESTRING
+    (140) spcte -> . ctebool
+    (92) expression -> . exploc logicexp
+    (137) ctebool -> . TRUE
+    (138) ctebool -> . FALSE
+    (96) exploc -> . exp expression1
+    (104) exp -> . term top_exp exp1
+    (109) term -> . factor top_factor term1
+    (113) factor -> . OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par
+    (114) factor -> . var_cte
+    (115) factor -> . ID push_id
+    (117) var_cte -> . arregloVar
+    (118) var_cte -> . CTEINT getvalue_i
+    (119) var_cte -> . CTEFLOAT getvalue_f
+    (120) var_cte -> . ID getidvalue
+    (121) var_cte -> . llamada getidllamada
+    (122) var_cte -> . spcte
+    (74) arregloVar -> . ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1
+    (52) llamada -> . ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2
+
+    CTESTRING       shift and go to state 80
+    TRUE            shift and go to state 82
+    FALSE           shift and go to state 90
+    OPENPARENTHESIS shift and go to state 93
+    ID              shift and go to state 145
+    CTEINT          shift and go to state 86
+    CTEFLOAT        shift and go to state 83
+
+    exploc                         shift and go to state 77
+    ctebool                        shift and go to state 78
+    var_cte                        shift and go to state 143
+    asignacionAux                  shift and go to state 182
+    arregloVar                     shift and go to state 81
+    llamada                        shift and go to state 84
+    factor                         shift and go to state 85
+    spcte                          shift and go to state 148
+    term                           shift and go to state 87
+    exp                            shift and go to state 92
+    expression                     shift and go to state 149
+
+state 157
+
+    (84) condicion -> IF OPENPARENTHESIS expression . CLOSEPARENTHESIS pn_3 bloque condicionAuxiliar SEMICOLON
+    (85) condicion -> IF OPENPARENTHESIS expression . CLOSEPARENTHESIS pn_3 bloque condicionAuxiliar
+
+    CLOSEPARENTHESIS shift and go to state 183
+
+
+state 158
+
+    (20) funcsAux3 -> tipo ID . funcsAux4
+    (21) funcsAux4 -> . COMMA funcsAux3
+    (22) funcsAux4 -> . empty
+    (1) empty -> .
+
+    COMMA           shift and go to state 185
+    CLOSEPARENTHESIS reduce using rule 1 (empty -> .)
+
+    funcsAux4                      shift and go to state 184
+    empty                          shift and go to state 186
+
+state 159
+
+    (16) funcsAux1 -> funcsAux5 OPENPARENTHESIS funcsAux2 CLOSEPARENTHESIS . bloque func_end
+    (35) bloque -> . OPENBRACKET bloqueAuxiliar1 bloqueAuxiliar CLOSEBRACKET
+
+    OPENBRACKET     shift and go to state 26
+
+    bloque                         shift and go to state 187
+
+state 160
+
+    (94) logicexp -> AND andor . exploc top_andor
+    (96) exploc -> . exp expression1
+    (104) exp -> . term top_exp exp1
+    (109) term -> . factor top_factor term1
+    (113) factor -> . OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par
+    (114) factor -> . var_cte
+    (115) factor -> . ID push_id
+    (117) var_cte -> . arregloVar
+    (118) var_cte -> . CTEINT getvalue_i
+    (119) var_cte -> . CTEFLOAT getvalue_f
+    (120) var_cte -> . ID getidvalue
+    (121) var_cte -> . llamada getidllamada
+    (122) var_cte -> . spcte
+    (74) arregloVar -> . ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1
+    (52) llamada -> . ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2
+    (139) spcte -> . CTESTRING
+    (140) spcte -> . ctebool
+    (137) ctebool -> . TRUE
+    (138) ctebool -> . FALSE
+
+    OPENPARENTHESIS shift and go to state 93
+    ID              shift and go to state 145
+    CTEINT          shift and go to state 86
+    CTEFLOAT        shift and go to state 83
+    CTESTRING       shift and go to state 80
+    TRUE            shift and go to state 82
+    FALSE           shift and go to state 90
+
+    exploc                         shift and go to state 188
+    ctebool                        shift and go to state 78
+    var_cte                        shift and go to state 143
+    arregloVar                     shift and go to state 81
+    llamada                        shift and go to state 84
+    factor                         shift and go to state 85
+    spcte                          shift and go to state 154
+    term                           shift and go to state 87
+    exp                            shift and go to state 92
+
+state 161
+
+    (93) logicexp -> OR andor . exploc top_andor
+    (96) exploc -> . exp expression1
+    (104) exp -> . term top_exp exp1
+    (109) term -> . factor top_factor term1
+    (113) factor -> . OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par
+    (114) factor -> . var_cte
+    (115) factor -> . ID push_id
+    (117) var_cte -> . arregloVar
+    (118) var_cte -> . CTEINT getvalue_i
+    (119) var_cte -> . CTEFLOAT getvalue_f
+    (120) var_cte -> . ID getidvalue
+    (121) var_cte -> . llamada getidllamada
+    (122) var_cte -> . spcte
+    (74) arregloVar -> . ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1
+    (52) llamada -> . ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2
+    (139) spcte -> . CTESTRING
+    (140) spcte -> . ctebool
+    (137) ctebool -> . TRUE
+    (138) ctebool -> . FALSE
+
+    OPENPARENTHESIS shift and go to state 93
+    ID              shift and go to state 145
+    CTEINT          shift and go to state 86
+    CTEFLOAT        shift and go to state 83
+    CTESTRING       shift and go to state 80
+    TRUE            shift and go to state 82
+    FALSE           shift and go to state 90
+
+    exploc                         shift and go to state 189
+    ctebool                        shift and go to state 78
+    var_cte                        shift and go to state 143
+    arregloVar                     shift and go to state 81
+    llamada                        shift and go to state 84
+    factor                         shift and go to state 85
+    spcte                          shift and go to state 154
+    term                           shift and go to state 87
+    exp                            shift and go to state 92
+
+state 162
+
+    (110) term1 -> DIVIDE . push_sign term
+    (133) push_sign -> .
+
+    OPENPARENTHESIS reduce using rule 133 (push_sign -> .)
+    ID              reduce using rule 133 (push_sign -> .)
+    CTEINT          reduce using rule 133 (push_sign -> .)
+    CTEFLOAT        reduce using rule 133 (push_sign -> .)
+    CTESTRING       reduce using rule 133 (push_sign -> .)
+    TRUE            reduce using rule 133 (push_sign -> .)
+    FALSE           reduce using rule 133 (push_sign -> .)
+
+    push_sign                      shift and go to state 190
+
+state 163
+
+    (109) term -> factor top_factor term1 .
+
+    MINUS           reduce using rule 109 (term -> factor top_factor term1 .)
+    PLUS            reduce using rule 109 (term -> factor top_factor term1 .)
+    LESSER          reduce using rule 109 (term -> factor top_factor term1 .)
+    GREATER         reduce using rule 109 (term -> factor top_factor term1 .)
+    EQUALEQUAL      reduce using rule 109 (term -> factor top_factor term1 .)
+    NOTEQUAL        reduce using rule 109 (term -> factor top_factor term1 .)
+    GREATEROREQUAL  reduce using rule 109 (term -> factor top_factor term1 .)
+    LESSEROREQUAL   reduce using rule 109 (term -> factor top_factor term1 .)
+    OR              reduce using rule 109 (term -> factor top_factor term1 .)
+    AND             reduce using rule 109 (term -> factor top_factor term1 .)
+    CLOSEPARENTHESIS reduce using rule 109 (term -> factor top_factor term1 .)
+    SQUAREBCLOSE    reduce using rule 109 (term -> factor top_factor term1 .)
+    COMMA           reduce using rule 109 (term -> factor top_factor term1 .)
+    SEMICOLON       reduce using rule 109 (term -> factor top_factor term1 .)
+
+
+state 164
+
+    (111) term1 -> TIMES . push_sign term
+    (133) push_sign -> .
+
+    OPENPARENTHESIS reduce using rule 133 (push_sign -> .)
+    ID              reduce using rule 133 (push_sign -> .)
+    CTEINT          reduce using rule 133 (push_sign -> .)
+    CTEFLOAT        reduce using rule 133 (push_sign -> .)
+    CTESTRING       reduce using rule 133 (push_sign -> .)
+    TRUE            reduce using rule 133 (push_sign -> .)
+    FALSE           reduce using rule 133 (push_sign -> .)
+
+    push_sign                      shift and go to state 191
+
+state 165
+
+    (112) term1 -> empty .
+
+    MINUS           reduce using rule 112 (term1 -> empty .)
+    PLUS            reduce using rule 112 (term1 -> empty .)
+    LESSER          reduce using rule 112 (term1 -> empty .)
+    GREATER         reduce using rule 112 (term1 -> empty .)
+    EQUALEQUAL      reduce using rule 112 (term1 -> empty .)
+    NOTEQUAL        reduce using rule 112 (term1 -> empty .)
+    GREATEROREQUAL  reduce using rule 112 (term1 -> empty .)
+    LESSEROREQUAL   reduce using rule 112 (term1 -> empty .)
+    OR              reduce using rule 112 (term1 -> empty .)
+    AND             reduce using rule 112 (term1 -> empty .)
+    SEMICOLON       reduce using rule 112 (term1 -> empty .)
+    CLOSEPARENTHESIS reduce using rule 112 (term1 -> empty .)
+    COMMA           reduce using rule 112 (term1 -> empty .)
+    SQUAREBCLOSE    reduce using rule 112 (term1 -> empty .)
+
+
+state 166
+
+    (104) exp -> term top_exp exp1 .
+
+    LESSER          reduce using rule 104 (exp -> term top_exp exp1 .)
+    GREATER         reduce using rule 104 (exp -> term top_exp exp1 .)
+    EQUALEQUAL      reduce using rule 104 (exp -> term top_exp exp1 .)
+    NOTEQUAL        reduce using rule 104 (exp -> term top_exp exp1 .)
+    GREATEROREQUAL  reduce using rule 104 (exp -> term top_exp exp1 .)
+    LESSEROREQUAL   reduce using rule 104 (exp -> term top_exp exp1 .)
+    OR              reduce using rule 104 (exp -> term top_exp exp1 .)
+    AND             reduce using rule 104 (exp -> term top_exp exp1 .)
+    SEMICOLON       reduce using rule 104 (exp -> term top_exp exp1 .)
+    CLOSEPARENTHESIS reduce using rule 104 (exp -> term top_exp exp1 .)
+    COMMA           reduce using rule 104 (exp -> term top_exp exp1 .)
+    SQUAREBCLOSE    reduce using rule 104 (exp -> term top_exp exp1 .)
+
+
+state 167
+
+    (106) exp1 -> PLUS . push_sign exp
+    (133) push_sign -> .
+
+    OPENPARENTHESIS reduce using rule 133 (push_sign -> .)
+    ID              reduce using rule 133 (push_sign -> .)
+    CTEINT          reduce using rule 133 (push_sign -> .)
+    CTEFLOAT        reduce using rule 133 (push_sign -> .)
+    CTESTRING       reduce using rule 133 (push_sign -> .)
+    TRUE            reduce using rule 133 (push_sign -> .)
+    FALSE           reduce using rule 133 (push_sign -> .)
+
+    push_sign                      shift and go to state 192
+
+state 168
+
+    (107) exp1 -> empty .
+
+    LESSER          reduce using rule 107 (exp1 -> empty .)
+    GREATER         reduce using rule 107 (exp1 -> empty .)
+    EQUALEQUAL      reduce using rule 107 (exp1 -> empty .)
+    NOTEQUAL        reduce using rule 107 (exp1 -> empty .)
+    GREATEROREQUAL  reduce using rule 107 (exp1 -> empty .)
+    LESSEROREQUAL   reduce using rule 107 (exp1 -> empty .)
+    OR              reduce using rule 107 (exp1 -> empty .)
+    AND             reduce using rule 107 (exp1 -> empty .)
+    SEMICOLON       reduce using rule 107 (exp1 -> empty .)
+    CLOSEPARENTHESIS reduce using rule 107 (exp1 -> empty .)
+    COMMA           reduce using rule 107 (exp1 -> empty .)
+    SQUAREBCLOSE    reduce using rule 107 (exp1 -> empty .)
+
+
+state 169
+
+    (105) exp1 -> MINUS . push_sign exp
+    (133) push_sign -> .
+
+    OPENPARENTHESIS reduce using rule 133 (push_sign -> .)
+    ID              reduce using rule 133 (push_sign -> .)
+    CTEINT          reduce using rule 133 (push_sign -> .)
+    CTEFLOAT        reduce using rule 133 (push_sign -> .)
+    CTESTRING       reduce using rule 133 (push_sign -> .)
+    TRUE            reduce using rule 133 (push_sign -> .)
+    FALSE           reduce using rule 133 (push_sign -> .)
+
+    push_sign                      shift and go to state 193
+
+state 170
+
+    (100) expression1 -> NOTEQUAL relop . exp top_relop
+    (104) exp -> . term top_exp exp1
+    (109) term -> . factor top_factor term1
+    (113) factor -> . OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par
+    (114) factor -> . var_cte
+    (115) factor -> . ID push_id
+    (117) var_cte -> . arregloVar
+    (118) var_cte -> . CTEINT getvalue_i
+    (119) var_cte -> . CTEFLOAT getvalue_f
+    (120) var_cte -> . ID getidvalue
+    (121) var_cte -> . llamada getidllamada
+    (122) var_cte -> . spcte
+    (74) arregloVar -> . ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1
+    (52) llamada -> . ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2
+    (139) spcte -> . CTESTRING
+    (140) spcte -> . ctebool
+    (137) ctebool -> . TRUE
+    (138) ctebool -> . FALSE
+
+    OPENPARENTHESIS shift and go to state 93
+    ID              shift and go to state 145
+    CTEINT          shift and go to state 86
+    CTEFLOAT        shift and go to state 83
+    CTESTRING       shift and go to state 80
+    TRUE            shift and go to state 82
+    FALSE           shift and go to state 90
+
+    ctebool                        shift and go to state 78
+    var_cte                        shift and go to state 143
+    arregloVar                     shift and go to state 81
+    llamada                        shift and go to state 84
+    factor                         shift and go to state 85
+    spcte                          shift and go to state 154
+    term                           shift and go to state 87
+    exp                            shift and go to state 194
+
+state 171
+
+    (98) expression1 -> GREATER relop . exp top_relop
+    (104) exp -> . term top_exp exp1
+    (109) term -> . factor top_factor term1
+    (113) factor -> . OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par
+    (114) factor -> . var_cte
+    (115) factor -> . ID push_id
+    (117) var_cte -> . arregloVar
+    (118) var_cte -> . CTEINT getvalue_i
+    (119) var_cte -> . CTEFLOAT getvalue_f
+    (120) var_cte -> . ID getidvalue
+    (121) var_cte -> . llamada getidllamada
+    (122) var_cte -> . spcte
+    (74) arregloVar -> . ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1
+    (52) llamada -> . ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2
+    (139) spcte -> . CTESTRING
+    (140) spcte -> . ctebool
+    (137) ctebool -> . TRUE
+    (138) ctebool -> . FALSE
+
+    OPENPARENTHESIS shift and go to state 93
+    ID              shift and go to state 145
+    CTEINT          shift and go to state 86
+    CTEFLOAT        shift and go to state 83
+    CTESTRING       shift and go to state 80
+    TRUE            shift and go to state 82
+    FALSE           shift and go to state 90
+
+    ctebool                        shift and go to state 78
+    var_cte                        shift and go to state 143
+    arregloVar                     shift and go to state 81
+    llamada                        shift and go to state 84
+    factor                         shift and go to state 85
+    spcte                          shift and go to state 154
+    term                           shift and go to state 87
+    exp                            shift and go to state 195
+
+state 172
+
+    (102) expression1 -> LESSEROREQUAL relop . exp top_relop
+    (104) exp -> . term top_exp exp1
+    (109) term -> . factor top_factor term1
+    (113) factor -> . OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par
+    (114) factor -> . var_cte
+    (115) factor -> . ID push_id
+    (117) var_cte -> . arregloVar
+    (118) var_cte -> . CTEINT getvalue_i
+    (119) var_cte -> . CTEFLOAT getvalue_f
+    (120) var_cte -> . ID getidvalue
+    (121) var_cte -> . llamada getidllamada
+    (122) var_cte -> . spcte
+    (74) arregloVar -> . ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1
+    (52) llamada -> . ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2
+    (139) spcte -> . CTESTRING
+    (140) spcte -> . ctebool
+    (137) ctebool -> . TRUE
+    (138) ctebool -> . FALSE
+
+    OPENPARENTHESIS shift and go to state 93
+    ID              shift and go to state 145
+    CTEINT          shift and go to state 86
+    CTEFLOAT        shift and go to state 83
+    CTESTRING       shift and go to state 80
+    TRUE            shift and go to state 82
+    FALSE           shift and go to state 90
+
+    ctebool                        shift and go to state 78
+    var_cte                        shift and go to state 143
+    arregloVar                     shift and go to state 81
+    llamada                        shift and go to state 84
+    factor                         shift and go to state 85
+    spcte                          shift and go to state 154
+    term                           shift and go to state 87
+    exp                            shift and go to state 196
+
+state 173
+
+    (97) expression1 -> LESSER relop . exp top_relop
+    (104) exp -> . term top_exp exp1
+    (109) term -> . factor top_factor term1
+    (113) factor -> . OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par
+    (114) factor -> . var_cte
+    (115) factor -> . ID push_id
+    (117) var_cte -> . arregloVar
+    (118) var_cte -> . CTEINT getvalue_i
+    (119) var_cte -> . CTEFLOAT getvalue_f
+    (120) var_cte -> . ID getidvalue
+    (121) var_cte -> . llamada getidllamada
+    (122) var_cte -> . spcte
+    (74) arregloVar -> . ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1
+    (52) llamada -> . ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2
+    (139) spcte -> . CTESTRING
+    (140) spcte -> . ctebool
+    (137) ctebool -> . TRUE
+    (138) ctebool -> . FALSE
+
+    OPENPARENTHESIS shift and go to state 93
+    ID              shift and go to state 145
+    CTEINT          shift and go to state 86
+    CTEFLOAT        shift and go to state 83
+    CTESTRING       shift and go to state 80
+    TRUE            shift and go to state 82
+    FALSE           shift and go to state 90
+
+    ctebool                        shift and go to state 78
+    var_cte                        shift and go to state 143
+    arregloVar                     shift and go to state 81
+    llamada                        shift and go to state 84
+    factor                         shift and go to state 85
+    spcte                          shift and go to state 154
+    term                           shift and go to state 87
+    exp                            shift and go to state 197
+
+state 174
+
+    (101) expression1 -> GREATEROREQUAL relop . exp top_relop
+    (104) exp -> . term top_exp exp1
+    (109) term -> . factor top_factor term1
+    (113) factor -> . OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par
+    (114) factor -> . var_cte
+    (115) factor -> . ID push_id
+    (117) var_cte -> . arregloVar
+    (118) var_cte -> . CTEINT getvalue_i
+    (119) var_cte -> . CTEFLOAT getvalue_f
+    (120) var_cte -> . ID getidvalue
+    (121) var_cte -> . llamada getidllamada
+    (122) var_cte -> . spcte
+    (74) arregloVar -> . ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1
+    (52) llamada -> . ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2
+    (139) spcte -> . CTESTRING
+    (140) spcte -> . ctebool
+    (137) ctebool -> . TRUE
+    (138) ctebool -> . FALSE
+
+    OPENPARENTHESIS shift and go to state 93
+    ID              shift and go to state 145
+    CTEINT          shift and go to state 86
+    CTEFLOAT        shift and go to state 83
+    CTESTRING       shift and go to state 80
+    TRUE            shift and go to state 82
+    FALSE           shift and go to state 90
+
+    ctebool                        shift and go to state 78
+    var_cte                        shift and go to state 143
+    arregloVar                     shift and go to state 81
+    llamada                        shift and go to state 84
+    factor                         shift and go to state 85
+    spcte                          shift and go to state 154
+    term                           shift and go to state 87
+    exp                            shift and go to state 198
+
+state 175
+
+    (99) expression1 -> EQUALEQUAL relop . exp top_relop
+    (104) exp -> . term top_exp exp1
+    (109) term -> . factor top_factor term1
+    (113) factor -> . OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par
+    (114) factor -> . var_cte
+    (115) factor -> . ID push_id
+    (117) var_cte -> . arregloVar
+    (118) var_cte -> . CTEINT getvalue_i
+    (119) var_cte -> . CTEFLOAT getvalue_f
+    (120) var_cte -> . ID getidvalue
+    (121) var_cte -> . llamada getidllamada
+    (122) var_cte -> . spcte
+    (74) arregloVar -> . ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1
+    (52) llamada -> . ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2
+    (139) spcte -> . CTESTRING
+    (140) spcte -> . ctebool
+    (137) ctebool -> . TRUE
+    (138) ctebool -> . FALSE
+
+    OPENPARENTHESIS shift and go to state 93
+    ID              shift and go to state 145
+    CTEINT          shift and go to state 86
+    CTEFLOAT        shift and go to state 83
+    CTESTRING       shift and go to state 80
+    TRUE            shift and go to state 82
+    FALSE           shift and go to state 90
+
+    ctebool                        shift and go to state 78
+    var_cte                        shift and go to state 143
+    arregloVar                     shift and go to state 81
+    llamada                        shift and go to state 84
+    factor                         shift and go to state 85
+    spcte                          shift and go to state 154
+    term                           shift and go to state 87
+    exp                            shift and go to state 199
+
+state 176
+
+    (113) factor -> OPENPARENTHESIS false_bottom expression . CLOSEPARENTHESIS end_par
+
+    CLOSEPARENTHESIS shift and go to state 200
+
+
+state 177
+
+    (81) escritura -> PRINT OPENPARENTHESIS escrituraAuxiliar1 CLOSEPARENTHESIS . SEMICOLON
+
+    SEMICOLON       shift and go to state 201
+
+
+state 178
+
+    (80) lectura -> READ OPENPARENTHESIS ID CLOSEPARENTHESIS . SEMICOLON
+
+    SEMICOLON       shift and go to state 202
+
+
+state 179
+
+    (61) ciclo -> FOR pn_8 OPENPARENTHESIS expression . CLOSEPARENTHESIS pn_6 bloque pn_7
+
+    CLOSEPARENTHESIS shift and go to state 203
+
+
+state 180
+
+    (52) llamada -> ID pn_llamada OPENPARENTHESIS false_bottom . llamadaAux CLOSEPARENTHESIS pn_llamada2
+    (55) llamadaAux -> . llamadaAux1
+    (56) llamadaAux -> . empty
+    (57) llamadaAux1 -> . expression end_par pn_llamada_param llamadaAux2
+    (1) empty -> .
+    (92) expression -> . exploc logicexp
+    (96) exploc -> . exp expression1
+    (104) exp -> . term top_exp exp1
+    (109) term -> . factor top_factor term1
+    (113) factor -> . OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par
+    (114) factor -> . var_cte
+    (115) factor -> . ID push_id
+    (117) var_cte -> . arregloVar
+    (118) var_cte -> . CTEINT getvalue_i
+    (119) var_cte -> . CTEFLOAT getvalue_f
+    (120) var_cte -> . ID getidvalue
+    (121) var_cte -> . llamada getidllamada
+    (122) var_cte -> . spcte
+    (74) arregloVar -> . ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1
+    (52) llamada -> . ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2
+    (139) spcte -> . CTESTRING
+    (140) spcte -> . ctebool
+    (137) ctebool -> . TRUE
+    (138) ctebool -> . FALSE
+
+    CLOSEPARENTHESIS reduce using rule 1 (empty -> .)
+    OPENPARENTHESIS shift and go to state 93
+    ID              shift and go to state 145
+    CTEINT          shift and go to state 86
+    CTEFLOAT        shift and go to state 83
+    CTESTRING       shift and go to state 80
+    TRUE            shift and go to state 82
+    FALSE           shift and go to state 90
+
+    exploc                         shift and go to state 77
+    ctebool                        shift and go to state 78
+    var_cte                        shift and go to state 143
+    llamadaAux                     shift and go to state 204
+    arregloVar                     shift and go to state 81
+    llamada                        shift and go to state 84
+    factor                         shift and go to state 85
+    llamadaAux1                    shift and go to state 206
+    term                           shift and go to state 87
+    spcte                          shift and go to state 154
+    empty                          shift and go to state 205
+    exp                            shift and go to state 92
+    expression                     shift and go to state 207
+
+state 181
+
+    (74) arregloVar -> ID getLimits false_bottom SQUAREBOPEN . expression setVerData end_par SQUAREBCLOSE listaccess1
+    (92) expression -> . exploc logicexp
+    (96) exploc -> . exp expression1
+    (104) exp -> . term top_exp exp1
+    (109) term -> . factor top_factor term1
+    (113) factor -> . OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par
+    (114) factor -> . var_cte
+    (115) factor -> . ID push_id
+    (117) var_cte -> . arregloVar
+    (118) var_cte -> . CTEINT getvalue_i
+    (119) var_cte -> . CTEFLOAT getvalue_f
+    (120) var_cte -> . ID getidvalue
+    (121) var_cte -> . llamada getidllamada
+    (122) var_cte -> . spcte
+    (74) arregloVar -> . ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1
+    (52) llamada -> . ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2
+    (139) spcte -> . CTESTRING
+    (140) spcte -> . ctebool
+    (137) ctebool -> . TRUE
+    (138) ctebool -> . FALSE
+
+    OPENPARENTHESIS shift and go to state 93
+    ID              shift and go to state 145
+    CTEINT          shift and go to state 86
+    CTEFLOAT        shift and go to state 83
+    CTESTRING       shift and go to state 80
+    TRUE            shift and go to state 82
+    FALSE           shift and go to state 90
+
+    exploc                         shift and go to state 77
+    ctebool                        shift and go to state 78
+    var_cte                        shift and go to state 143
+    arregloVar                     shift and go to state 81
+    llamada                        shift and go to state 84
+    factor                         shift and go to state 85
+    spcte                          shift and go to state 154
+    term                           shift and go to state 87
+    exp                            shift and go to state 92
+    expression                     shift and go to state 208
+
+state 182
+
+    (68) asignacion -> ID pupid EQUAL asignacionAux .
+
+    SEMICOLON       reduce using rule 68 (asignacion -> ID pupid EQUAL asignacionAux .)
+
+
+state 183
+
+    (84) condicion -> IF OPENPARENTHESIS expression CLOSEPARENTHESIS . pn_3 bloque condicionAuxiliar SEMICOLON
+    (85) condicion -> IF OPENPARENTHESIS expression CLOSEPARENTHESIS . pn_3 bloque condicionAuxiliar
+    (86) pn_3 -> . empty
+    (1) empty -> .
+
+    OPENBRACKET     reduce using rule 1 (empty -> .)
+
+    pn_3                           shift and go to state 209
+    empty                          shift and go to state 210
+
+state 184
+
+    (20) funcsAux3 -> tipo ID funcsAux4 .
+
+    CLOSEPARENTHESIS reduce using rule 20 (funcsAux3 -> tipo ID funcsAux4 .)
+
+
+state 185
+
+    (21) funcsAux4 -> COMMA . funcsAux3
+    (20) funcsAux3 -> . tipo ID funcsAux4
+    (30) tipo -> . INT
+    (31) tipo -> . FLOAT
+    (32) tipo -> . arreglo
+    (33) tipo -> . BOOL
+    (34) tipo -> . STRING
+    (73) arreglo -> . tipo SQUAREBOPEN CTEINT SQUAREBCLOSE
+
+    INT             shift and go to state 21
+    FLOAT           shift and go to state 22
+    BOOL            shift and go to state 24
+    STRING          shift and go to state 25
+
+    arreglo                        shift and go to state 23
+    funcsAux3                      shift and go to state 211
+    tipo                           shift and go to state 113
+
+state 186
+
+    (22) funcsAux4 -> empty .
+
+    CLOSEPARENTHESIS reduce using rule 22 (funcsAux4 -> empty .)
+
+
+state 187
+
+    (16) funcsAux1 -> funcsAux5 OPENPARENTHESIS funcsAux2 CLOSEPARENTHESIS bloque . func_end
+    (17) func_end -> .
+
+    INT             reduce using rule 17 (func_end -> .)
+    FLOAT           reduce using rule 17 (func_end -> .)
+    BOOL            reduce using rule 17 (func_end -> .)
+    STRING          reduce using rule 17 (func_end -> .)
+    VOID            reduce using rule 17 (func_end -> .)
+    MAIN            reduce using rule 17 (func_end -> .)
+
+    func_end                       shift and go to state 212
+
+state 188
+
+    (94) logicexp -> AND andor exploc . top_andor
+    (131) top_andor -> .
+
+    SEMICOLON       reduce using rule 131 (top_andor -> .)
+    CLOSEPARENTHESIS reduce using rule 131 (top_andor -> .)
+    COMMA           reduce using rule 131 (top_andor -> .)
+    SQUAREBCLOSE    reduce using rule 131 (top_andor -> .)
+
+    top_andor                      shift and go to state 213
+
+state 189
+
+    (93) logicexp -> OR andor exploc . top_andor
+    (131) top_andor -> .
+
+    SEMICOLON       reduce using rule 131 (top_andor -> .)
+    CLOSEPARENTHESIS reduce using rule 131 (top_andor -> .)
+    COMMA           reduce using rule 131 (top_andor -> .)
+    SQUAREBCLOSE    reduce using rule 131 (top_andor -> .)
+
+    top_andor                      shift and go to state 214
+
+state 190
+
+    (110) term1 -> DIVIDE push_sign . term
+    (109) term -> . factor top_factor term1
+    (113) factor -> . OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par
+    (114) factor -> . var_cte
+    (115) factor -> . ID push_id
+    (117) var_cte -> . arregloVar
+    (118) var_cte -> . CTEINT getvalue_i
+    (119) var_cte -> . CTEFLOAT getvalue_f
+    (120) var_cte -> . ID getidvalue
+    (121) var_cte -> . llamada getidllamada
+    (122) var_cte -> . spcte
+    (74) arregloVar -> . ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1
+    (52) llamada -> . ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2
+    (139) spcte -> . CTESTRING
+    (140) spcte -> . ctebool
+    (137) ctebool -> . TRUE
+    (138) ctebool -> . FALSE
+
+    OPENPARENTHESIS shift and go to state 93
+    ID              shift and go to state 145
+    CTEINT          shift and go to state 86
+    CTEFLOAT        shift and go to state 83
+    CTESTRING       shift and go to state 80
+    TRUE            shift and go to state 82
+    FALSE           shift and go to state 90
+
+    ctebool                        shift and go to state 78
+    var_cte                        shift and go to state 143
+    arregloVar                     shift and go to state 81
+    llamada                        shift and go to state 84
+    factor                         shift and go to state 85
+    spcte                          shift and go to state 154
+    term                           shift and go to state 215
+
+state 191
+
+    (111) term1 -> TIMES push_sign . term
+    (109) term -> . factor top_factor term1
+    (113) factor -> . OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par
+    (114) factor -> . var_cte
+    (115) factor -> . ID push_id
+    (117) var_cte -> . arregloVar
+    (118) var_cte -> . CTEINT getvalue_i
+    (119) var_cte -> . CTEFLOAT getvalue_f
+    (120) var_cte -> . ID getidvalue
+    (121) var_cte -> . llamada getidllamada
+    (122) var_cte -> . spcte
+    (74) arregloVar -> . ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1
+    (52) llamada -> . ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2
+    (139) spcte -> . CTESTRING
+    (140) spcte -> . ctebool
+    (137) ctebool -> . TRUE
+    (138) ctebool -> . FALSE
+
+    OPENPARENTHESIS shift and go to state 93
+    ID              shift and go to state 145
+    CTEINT          shift and go to state 86
+    CTEFLOAT        shift and go to state 83
+    CTESTRING       shift and go to state 80
+    TRUE            shift and go to state 82
+    FALSE           shift and go to state 90
+
+    ctebool                        shift and go to state 78
+    var_cte                        shift and go to state 143
+    arregloVar                     shift and go to state 81
+    llamada                        shift and go to state 84
+    factor                         shift and go to state 85
+    spcte                          shift and go to state 154
+    term                           shift and go to state 216
+
+state 192
+
+    (106) exp1 -> PLUS push_sign . exp
+    (104) exp -> . term top_exp exp1
+    (109) term -> . factor top_factor term1
+    (113) factor -> . OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par
+    (114) factor -> . var_cte
+    (115) factor -> . ID push_id
+    (117) var_cte -> . arregloVar
+    (118) var_cte -> . CTEINT getvalue_i
+    (119) var_cte -> . CTEFLOAT getvalue_f
+    (120) var_cte -> . ID getidvalue
+    (121) var_cte -> . llamada getidllamada
+    (122) var_cte -> . spcte
+    (74) arregloVar -> . ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1
+    (52) llamada -> . ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2
+    (139) spcte -> . CTESTRING
+    (140) spcte -> . ctebool
+    (137) ctebool -> . TRUE
+    (138) ctebool -> . FALSE
+
+    OPENPARENTHESIS shift and go to state 93
+    ID              shift and go to state 145
+    CTEINT          shift and go to state 86
+    CTEFLOAT        shift and go to state 83
+    CTESTRING       shift and go to state 80
+    TRUE            shift and go to state 82
+    FALSE           shift and go to state 90
+
+    ctebool                        shift and go to state 78
+    var_cte                        shift and go to state 143
+    arregloVar                     shift and go to state 81
+    llamada                        shift and go to state 84
+    factor                         shift and go to state 85
+    spcte                          shift and go to state 154
+    term                           shift and go to state 87
+    exp                            shift and go to state 217
+
+state 193
+
+    (105) exp1 -> MINUS push_sign . exp
+    (104) exp -> . term top_exp exp1
+    (109) term -> . factor top_factor term1
+    (113) factor -> . OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par
+    (114) factor -> . var_cte
+    (115) factor -> . ID push_id
+    (117) var_cte -> . arregloVar
+    (118) var_cte -> . CTEINT getvalue_i
+    (119) var_cte -> . CTEFLOAT getvalue_f
+    (120) var_cte -> . ID getidvalue
+    (121) var_cte -> . llamada getidllamada
+    (122) var_cte -> . spcte
+    (74) arregloVar -> . ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1
+    (52) llamada -> . ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2
+    (139) spcte -> . CTESTRING
+    (140) spcte -> . ctebool
+    (137) ctebool -> . TRUE
+    (138) ctebool -> . FALSE
+
+    OPENPARENTHESIS shift and go to state 93
+    ID              shift and go to state 145
+    CTEINT          shift and go to state 86
+    CTEFLOAT        shift and go to state 83
+    CTESTRING       shift and go to state 80
+    TRUE            shift and go to state 82
+    FALSE           shift and go to state 90
+
+    ctebool                        shift and go to state 78
+    var_cte                        shift and go to state 143
+    arregloVar                     shift and go to state 81
+    llamada                        shift and go to state 84
+    factor                         shift and go to state 85
+    spcte                          shift and go to state 154
+    term                           shift and go to state 87
+    exp                            shift and go to state 218
+
+state 194
+
+    (100) expression1 -> NOTEQUAL relop exp . top_relop
+    (132) top_relop -> .
+
+    OR              reduce using rule 132 (top_relop -> .)
+    AND             reduce using rule 132 (top_relop -> .)
+    SEMICOLON       reduce using rule 132 (top_relop -> .)
+    CLOSEPARENTHESIS reduce using rule 132 (top_relop -> .)
+    COMMA           reduce using rule 132 (top_relop -> .)
+    SQUAREBCLOSE    reduce using rule 132 (top_relop -> .)
+
+    top_relop                      shift and go to state 219
+
+state 195
+
+    (98) expression1 -> GREATER relop exp . top_relop
+    (132) top_relop -> .
+
+    OR              reduce using rule 132 (top_relop -> .)
+    AND             reduce using rule 132 (top_relop -> .)
+    SEMICOLON       reduce using rule 132 (top_relop -> .)
+    CLOSEPARENTHESIS reduce using rule 132 (top_relop -> .)
+    COMMA           reduce using rule 132 (top_relop -> .)
+    SQUAREBCLOSE    reduce using rule 132 (top_relop -> .)
+
+    top_relop                      shift and go to state 220
+
+state 196
+
+    (102) expression1 -> LESSEROREQUAL relop exp . top_relop
+    (132) top_relop -> .
+
+    OR              reduce using rule 132 (top_relop -> .)
+    AND             reduce using rule 132 (top_relop -> .)
+    SEMICOLON       reduce using rule 132 (top_relop -> .)
+    CLOSEPARENTHESIS reduce using rule 132 (top_relop -> .)
+    COMMA           reduce using rule 132 (top_relop -> .)
+    SQUAREBCLOSE    reduce using rule 132 (top_relop -> .)
+
+    top_relop                      shift and go to state 221
+
+state 197
+
+    (97) expression1 -> LESSER relop exp . top_relop
+    (132) top_relop -> .
+
+    OR              reduce using rule 132 (top_relop -> .)
+    AND             reduce using rule 132 (top_relop -> .)
+    SEMICOLON       reduce using rule 132 (top_relop -> .)
+    CLOSEPARENTHESIS reduce using rule 132 (top_relop -> .)
+    COMMA           reduce using rule 132 (top_relop -> .)
+    SQUAREBCLOSE    reduce using rule 132 (top_relop -> .)
+
+    top_relop                      shift and go to state 222
+
+state 198
+
+    (101) expression1 -> GREATEROREQUAL relop exp . top_relop
+    (132) top_relop -> .
+
+    OR              reduce using rule 132 (top_relop -> .)
+    AND             reduce using rule 132 (top_relop -> .)
+    SEMICOLON       reduce using rule 132 (top_relop -> .)
+    CLOSEPARENTHESIS reduce using rule 132 (top_relop -> .)
+    COMMA           reduce using rule 132 (top_relop -> .)
+    SQUAREBCLOSE    reduce using rule 132 (top_relop -> .)
+
+    top_relop                      shift and go to state 223
+
+state 199
+
+    (99) expression1 -> EQUALEQUAL relop exp . top_relop
+    (132) top_relop -> .
+
+    OR              reduce using rule 132 (top_relop -> .)
+    AND             reduce using rule 132 (top_relop -> .)
+    SEMICOLON       reduce using rule 132 (top_relop -> .)
+    CLOSEPARENTHESIS reduce using rule 132 (top_relop -> .)
+    COMMA           reduce using rule 132 (top_relop -> .)
+    SQUAREBCLOSE    reduce using rule 132 (top_relop -> .)
+
+    top_relop                      shift and go to state 224
+
+state 200
+
+    (113) factor -> OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS . end_par
+    (135) end_par -> .
+
+    DIVIDE          reduce using rule 135 (end_par -> .)
+    TIMES           reduce using rule 135 (end_par -> .)
+    MINUS           reduce using rule 135 (end_par -> .)
+    PLUS            reduce using rule 135 (end_par -> .)
+    LESSER          reduce using rule 135 (end_par -> .)
+    GREATER         reduce using rule 135 (end_par -> .)
+    EQUALEQUAL      reduce using rule 135 (end_par -> .)
+    NOTEQUAL        reduce using rule 135 (end_par -> .)
+    GREATEROREQUAL  reduce using rule 135 (end_par -> .)
+    LESSEROREQUAL   reduce using rule 135 (end_par -> .)
+    OR              reduce using rule 135 (end_par -> .)
+    AND             reduce using rule 135 (end_par -> .)
+    SEMICOLON       reduce using rule 135 (end_par -> .)
+    CLOSEPARENTHESIS reduce using rule 135 (end_par -> .)
+    COMMA           reduce using rule 135 (end_par -> .)
+    SQUAREBCLOSE    reduce using rule 135 (end_par -> .)
+
+    end_par                        shift and go to state 225
+
+state 201
+
+    (81) escritura -> PRINT OPENPARENTHESIS escrituraAuxiliar1 CLOSEPARENTHESIS SEMICOLON .
+
+    ID              reduce using rule 81 (escritura -> PRINT OPENPARENTHESIS escrituraAuxiliar1 CLOSEPARENTHESIS SEMICOLON .)
+    IF              reduce using rule 81 (escritura -> PRINT OPENPARENTHESIS escrituraAuxiliar1 CLOSEPARENTHESIS SEMICOLON .)
+    PRINT           reduce using rule 81 (escritura -> PRINT OPENPARENTHESIS escrituraAuxiliar1 CLOSEPARENTHESIS SEMICOLON .)
+    READ            reduce using rule 81 (escritura -> PRINT OPENPARENTHESIS escrituraAuxiliar1 CLOSEPARENTHESIS SEMICOLON .)
+    FOR             reduce using rule 81 (escritura -> PRINT OPENPARENTHESIS escrituraAuxiliar1 CLOSEPARENTHESIS SEMICOLON .)
+    RETURN          reduce using rule 81 (escritura -> PRINT OPENPARENTHESIS escrituraAuxiliar1 CLOSEPARENTHESIS SEMICOLON .)
+    CLOSEBRACKET    reduce using rule 81 (escritura -> PRINT OPENPARENTHESIS escrituraAuxiliar1 CLOSEPARENTHESIS SEMICOLON .)
+
+
+state 202
+
+    (80) lectura -> READ OPENPARENTHESIS ID CLOSEPARENTHESIS SEMICOLON .
+
+    ID              reduce using rule 80 (lectura -> READ OPENPARENTHESIS ID CLOSEPARENTHESIS SEMICOLON .)
+    IF              reduce using rule 80 (lectura -> READ OPENPARENTHESIS ID CLOSEPARENTHESIS SEMICOLON .)
+    PRINT           reduce using rule 80 (lectura -> READ OPENPARENTHESIS ID CLOSEPARENTHESIS SEMICOLON .)
+    READ            reduce using rule 80 (lectura -> READ OPENPARENTHESIS ID CLOSEPARENTHESIS SEMICOLON .)
+    FOR             reduce using rule 80 (lectura -> READ OPENPARENTHESIS ID CLOSEPARENTHESIS SEMICOLON .)
+    RETURN          reduce using rule 80 (lectura -> READ OPENPARENTHESIS ID CLOSEPARENTHESIS SEMICOLON .)
+    CLOSEBRACKET    reduce using rule 80 (lectura -> READ OPENPARENTHESIS ID CLOSEPARENTHESIS SEMICOLON .)
+
+
+state 203
+
+    (61) ciclo -> FOR pn_8 OPENPARENTHESIS expression CLOSEPARENTHESIS . pn_6 bloque pn_7
+    (63) pn_6 -> . empty
+    (1) empty -> .
+
+    OPENBRACKET     reduce using rule 1 (empty -> .)
+
+    pn_6                           shift and go to state 226
+    empty                          shift and go to state 227
+
+state 204
+
+    (52) llamada -> ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux . CLOSEPARENTHESIS pn_llamada2
+
+    CLOSEPARENTHESIS shift and go to state 228
+
+
+state 205
+
+    (56) llamadaAux -> empty .
+
+    CLOSEPARENTHESIS reduce using rule 56 (llamadaAux -> empty .)
+
+
+state 206
+
+    (55) llamadaAux -> llamadaAux1 .
+
+    CLOSEPARENTHESIS reduce using rule 55 (llamadaAux -> llamadaAux1 .)
+
+
+state 207
+
+    (57) llamadaAux1 -> expression . end_par pn_llamada_param llamadaAux2
+    (135) end_par -> .
+
+    COMMA           reduce using rule 135 (end_par -> .)
+    CLOSEPARENTHESIS reduce using rule 135 (end_par -> .)
+
+    end_par                        shift and go to state 229
+
+state 208
+
+    (74) arregloVar -> ID getLimits false_bottom SQUAREBOPEN expression . setVerData end_par SQUAREBCLOSE listaccess1
+    (75) setVerData -> .
+
+    SQUAREBCLOSE    reduce using rule 75 (setVerData -> .)
+
+    setVerData                     shift and go to state 230
+
+state 209
+
+    (84) condicion -> IF OPENPARENTHESIS expression CLOSEPARENTHESIS pn_3 . bloque condicionAuxiliar SEMICOLON
+    (85) condicion -> IF OPENPARENTHESIS expression CLOSEPARENTHESIS pn_3 . bloque condicionAuxiliar
+    (35) bloque -> . OPENBRACKET bloqueAuxiliar1 bloqueAuxiliar CLOSEBRACKET
+
+    OPENBRACKET     shift and go to state 26
+
+    bloque                         shift and go to state 231
+
+state 210
+
+    (86) pn_3 -> empty .
+
+    OPENBRACKET     reduce using rule 86 (pn_3 -> empty .)
+
+
+state 211
+
+    (21) funcsAux4 -> COMMA funcsAux3 .
+
+    CLOSEPARENTHESIS reduce using rule 21 (funcsAux4 -> COMMA funcsAux3 .)
+
+
+state 212
+
+    (16) funcsAux1 -> funcsAux5 OPENPARENTHESIS funcsAux2 CLOSEPARENTHESIS bloque func_end .
+
+    INT             reduce using rule 16 (funcsAux1 -> funcsAux5 OPENPARENTHESIS funcsAux2 CLOSEPARENTHESIS bloque func_end .)
+    FLOAT           reduce using rule 16 (funcsAux1 -> funcsAux5 OPENPARENTHESIS funcsAux2 CLOSEPARENTHESIS bloque func_end .)
+    BOOL            reduce using rule 16 (funcsAux1 -> funcsAux5 OPENPARENTHESIS funcsAux2 CLOSEPARENTHESIS bloque func_end .)
+    STRING          reduce using rule 16 (funcsAux1 -> funcsAux5 OPENPARENTHESIS funcsAux2 CLOSEPARENTHESIS bloque func_end .)
+    VOID            reduce using rule 16 (funcsAux1 -> funcsAux5 OPENPARENTHESIS funcsAux2 CLOSEPARENTHESIS bloque func_end .)
+    MAIN            reduce using rule 16 (funcsAux1 -> funcsAux5 OPENPARENTHESIS funcsAux2 CLOSEPARENTHESIS bloque func_end .)
+
+
+state 213
+
+    (94) logicexp -> AND andor exploc top_andor .
+
+    SEMICOLON       reduce using rule 94 (logicexp -> AND andor exploc top_andor .)
+    CLOSEPARENTHESIS reduce using rule 94 (logicexp -> AND andor exploc top_andor .)
+    COMMA           reduce using rule 94 (logicexp -> AND andor exploc top_andor .)
+    SQUAREBCLOSE    reduce using rule 94 (logicexp -> AND andor exploc top_andor .)
+
+
+state 214
+
+    (93) logicexp -> OR andor exploc top_andor .
+
+    SEMICOLON       reduce using rule 93 (logicexp -> OR andor exploc top_andor .)
+    CLOSEPARENTHESIS reduce using rule 93 (logicexp -> OR andor exploc top_andor .)
+    COMMA           reduce using rule 93 (logicexp -> OR andor exploc top_andor .)
+    SQUAREBCLOSE    reduce using rule 93 (logicexp -> OR andor exploc top_andor .)
+
+
+state 215
+
+    (110) term1 -> DIVIDE push_sign term .
+
+    MINUS           reduce using rule 110 (term1 -> DIVIDE push_sign term .)
+    PLUS            reduce using rule 110 (term1 -> DIVIDE push_sign term .)
+    LESSER          reduce using rule 110 (term1 -> DIVIDE push_sign term .)
+    GREATER         reduce using rule 110 (term1 -> DIVIDE push_sign term .)
+    EQUALEQUAL      reduce using rule 110 (term1 -> DIVIDE push_sign term .)
+    NOTEQUAL        reduce using rule 110 (term1 -> DIVIDE push_sign term .)
+    GREATEROREQUAL  reduce using rule 110 (term1 -> DIVIDE push_sign term .)
+    LESSEROREQUAL   reduce using rule 110 (term1 -> DIVIDE push_sign term .)
+    OR              reduce using rule 110 (term1 -> DIVIDE push_sign term .)
+    AND             reduce using rule 110 (term1 -> DIVIDE push_sign term .)
+    SEMICOLON       reduce using rule 110 (term1 -> DIVIDE push_sign term .)
+    CLOSEPARENTHESIS reduce using rule 110 (term1 -> DIVIDE push_sign term .)
+    COMMA           reduce using rule 110 (term1 -> DIVIDE push_sign term .)
+    SQUAREBCLOSE    reduce using rule 110 (term1 -> DIVIDE push_sign term .)
+
+
+state 216
+
+    (111) term1 -> TIMES push_sign term .
+
+    MINUS           reduce using rule 111 (term1 -> TIMES push_sign term .)
+    PLUS            reduce using rule 111 (term1 -> TIMES push_sign term .)
+    LESSER          reduce using rule 111 (term1 -> TIMES push_sign term .)
+    GREATER         reduce using rule 111 (term1 -> TIMES push_sign term .)
+    EQUALEQUAL      reduce using rule 111 (term1 -> TIMES push_sign term .)
+    NOTEQUAL        reduce using rule 111 (term1 -> TIMES push_sign term .)
+    GREATEROREQUAL  reduce using rule 111 (term1 -> TIMES push_sign term .)
+    LESSEROREQUAL   reduce using rule 111 (term1 -> TIMES push_sign term .)
+    OR              reduce using rule 111 (term1 -> TIMES push_sign term .)
+    AND             reduce using rule 111 (term1 -> TIMES push_sign term .)
+    SEMICOLON       reduce using rule 111 (term1 -> TIMES push_sign term .)
+    CLOSEPARENTHESIS reduce using rule 111 (term1 -> TIMES push_sign term .)
+    COMMA           reduce using rule 111 (term1 -> TIMES push_sign term .)
+    SQUAREBCLOSE    reduce using rule 111 (term1 -> TIMES push_sign term .)
+
+
+state 217
+
+    (106) exp1 -> PLUS push_sign exp .
+
+    LESSER          reduce using rule 106 (exp1 -> PLUS push_sign exp .)
+    GREATER         reduce using rule 106 (exp1 -> PLUS push_sign exp .)
+    EQUALEQUAL      reduce using rule 106 (exp1 -> PLUS push_sign exp .)
+    NOTEQUAL        reduce using rule 106 (exp1 -> PLUS push_sign exp .)
+    GREATEROREQUAL  reduce using rule 106 (exp1 -> PLUS push_sign exp .)
+    LESSEROREQUAL   reduce using rule 106 (exp1 -> PLUS push_sign exp .)
+    OR              reduce using rule 106 (exp1 -> PLUS push_sign exp .)
+    AND             reduce using rule 106 (exp1 -> PLUS push_sign exp .)
+    SEMICOLON       reduce using rule 106 (exp1 -> PLUS push_sign exp .)
+    CLOSEPARENTHESIS reduce using rule 106 (exp1 -> PLUS push_sign exp .)
+    COMMA           reduce using rule 106 (exp1 -> PLUS push_sign exp .)
+    SQUAREBCLOSE    reduce using rule 106 (exp1 -> PLUS push_sign exp .)
+
+
+state 218
+
+    (105) exp1 -> MINUS push_sign exp .
+
+    LESSER          reduce using rule 105 (exp1 -> MINUS push_sign exp .)
+    GREATER         reduce using rule 105 (exp1 -> MINUS push_sign exp .)
+    EQUALEQUAL      reduce using rule 105 (exp1 -> MINUS push_sign exp .)
+    NOTEQUAL        reduce using rule 105 (exp1 -> MINUS push_sign exp .)
+    GREATEROREQUAL  reduce using rule 105 (exp1 -> MINUS push_sign exp .)
+    LESSEROREQUAL   reduce using rule 105 (exp1 -> MINUS push_sign exp .)
+    OR              reduce using rule 105 (exp1 -> MINUS push_sign exp .)
+    AND             reduce using rule 105 (exp1 -> MINUS push_sign exp .)
+    SEMICOLON       reduce using rule 105 (exp1 -> MINUS push_sign exp .)
+    CLOSEPARENTHESIS reduce using rule 105 (exp1 -> MINUS push_sign exp .)
+    COMMA           reduce using rule 105 (exp1 -> MINUS push_sign exp .)
+    SQUAREBCLOSE    reduce using rule 105 (exp1 -> MINUS push_sign exp .)
+
+
+state 219
+
+    (100) expression1 -> NOTEQUAL relop exp top_relop .
+
+    OR              reduce using rule 100 (expression1 -> NOTEQUAL relop exp top_relop .)
+    AND             reduce using rule 100 (expression1 -> NOTEQUAL relop exp top_relop .)
+    SEMICOLON       reduce using rule 100 (expression1 -> NOTEQUAL relop exp top_relop .)
+    CLOSEPARENTHESIS reduce using rule 100 (expression1 -> NOTEQUAL relop exp top_relop .)
+    COMMA           reduce using rule 100 (expression1 -> NOTEQUAL relop exp top_relop .)
+    SQUAREBCLOSE    reduce using rule 100 (expression1 -> NOTEQUAL relop exp top_relop .)
+
+
+state 220
+
+    (98) expression1 -> GREATER relop exp top_relop .
+
+    OR              reduce using rule 98 (expression1 -> GREATER relop exp top_relop .)
+    AND             reduce using rule 98 (expression1 -> GREATER relop exp top_relop .)
+    SEMICOLON       reduce using rule 98 (expression1 -> GREATER relop exp top_relop .)
+    CLOSEPARENTHESIS reduce using rule 98 (expression1 -> GREATER relop exp top_relop .)
+    COMMA           reduce using rule 98 (expression1 -> GREATER relop exp top_relop .)
+    SQUAREBCLOSE    reduce using rule 98 (expression1 -> GREATER relop exp top_relop .)
+
+
+state 221
+
+    (102) expression1 -> LESSEROREQUAL relop exp top_relop .
+
+    OR              reduce using rule 102 (expression1 -> LESSEROREQUAL relop exp top_relop .)
+    AND             reduce using rule 102 (expression1 -> LESSEROREQUAL relop exp top_relop .)
+    SEMICOLON       reduce using rule 102 (expression1 -> LESSEROREQUAL relop exp top_relop .)
+    CLOSEPARENTHESIS reduce using rule 102 (expression1 -> LESSEROREQUAL relop exp top_relop .)
+    COMMA           reduce using rule 102 (expression1 -> LESSEROREQUAL relop exp top_relop .)
+    SQUAREBCLOSE    reduce using rule 102 (expression1 -> LESSEROREQUAL relop exp top_relop .)
+
+
+state 222
+
+    (97) expression1 -> LESSER relop exp top_relop .
+
+    OR              reduce using rule 97 (expression1 -> LESSER relop exp top_relop .)
+    AND             reduce using rule 97 (expression1 -> LESSER relop exp top_relop .)
+    SEMICOLON       reduce using rule 97 (expression1 -> LESSER relop exp top_relop .)
+    CLOSEPARENTHESIS reduce using rule 97 (expression1 -> LESSER relop exp top_relop .)
+    COMMA           reduce using rule 97 (expression1 -> LESSER relop exp top_relop .)
+    SQUAREBCLOSE    reduce using rule 97 (expression1 -> LESSER relop exp top_relop .)
+
+
+state 223
+
+    (101) expression1 -> GREATEROREQUAL relop exp top_relop .
+
+    OR              reduce using rule 101 (expression1 -> GREATEROREQUAL relop exp top_relop .)
+    AND             reduce using rule 101 (expression1 -> GREATEROREQUAL relop exp top_relop .)
+    SEMICOLON       reduce using rule 101 (expression1 -> GREATEROREQUAL relop exp top_relop .)
+    CLOSEPARENTHESIS reduce using rule 101 (expression1 -> GREATEROREQUAL relop exp top_relop .)
+    COMMA           reduce using rule 101 (expression1 -> GREATEROREQUAL relop exp top_relop .)
+    SQUAREBCLOSE    reduce using rule 101 (expression1 -> GREATEROREQUAL relop exp top_relop .)
+
+
+state 224
+
+    (99) expression1 -> EQUALEQUAL relop exp top_relop .
+
+    OR              reduce using rule 99 (expression1 -> EQUALEQUAL relop exp top_relop .)
+    AND             reduce using rule 99 (expression1 -> EQUALEQUAL relop exp top_relop .)
+    SEMICOLON       reduce using rule 99 (expression1 -> EQUALEQUAL relop exp top_relop .)
+    CLOSEPARENTHESIS reduce using rule 99 (expression1 -> EQUALEQUAL relop exp top_relop .)
+    COMMA           reduce using rule 99 (expression1 -> EQUALEQUAL relop exp top_relop .)
+    SQUAREBCLOSE    reduce using rule 99 (expression1 -> EQUALEQUAL relop exp top_relop .)
+
+
+state 225
+
+    (113) factor -> OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par .
+
+    DIVIDE          reduce using rule 113 (factor -> OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par .)
+    TIMES           reduce using rule 113 (factor -> OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par .)
+    MINUS           reduce using rule 113 (factor -> OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par .)
+    PLUS            reduce using rule 113 (factor -> OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par .)
+    LESSER          reduce using rule 113 (factor -> OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par .)
+    GREATER         reduce using rule 113 (factor -> OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par .)
+    EQUALEQUAL      reduce using rule 113 (factor -> OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par .)
+    NOTEQUAL        reduce using rule 113 (factor -> OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par .)
+    GREATEROREQUAL  reduce using rule 113 (factor -> OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par .)
+    LESSEROREQUAL   reduce using rule 113 (factor -> OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par .)
+    OR              reduce using rule 113 (factor -> OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par .)
+    AND             reduce using rule 113 (factor -> OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par .)
+    CLOSEPARENTHESIS reduce using rule 113 (factor -> OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par .)
+    SEMICOLON       reduce using rule 113 (factor -> OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par .)
+    COMMA           reduce using rule 113 (factor -> OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par .)
+    SQUAREBCLOSE    reduce using rule 113 (factor -> OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par .)
+
+
+state 226
+
+    (61) ciclo -> FOR pn_8 OPENPARENTHESIS expression CLOSEPARENTHESIS pn_6 . bloque pn_7
+    (35) bloque -> . OPENBRACKET bloqueAuxiliar1 bloqueAuxiliar CLOSEBRACKET
+
+    OPENBRACKET     shift and go to state 26
+
+    bloque                         shift and go to state 232
+
+state 227
+
+    (63) pn_6 -> empty .
+
+    OPENBRACKET     reduce using rule 63 (pn_6 -> empty .)
+
+
+state 228
+
+    (52) llamada -> ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS . pn_llamada2
+    (54) pn_llamada2 -> .
+
+    SEMICOLON       reduce using rule 54 (pn_llamada2 -> .)
+    DIVIDE          reduce using rule 54 (pn_llamada2 -> .)
+    TIMES           reduce using rule 54 (pn_llamada2 -> .)
+    MINUS           reduce using rule 54 (pn_llamada2 -> .)
+    PLUS            reduce using rule 54 (pn_llamada2 -> .)
+    LESSER          reduce using rule 54 (pn_llamada2 -> .)
+    GREATER         reduce using rule 54 (pn_llamada2 -> .)
+    EQUALEQUAL      reduce using rule 54 (pn_llamada2 -> .)
+    NOTEQUAL        reduce using rule 54 (pn_llamada2 -> .)
+    GREATEROREQUAL  reduce using rule 54 (pn_llamada2 -> .)
+    LESSEROREQUAL   reduce using rule 54 (pn_llamada2 -> .)
+    OR              reduce using rule 54 (pn_llamada2 -> .)
+    AND             reduce using rule 54 (pn_llamada2 -> .)
+    CLOSEPARENTHESIS reduce using rule 54 (pn_llamada2 -> .)
+    COMMA           reduce using rule 54 (pn_llamada2 -> .)
+    SQUAREBCLOSE    reduce using rule 54 (pn_llamada2 -> .)
+
+    pn_llamada2                    shift and go to state 233
+
+state 229
+
+    (57) llamadaAux1 -> expression end_par . pn_llamada_param llamadaAux2
+    (58) pn_llamada_param -> .
+
+    COMMA           reduce using rule 58 (pn_llamada_param -> .)
+    CLOSEPARENTHESIS reduce using rule 58 (pn_llamada_param -> .)
+
+    pn_llamada_param               shift and go to state 234
+
+state 230
+
+    (74) arregloVar -> ID getLimits false_bottom SQUAREBOPEN expression setVerData . end_par SQUAREBCLOSE listaccess1
+    (135) end_par -> .
+
+    SQUAREBCLOSE    reduce using rule 135 (end_par -> .)
+
+    end_par                        shift and go to state 235
+
+state 231
+
+    (84) condicion -> IF OPENPARENTHESIS expression CLOSEPARENTHESIS pn_3 bloque . condicionAuxiliar SEMICOLON
+    (85) condicion -> IF OPENPARENTHESIS expression CLOSEPARENTHESIS pn_3 bloque . condicionAuxiliar
+    (88) condicionAuxiliar -> . pn_9 ELSE bloque pn_5
+    (89) condicionAuxiliar -> . pn_4 empty
+    (90) pn_9 -> . empty
+    (87) pn_4 -> . empty
+    (1) empty -> .
+
+    ELSE            reduce using rule 1 (empty -> .)
+    SEMICOLON       reduce using rule 1 (empty -> .)
+    ID              reduce using rule 1 (empty -> .)
+    IF              reduce using rule 1 (empty -> .)
+    PRINT           reduce using rule 1 (empty -> .)
+    READ            reduce using rule 1 (empty -> .)
+    FOR             reduce using rule 1 (empty -> .)
+    RETURN          reduce using rule 1 (empty -> .)
+    CLOSEBRACKET    reduce using rule 1 (empty -> .)
+
+    pn_9                           shift and go to state 237
+    empty                          shift and go to state 239
+    condicionAuxiliar              shift and go to state 236
+    pn_4                           shift and go to state 238
+
+state 232
+
+    (61) ciclo -> FOR pn_8 OPENPARENTHESIS expression CLOSEPARENTHESIS pn_6 bloque . pn_7
+    (64) pn_7 -> . empty
+    (1) empty -> .
+
+    ID              reduce using rule 1 (empty -> .)
+    IF              reduce using rule 1 (empty -> .)
+    PRINT           reduce using rule 1 (empty -> .)
+    READ            reduce using rule 1 (empty -> .)
+    FOR             reduce using rule 1 (empty -> .)
+    RETURN          reduce using rule 1 (empty -> .)
+    CLOSEBRACKET    reduce using rule 1 (empty -> .)
+
+    pn_7                           shift and go to state 240
+    empty                          shift and go to state 241
+
+state 233
+
+    (52) llamada -> ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2 .
+
+    DIVIDE          reduce using rule 52 (llamada -> ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2 .)
+    TIMES           reduce using rule 52 (llamada -> ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2 .)
+    MINUS           reduce using rule 52 (llamada -> ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2 .)
+    PLUS            reduce using rule 52 (llamada -> ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2 .)
+    OR              reduce using rule 52 (llamada -> ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2 .)
+    AND             reduce using rule 52 (llamada -> ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2 .)
+    SEMICOLON       reduce using rule 52 (llamada -> ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2 .)
+    CLOSEPARENTHESIS reduce using rule 52 (llamada -> ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2 .)
+    COMMA           reduce using rule 52 (llamada -> ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2 .)
+    SQUAREBCLOSE    reduce using rule 52 (llamada -> ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2 .)
+    LESSER          reduce using rule 52 (llamada -> ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2 .)
+    GREATER         reduce using rule 52 (llamada -> ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2 .)
+    EQUALEQUAL      reduce using rule 52 (llamada -> ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2 .)
+    NOTEQUAL        reduce using rule 52 (llamada -> ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2 .)
+    GREATEROREQUAL  reduce using rule 52 (llamada -> ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2 .)
+    LESSEROREQUAL   reduce using rule 52 (llamada -> ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2 .)
+
+
+state 234
+
+    (57) llamadaAux1 -> expression end_par pn_llamada_param . llamadaAux2
+    (59) llamadaAux2 -> . COMMA false_bottom llamadaAux1
+    (60) llamadaAux2 -> . empty
+    (1) empty -> .
+
+    COMMA           shift and go to state 243
+    CLOSEPARENTHESIS reduce using rule 1 (empty -> .)
+
+    empty                          shift and go to state 242
+    llamadaAux2                    shift and go to state 244
+
+state 235
+
+    (74) arregloVar -> ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par . SQUAREBCLOSE listaccess1
+
+    SQUAREBCLOSE    shift and go to state 245
+
+
+state 236
+
+    (84) condicion -> IF OPENPARENTHESIS expression CLOSEPARENTHESIS pn_3 bloque condicionAuxiliar . SEMICOLON
+    (85) condicion -> IF OPENPARENTHESIS expression CLOSEPARENTHESIS pn_3 bloque condicionAuxiliar .
+
+    SEMICOLON       shift and go to state 246
+    ID              reduce using rule 85 (condicion -> IF OPENPARENTHESIS expression CLOSEPARENTHESIS pn_3 bloque condicionAuxiliar .)
+    IF              reduce using rule 85 (condicion -> IF OPENPARENTHESIS expression CLOSEPARENTHESIS pn_3 bloque condicionAuxiliar .)
+    PRINT           reduce using rule 85 (condicion -> IF OPENPARENTHESIS expression CLOSEPARENTHESIS pn_3 bloque condicionAuxiliar .)
+    READ            reduce using rule 85 (condicion -> IF OPENPARENTHESIS expression CLOSEPARENTHESIS pn_3 bloque condicionAuxiliar .)
+    FOR             reduce using rule 85 (condicion -> IF OPENPARENTHESIS expression CLOSEPARENTHESIS pn_3 bloque condicionAuxiliar .)
+    RETURN          reduce using rule 85 (condicion -> IF OPENPARENTHESIS expression CLOSEPARENTHESIS pn_3 bloque condicionAuxiliar .)
+    CLOSEBRACKET    reduce using rule 85 (condicion -> IF OPENPARENTHESIS expression CLOSEPARENTHESIS pn_3 bloque condicionAuxiliar .)
+
+
+state 237
+
+    (88) condicionAuxiliar -> pn_9 . ELSE bloque pn_5
+
+    ELSE            shift and go to state 247
+
+
+state 238
+
+    (89) condicionAuxiliar -> pn_4 . empty
+    (1) empty -> .
+
+    SEMICOLON       reduce using rule 1 (empty -> .)
+    ID              reduce using rule 1 (empty -> .)
+    IF              reduce using rule 1 (empty -> .)
+    PRINT           reduce using rule 1 (empty -> .)
+    READ            reduce using rule 1 (empty -> .)
+    FOR             reduce using rule 1 (empty -> .)
+    RETURN          reduce using rule 1 (empty -> .)
+    CLOSEBRACKET    reduce using rule 1 (empty -> .)
+
+    empty                          shift and go to state 248
+
+state 239
+
+    (90) pn_9 -> empty .
+    (87) pn_4 -> empty .
+
+    ELSE            reduce using rule 90 (pn_9 -> empty .)
+    SEMICOLON       reduce using rule 87 (pn_4 -> empty .)
+    ID              reduce using rule 87 (pn_4 -> empty .)
+    IF              reduce using rule 87 (pn_4 -> empty .)
+    PRINT           reduce using rule 87 (pn_4 -> empty .)
+    READ            reduce using rule 87 (pn_4 -> empty .)
+    FOR             reduce using rule 87 (pn_4 -> empty .)
+    RETURN          reduce using rule 87 (pn_4 -> empty .)
+    CLOSEBRACKET    reduce using rule 87 (pn_4 -> empty .)
+
+
+state 240
+
+    (61) ciclo -> FOR pn_8 OPENPARENTHESIS expression CLOSEPARENTHESIS pn_6 bloque pn_7 .
+
+    ID              reduce using rule 61 (ciclo -> FOR pn_8 OPENPARENTHESIS expression CLOSEPARENTHESIS pn_6 bloque pn_7 .)
+    IF              reduce using rule 61 (ciclo -> FOR pn_8 OPENPARENTHESIS expression CLOSEPARENTHESIS pn_6 bloque pn_7 .)
+    PRINT           reduce using rule 61 (ciclo -> FOR pn_8 OPENPARENTHESIS expression CLOSEPARENTHESIS pn_6 bloque pn_7 .)
+    READ            reduce using rule 61 (ciclo -> FOR pn_8 OPENPARENTHESIS expression CLOSEPARENTHESIS pn_6 bloque pn_7 .)
+    FOR             reduce using rule 61 (ciclo -> FOR pn_8 OPENPARENTHESIS expression CLOSEPARENTHESIS pn_6 bloque pn_7 .)
+    RETURN          reduce using rule 61 (ciclo -> FOR pn_8 OPENPARENTHESIS expression CLOSEPARENTHESIS pn_6 bloque pn_7 .)
+    CLOSEBRACKET    reduce using rule 61 (ciclo -> FOR pn_8 OPENPARENTHESIS expression CLOSEPARENTHESIS pn_6 bloque pn_7 .)
+
+
+state 241
+
+    (64) pn_7 -> empty .
+
+    ID              reduce using rule 64 (pn_7 -> empty .)
+    IF              reduce using rule 64 (pn_7 -> empty .)
+    PRINT           reduce using rule 64 (pn_7 -> empty .)
+    READ            reduce using rule 64 (pn_7 -> empty .)
+    FOR             reduce using rule 64 (pn_7 -> empty .)
+    RETURN          reduce using rule 64 (pn_7 -> empty .)
+    CLOSEBRACKET    reduce using rule 64 (pn_7 -> empty .)
+
+
+state 242
+
+    (60) llamadaAux2 -> empty .
+
+    CLOSEPARENTHESIS reduce using rule 60 (llamadaAux2 -> empty .)
+
+
+state 243
+
+    (59) llamadaAux2 -> COMMA . false_bottom llamadaAux1
+    (134) false_bottom -> . empty
+    (1) empty -> .
+
+    OPENPARENTHESIS reduce using rule 1 (empty -> .)
+    ID              reduce using rule 1 (empty -> .)
+    CTEINT          reduce using rule 1 (empty -> .)
+    CTEFLOAT        reduce using rule 1 (empty -> .)
+    CTESTRING       reduce using rule 1 (empty -> .)
+    TRUE            reduce using rule 1 (empty -> .)
+    FALSE           reduce using rule 1 (empty -> .)
+
+    false_bottom                   shift and go to state 249
+    empty                          shift and go to state 141
+
+state 244
+
+    (57) llamadaAux1 -> expression end_par pn_llamada_param llamadaAux2 .
+
+    CLOSEPARENTHESIS reduce using rule 57 (llamadaAux1 -> expression end_par pn_llamada_param llamadaAux2 .)
+
+
+state 245
+
+    (74) arregloVar -> ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE . listaccess1
+    (78) listaccess1 -> . SQUAREBOPEN false_bottom expression setVerData1 SQUAREBCLOSE end_par
+    (79) listaccess1 -> . empty
+    (1) empty -> .
+
+    SQUAREBOPEN     shift and go to state 251
+    EQUAL           reduce using rule 1 (empty -> .)
+    SEMICOLON       reduce using rule 1 (empty -> .)
+    DIVIDE          reduce using rule 1 (empty -> .)
+    TIMES           reduce using rule 1 (empty -> .)
+    MINUS           reduce using rule 1 (empty -> .)
+    PLUS            reduce using rule 1 (empty -> .)
+    LESSER          reduce using rule 1 (empty -> .)
+    GREATER         reduce using rule 1 (empty -> .)
+    EQUALEQUAL      reduce using rule 1 (empty -> .)
+    NOTEQUAL        reduce using rule 1 (empty -> .)
+    GREATEROREQUAL  reduce using rule 1 (empty -> .)
+    LESSEROREQUAL   reduce using rule 1 (empty -> .)
+    OR              reduce using rule 1 (empty -> .)
+    AND             reduce using rule 1 (empty -> .)
+    CLOSEPARENTHESIS reduce using rule 1 (empty -> .)
+    COMMA           reduce using rule 1 (empty -> .)
+    SQUAREBCLOSE    reduce using rule 1 (empty -> .)
+
+    listaccess1                    shift and go to state 250
+    empty                          shift and go to state 252
+
+state 246
+
+    (84) condicion -> IF OPENPARENTHESIS expression CLOSEPARENTHESIS pn_3 bloque condicionAuxiliar SEMICOLON .
+
+    ID              reduce using rule 84 (condicion -> IF OPENPARENTHESIS expression CLOSEPARENTHESIS pn_3 bloque condicionAuxiliar SEMICOLON .)
+    IF              reduce using rule 84 (condicion -> IF OPENPARENTHESIS expression CLOSEPARENTHESIS pn_3 bloque condicionAuxiliar SEMICOLON .)
+    PRINT           reduce using rule 84 (condicion -> IF OPENPARENTHESIS expression CLOSEPARENTHESIS pn_3 bloque condicionAuxiliar SEMICOLON .)
+    READ            reduce using rule 84 (condicion -> IF OPENPARENTHESIS expression CLOSEPARENTHESIS pn_3 bloque condicionAuxiliar SEMICOLON .)
+    FOR             reduce using rule 84 (condicion -> IF OPENPARENTHESIS expression CLOSEPARENTHESIS pn_3 bloque condicionAuxiliar SEMICOLON .)
+    RETURN          reduce using rule 84 (condicion -> IF OPENPARENTHESIS expression CLOSEPARENTHESIS pn_3 bloque condicionAuxiliar SEMICOLON .)
+    CLOSEBRACKET    reduce using rule 84 (condicion -> IF OPENPARENTHESIS expression CLOSEPARENTHESIS pn_3 bloque condicionAuxiliar SEMICOLON .)
+
+
+state 247
+
+    (88) condicionAuxiliar -> pn_9 ELSE . bloque pn_5
+    (35) bloque -> . OPENBRACKET bloqueAuxiliar1 bloqueAuxiliar CLOSEBRACKET
+
+    OPENBRACKET     shift and go to state 26
+
+    bloque                         shift and go to state 253
+
+state 248
+
+    (89) condicionAuxiliar -> pn_4 empty .
+
+    SEMICOLON       reduce using rule 89 (condicionAuxiliar -> pn_4 empty .)
+    ID              reduce using rule 89 (condicionAuxiliar -> pn_4 empty .)
+    IF              reduce using rule 89 (condicionAuxiliar -> pn_4 empty .)
+    PRINT           reduce using rule 89 (condicionAuxiliar -> pn_4 empty .)
+    READ            reduce using rule 89 (condicionAuxiliar -> pn_4 empty .)
+    FOR             reduce using rule 89 (condicionAuxiliar -> pn_4 empty .)
+    RETURN          reduce using rule 89 (condicionAuxiliar -> pn_4 empty .)
+    CLOSEBRACKET    reduce using rule 89 (condicionAuxiliar -> pn_4 empty .)
+
+
+state 249
+
+    (59) llamadaAux2 -> COMMA false_bottom . llamadaAux1
+    (57) llamadaAux1 -> . expression end_par pn_llamada_param llamadaAux2
+    (92) expression -> . exploc logicexp
+    (96) exploc -> . exp expression1
+    (104) exp -> . term top_exp exp1
+    (109) term -> . factor top_factor term1
+    (113) factor -> . OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par
+    (114) factor -> . var_cte
+    (115) factor -> . ID push_id
+    (117) var_cte -> . arregloVar
+    (118) var_cte -> . CTEINT getvalue_i
+    (119) var_cte -> . CTEFLOAT getvalue_f
+    (120) var_cte -> . ID getidvalue
+    (121) var_cte -> . llamada getidllamada
+    (122) var_cte -> . spcte
+    (74) arregloVar -> . ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1
+    (52) llamada -> . ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2
+    (139) spcte -> . CTESTRING
+    (140) spcte -> . ctebool
+    (137) ctebool -> . TRUE
+    (138) ctebool -> . FALSE
+
+    OPENPARENTHESIS shift and go to state 93
+    ID              shift and go to state 145
+    CTEINT          shift and go to state 86
+    CTEFLOAT        shift and go to state 83
+    CTESTRING       shift and go to state 80
+    TRUE            shift and go to state 82
+    FALSE           shift and go to state 90
+
+    exploc                         shift and go to state 77
+    ctebool                        shift and go to state 78
+    var_cte                        shift and go to state 143
+    arregloVar                     shift and go to state 81
+    llamada                        shift and go to state 84
+    factor                         shift and go to state 85
+    llamadaAux1                    shift and go to state 254
+    spcte                          shift and go to state 154
+    term                           shift and go to state 87
+    exp                            shift and go to state 92
+    expression                     shift and go to state 207
+
+state 250
+
+    (74) arregloVar -> ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1 .
+
+    DIVIDE          reduce using rule 74 (arregloVar -> ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1 .)
+    TIMES           reduce using rule 74 (arregloVar -> ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1 .)
+    MINUS           reduce using rule 74 (arregloVar -> ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1 .)
+    PLUS            reduce using rule 74 (arregloVar -> ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1 .)
+    LESSER          reduce using rule 74 (arregloVar -> ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1 .)
+    GREATER         reduce using rule 74 (arregloVar -> ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1 .)
+    EQUALEQUAL      reduce using rule 74 (arregloVar -> ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1 .)
+    NOTEQUAL        reduce using rule 74 (arregloVar -> ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1 .)
+    GREATEROREQUAL  reduce using rule 74 (arregloVar -> ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1 .)
+    LESSEROREQUAL   reduce using rule 74 (arregloVar -> ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1 .)
+    OR              reduce using rule 74 (arregloVar -> ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1 .)
+    AND             reduce using rule 74 (arregloVar -> ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1 .)
+    SEMICOLON       reduce using rule 74 (arregloVar -> ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1 .)
+    CLOSEPARENTHESIS reduce using rule 74 (arregloVar -> ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1 .)
+    COMMA           reduce using rule 74 (arregloVar -> ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1 .)
+    SQUAREBCLOSE    reduce using rule 74 (arregloVar -> ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1 .)
+    EQUAL           reduce using rule 74 (arregloVar -> ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1 .)
+
+
+state 251
+
+    (78) listaccess1 -> SQUAREBOPEN . false_bottom expression setVerData1 SQUAREBCLOSE end_par
+    (134) false_bottom -> . empty
+    (1) empty -> .
+
+    OPENPARENTHESIS reduce using rule 1 (empty -> .)
+    ID              reduce using rule 1 (empty -> .)
+    CTEINT          reduce using rule 1 (empty -> .)
+    CTEFLOAT        reduce using rule 1 (empty -> .)
+    CTESTRING       reduce using rule 1 (empty -> .)
+    TRUE            reduce using rule 1 (empty -> .)
+    FALSE           reduce using rule 1 (empty -> .)
+
+    false_bottom                   shift and go to state 255
+    empty                          shift and go to state 141
+
+state 252
+
+    (79) listaccess1 -> empty .
+
+    EQUAL           reduce using rule 79 (listaccess1 -> empty .)
+    SEMICOLON       reduce using rule 79 (listaccess1 -> empty .)
+    DIVIDE          reduce using rule 79 (listaccess1 -> empty .)
+    TIMES           reduce using rule 79 (listaccess1 -> empty .)
+    MINUS           reduce using rule 79 (listaccess1 -> empty .)
+    PLUS            reduce using rule 79 (listaccess1 -> empty .)
+    LESSER          reduce using rule 79 (listaccess1 -> empty .)
+    GREATER         reduce using rule 79 (listaccess1 -> empty .)
+    EQUALEQUAL      reduce using rule 79 (listaccess1 -> empty .)
+    NOTEQUAL        reduce using rule 79 (listaccess1 -> empty .)
+    GREATEROREQUAL  reduce using rule 79 (listaccess1 -> empty .)
+    LESSEROREQUAL   reduce using rule 79 (listaccess1 -> empty .)
+    OR              reduce using rule 79 (listaccess1 -> empty .)
+    AND             reduce using rule 79 (listaccess1 -> empty .)
+    CLOSEPARENTHESIS reduce using rule 79 (listaccess1 -> empty .)
+    COMMA           reduce using rule 79 (listaccess1 -> empty .)
+    SQUAREBCLOSE    reduce using rule 79 (listaccess1 -> empty .)
+
+
+state 253
+
+    (88) condicionAuxiliar -> pn_9 ELSE bloque . pn_5
+    (91) pn_5 -> . empty
+    (1) empty -> .
+
+    SEMICOLON       reduce using rule 1 (empty -> .)
+    ID              reduce using rule 1 (empty -> .)
+    IF              reduce using rule 1 (empty -> .)
+    PRINT           reduce using rule 1 (empty -> .)
+    READ            reduce using rule 1 (empty -> .)
+    FOR             reduce using rule 1 (empty -> .)
+    RETURN          reduce using rule 1 (empty -> .)
+    CLOSEBRACKET    reduce using rule 1 (empty -> .)
+
+    empty                          shift and go to state 256
+    pn_5                           shift and go to state 257
+
+state 254
+
+    (59) llamadaAux2 -> COMMA false_bottom llamadaAux1 .
+
+    CLOSEPARENTHESIS reduce using rule 59 (llamadaAux2 -> COMMA false_bottom llamadaAux1 .)
+
+
+state 255
+
+    (78) listaccess1 -> SQUAREBOPEN false_bottom . expression setVerData1 SQUAREBCLOSE end_par
+    (92) expression -> . exploc logicexp
+    (96) exploc -> . exp expression1
+    (104) exp -> . term top_exp exp1
+    (109) term -> . factor top_factor term1
+    (113) factor -> . OPENPARENTHESIS false_bottom expression CLOSEPARENTHESIS end_par
+    (114) factor -> . var_cte
+    (115) factor -> . ID push_id
+    (117) var_cte -> . arregloVar
+    (118) var_cte -> . CTEINT getvalue_i
+    (119) var_cte -> . CTEFLOAT getvalue_f
+    (120) var_cte -> . ID getidvalue
+    (121) var_cte -> . llamada getidllamada
+    (122) var_cte -> . spcte
+    (74) arregloVar -> . ID getLimits false_bottom SQUAREBOPEN expression setVerData end_par SQUAREBCLOSE listaccess1
+    (52) llamada -> . ID pn_llamada OPENPARENTHESIS false_bottom llamadaAux CLOSEPARENTHESIS pn_llamada2
+    (139) spcte -> . CTESTRING
+    (140) spcte -> . ctebool
+    (137) ctebool -> . TRUE
+    (138) ctebool -> . FALSE
+
+    OPENPARENTHESIS shift and go to state 93
+    ID              shift and go to state 145
+    CTEINT          shift and go to state 86
+    CTEFLOAT        shift and go to state 83
+    CTESTRING       shift and go to state 80
+    TRUE            shift and go to state 82
+    FALSE           shift and go to state 90
+
+    exploc                         shift and go to state 77
+    ctebool                        shift and go to state 78
+    var_cte                        shift and go to state 143
+    arregloVar                     shift and go to state 81
+    llamada                        shift and go to state 84
+    factor                         shift and go to state 85
+    spcte                          shift and go to state 154
+    term                           shift and go to state 87
+    exp                            shift and go to state 92
+    expression                     shift and go to state 258
+
+state 256
+
+    (91) pn_5 -> empty .
+
+    SEMICOLON       reduce using rule 91 (pn_5 -> empty .)
+    ID              reduce using rule 91 (pn_5 -> empty .)
+    IF              reduce using rule 91 (pn_5 -> empty .)
+    PRINT           reduce using rule 91 (pn_5 -> empty .)
+    READ            reduce using rule 91 (pn_5 -> empty .)
+    FOR             reduce using rule 91 (pn_5 -> empty .)
+    RETURN          reduce using rule 91 (pn_5 -> empty .)
+    CLOSEBRACKET    reduce using rule 91 (pn_5 -> empty .)
+
+
+state 257
+
+    (88) condicionAuxiliar -> pn_9 ELSE bloque pn_5 .
+
+    SEMICOLON       reduce using rule 88 (condicionAuxiliar -> pn_9 ELSE bloque pn_5 .)
+    ID              reduce using rule 88 (condicionAuxiliar -> pn_9 ELSE bloque pn_5 .)
+    IF              reduce using rule 88 (condicionAuxiliar -> pn_9 ELSE bloque pn_5 .)
+    PRINT           reduce using rule 88 (condicionAuxiliar -> pn_9 ELSE bloque pn_5 .)
+    READ            reduce using rule 88 (condicionAuxiliar -> pn_9 ELSE bloque pn_5 .)
+    FOR             reduce using rule 88 (condicionAuxiliar -> pn_9 ELSE bloque pn_5 .)
+    RETURN          reduce using rule 88 (condicionAuxiliar -> pn_9 ELSE bloque pn_5 .)
+    CLOSEBRACKET    reduce using rule 88 (condicionAuxiliar -> pn_9 ELSE bloque pn_5 .)
+
+
+state 258
+
+    (78) listaccess1 -> SQUAREBOPEN false_bottom expression . setVerData1 SQUAREBCLOSE end_par
+    (77) setVerData1 -> .
+
+    SQUAREBCLOSE    reduce using rule 77 (setVerData1 -> .)
+
+    setVerData1                    shift and go to state 259
+
+state 259
+
+    (78) listaccess1 -> SQUAREBOPEN false_bottom expression setVerData1 . SQUAREBCLOSE end_par
+
+    SQUAREBCLOSE    shift and go to state 260
+
+
+state 260
+
+    (78) listaccess1 -> SQUAREBOPEN false_bottom expression setVerData1 SQUAREBCLOSE . end_par
+    (135) end_par -> .
+
+    EQUAL           reduce using rule 135 (end_par -> .)
+    SEMICOLON       reduce using rule 135 (end_par -> .)
+    DIVIDE          reduce using rule 135 (end_par -> .)
+    TIMES           reduce using rule 135 (end_par -> .)
+    MINUS           reduce using rule 135 (end_par -> .)
+    PLUS            reduce using rule 135 (end_par -> .)
+    LESSER          reduce using rule 135 (end_par -> .)
+    GREATER         reduce using rule 135 (end_par -> .)
+    EQUALEQUAL      reduce using rule 135 (end_par -> .)
+    NOTEQUAL        reduce using rule 135 (end_par -> .)
+    GREATEROREQUAL  reduce using rule 135 (end_par -> .)
+    LESSEROREQUAL   reduce using rule 135 (end_par -> .)
+    OR              reduce using rule 135 (end_par -> .)
+    AND             reduce using rule 135 (end_par -> .)
+    CLOSEPARENTHESIS reduce using rule 135 (end_par -> .)
+    COMMA           reduce using rule 135 (end_par -> .)
+    SQUAREBCLOSE    reduce using rule 135 (end_par -> .)
+
+    end_par                        shift and go to state 261
+
+state 261
+
+    (78) listaccess1 -> SQUAREBOPEN false_bottom expression setVerData1 SQUAREBCLOSE end_par .
+
+    EQUAL           reduce using rule 78 (listaccess1 -> SQUAREBOPEN false_bottom expression setVerData1 SQUAREBCLOSE end_par .)
+    SEMICOLON       reduce using rule 78 (listaccess1 -> SQUAREBOPEN false_bottom expression setVerData1 SQUAREBCLOSE end_par .)
+    DIVIDE          reduce using rule 78 (listaccess1 -> SQUAREBOPEN false_bottom expression setVerData1 SQUAREBCLOSE end_par .)
+    TIMES           reduce using rule 78 (listaccess1 -> SQUAREBOPEN false_bottom expression setVerData1 SQUAREBCLOSE end_par .)
+    MINUS           reduce using rule 78 (listaccess1 -> SQUAREBOPEN false_bottom expression setVerData1 SQUAREBCLOSE end_par .)
+    PLUS            reduce using rule 78 (listaccess1 -> SQUAREBOPEN false_bottom expression setVerData1 SQUAREBCLOSE end_par .)
+    LESSER          reduce using rule 78 (listaccess1 -> SQUAREBOPEN false_bottom expression setVerData1 SQUAREBCLOSE end_par .)
+    GREATER         reduce using rule 78 (listaccess1 -> SQUAREBOPEN false_bottom expression setVerData1 SQUAREBCLOSE end_par .)
+    EQUALEQUAL      reduce using rule 78 (listaccess1 -> SQUAREBOPEN false_bottom expression setVerData1 SQUAREBCLOSE end_par .)
+    NOTEQUAL        reduce using rule 78 (listaccess1 -> SQUAREBOPEN false_bottom expression setVerData1 SQUAREBCLOSE end_par .)
+    GREATEROREQUAL  reduce using rule 78 (listaccess1 -> SQUAREBOPEN false_bottom expression setVerData1 SQUAREBCLOSE end_par .)
+    LESSEROREQUAL   reduce using rule 78 (listaccess1 -> SQUAREBOPEN false_bottom expression setVerData1 SQUAREBCLOSE end_par .)
+    OR              reduce using rule 78 (listaccess1 -> SQUAREBOPEN false_bottom expression setVerData1 SQUAREBCLOSE end_par .)
+    AND             reduce using rule 78 (listaccess1 -> SQUAREBOPEN false_bottom expression setVerData1 SQUAREBCLOSE end_par .)
+    CLOSEPARENTHESIS reduce using rule 78 (listaccess1 -> SQUAREBOPEN false_bottom expression setVerData1 SQUAREBCLOSE end_par .)
+    COMMA           reduce using rule 78 (listaccess1 -> SQUAREBOPEN false_bottom expression setVerData1 SQUAREBCLOSE end_par .)
+    SQUAREBCLOSE    reduce using rule 78 (listaccess1 -> SQUAREBOPEN false_bottom expression setVerData1 SQUAREBCLOSE end_par .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: reduce/reduce conflict in state 79 resolved using rule (retornoAux -> var_cte)
+WARNING: rejected rule (factor -> var_cte) in state 79
+WARNING: reduce/reduce conflict in state 88 resolved using rule (retornoAux -> spcte)
+WARNING: rejected rule (var_cte -> spcte) in state 88
+WARNING: reduce/reduce conflict in state 89 resolved using rule (getidvalue -> <empty>)
+WARNING: rejected rule (push_id -> <empty>) in state 89
+WARNING: reduce/reduce conflict in state 144 resolved using rule (escrituraAuxiliar1 -> spcte)
+WARNING: rejected rule (var_cte -> spcte) in state 144
+WARNING: reduce/reduce conflict in state 145 resolved using rule (getidvalue -> <empty>)
+WARNING: rejected rule (push_id -> <empty>) in state 145
+WARNING: reduce/reduce conflict in state 148 resolved using rule (asignacionAux -> spcte)
+WARNING: rejected rule (var_cte -> spcte) in state 148
+WARNING: Rule (push_id -> <empty>) is never reduced

@@ -1,0 +1,27 @@
+program programa1;
+variables:
+ int n;
+ int i;
+ int temp;
+ int[10] arr;
+
+
+principal {
+
+ i = "s";
+ imprimir("Numero de elementos");
+leer(n);
+  i = 1;
+  ciclo (i <= n) {
+ imprimir("");
+leer(temp);
+    arr[(i - 1)] = temp;
+    i = i + 1;
+  }
+  imprimir("Unsorted array \\n");
+  i = 0;
+  ciclo (i <= n) {
+    imprimir(arr[(i - 1)]);
+  }
+  imprimir("\\n");
+}

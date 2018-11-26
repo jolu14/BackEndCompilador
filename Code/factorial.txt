@@ -1,0 +1,22 @@
+program programa1;
+
+funciones:
+int factorial(int n)
+{
+   si(n > 1){
+    regresar factorial(n-1) * n;
+   }
+   sino{
+    regresar 1;
+   };
+}
+
+principal{
+  variables:
+  int num;
+  int f;
+  imprimir("intorduce numero:");
+  leer(num);
+  f = factorial (num);
+  imprimir(f);
+}

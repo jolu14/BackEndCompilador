@@ -1,0 +1,65 @@
+program programa1;
+variables:
+    float var5;
+    float var6;
+
+funciones:
+int fib(int n)
+{
+
+}
+int fibo(int n)
+{
+    si(n == 1 or n == 0){
+       regresar n;
+    }sino{
+       regresar fibo(n - 1) + fibo(n - 2);
+    };
+}
+
+principal{
+variables:
+    int i;
+    int num ;
+    int x ;
+    int t1;
+    int t2;
+    int nextTerm;
+    imprimir("Introduce un numero entero positivo:\n");
+    leer(num);
+    imprimir("FIBONACCI recursivo\n");
+    i = 0;
+    ciclo(i < num)
+    {
+        x = fibo(i);
+        imprimir(x + " ");
+        i = i + 1;
+    }
+    imprimir("\n");
+
+    imprimir("FIBONACCI iterativo\n");
+    i = 0;
+    t1 = 0;
+    t2 = 1;
+    nextTerm = 0;
+    ciclo(i < num)
+    {
+        si(i == 0){
+            imprimir(t1 + " ");
+        }sino{
+            si(i == 1){
+                imprimir(t2 + " ");
+            }sino{
+                nextTerm = t1 + t2;
+                t1 = t2;
+                t2 = nextTerm;
+                imprimir(nextTerm + " ");
+            };
+        };
+        i = i + 1;
+    }
+    imprimir("\n");
+
+    imprimir("Fin del programa");
+    imprimir("\n");
+}
